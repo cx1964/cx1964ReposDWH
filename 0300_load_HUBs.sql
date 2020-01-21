@@ -11,4 +11,4 @@ where
        b.code NOT IN (  select code from [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] )
 	--   zie tekst paragraaf 12.1.1.1. DataVault 2.0 boek waarom een test op LoadDDate voor specifieke load datum.
        --   Namelijk om staging (die meerdere laadjobs kan bevat), de meerdere loads in juiste volgorde te laden   
-  --     AND ( meta_load_date = ???? =  AND meta_create_time = ??? )     
+  --     AND ( meta_load_date = ???? =  AND meta_create_time = ??? )     *** NOG AANZETTEN ***
