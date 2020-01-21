@@ -6,7 +6,9 @@ select distinct
                 ,b.code as code -- logische business key
                 ,convert(date, getdate()) as [meta_load_date]
 			    ,convert(time, getdate()) as [meta_load_date]
-from [TestSourceDB].[dbo].[Organisatie_Eenheid] b
+from [TestSourceDB].[dbo].[Organisatie_Eenheid] b -- nog gebruik maken van staging !!!!!!
 where
        b.code NOT IN (  select code from [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] )
-	   -- AND  zie tekst waarom nog een test op een specifieke load datum       
+	--   zie tekst paragraaf 12.1.1.1. DataVault 2.0 boek waarom een test op LoadDDate voor specifieke load datum.
+       --   Namelijk om staging (die meerdere laadjobs kan bevat), de meerdere loads in juiste volgorde te laden   
+       AND ( meta_load_date = ???? =  AND meta_load_time = ??? )     
