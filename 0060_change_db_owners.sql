@@ -20,6 +20,16 @@ go
 -- *** Einde Change owner TestSourceDB DB ***
 
 
+-- *** Begin Change owner TestStagingDB DB ***
+/* Selecteer de nieuwe lege applicatie database */ 
+use TestStagingDB
+go
+
+/* Maak de Applicatie database user eigenaar van de database */
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerStaging'
+go
+-- *** Einde Change owner TestIntegrationDB DB ***
+
 
 -- *** Begin Change owner TestIntegrationDB DB ***
 /* Selecteer de nieuwe lege applicatie database */ 
