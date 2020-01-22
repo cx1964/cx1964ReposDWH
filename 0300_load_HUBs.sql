@@ -25,7 +25,7 @@ inner join (
                      ,min([meta_load_date]) as meta_load_date
                      ,min([meta_create_time]) as meta_create_time
              from [TestStagingDB].[dbo].[Organisatie_Eenheid]
-             group by id, clode -- business key
+             group by id, code -- business key
            ) eerste
 		   on (     eerste.id = staging.id 
 		        and eerste.meta_load_date = staging.meta_load_date
@@ -33,7 +33,7 @@ inner join (
 where 1=1
   -- voeg alleen nog niet bekende business keys toe  
   and staging.[code] not in (select code 
-                           from [TestIntegrationDB].[dbo].[H_Medewerker])
+                           from [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid])
 
 insert into H_Medewerker
 select
