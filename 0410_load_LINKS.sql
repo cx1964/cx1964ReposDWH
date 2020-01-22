@@ -7,7 +7,8 @@ go
 select  HASHBYTES('SHA2_256', sm.nr+so.code) as [L_Medewerker_Organisatie_EenheidHashkey] -- nog geode hashkey bepalen voor LINK key; nu nog niet uniek
        ,HASHBYTES('SHA2_256', sm.nr) as [H_MedewerkerHashkey]
 	   ,HASHBYTES('SHA2_256', so.code) as [h_Organisatie_EenheidHashkey]
-	   ,str(sm.id)+str(so.id)
+	   ,concat(str(sm.id,8,0),str(so.id,8,0))+convert(varchar(24), getdate(), 121) -- test tbv hash key maken
+	   ,concat(str(sm.id,8,0),str(so.id,8,0)) -- nog weg halen !!!!!!!!!!!!!!!!!!!!
 	   ,sm.[meta_record_source] -- uit Medewerker omdat die de fk bevat 
        ,sm.[meta_load_date] -- uit Medewerker omdat die de fk bevat 
        ,sm.[meta_create_time] -- uit Medewerker omdat die de fk bevat 
