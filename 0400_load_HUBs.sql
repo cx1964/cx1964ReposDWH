@@ -5,7 +5,6 @@
 -- Daniel Linstedt
 -- Micheal Olschimke
 
-
 use [TestIntegrationDB]
 go
 
