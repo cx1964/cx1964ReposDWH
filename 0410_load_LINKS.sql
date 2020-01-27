@@ -37,3 +37,13 @@ inner join	[TestIntegrationDB].[dbo].[H_medewerker] mh
 -- tbv hashkey Organisatie_Eenheid
 inner join	[TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] oh
        on oh.code = os.code
+-- check alleen records toevoegen in link tabel die nog niet bekend zijn
+and not exists
+(
+   select 'dummy'
+   from L_Medewerker_Organisatie_Eenheid lmo
+    where 1=1
+	  and lmo.H_MedewerkerHashkey = mh.H_MedewerkerHashkey
+	  and lmo.H_Organisatie_EenheidHashkey = oh.H_Organisatie_EenheidHashkey
+)
+
