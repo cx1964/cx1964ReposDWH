@@ -165,7 +165,7 @@ FROM
      )
      -- then outdate the existing record
      THEN UPDATE SET
-           IsCurrent  = 0
+           meta_IsCurrent  = 0
           ,meta_load_end_date = @LoadDate 
 		  ,meta_load_end_time = @LoadTime 
      -- when record not exists in satellite, insert the new record
