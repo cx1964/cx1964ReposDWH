@@ -160,6 +160,10 @@ END CATCH
  
 GO
 
+-- run procedure to load S_Medewerker
+exec Load_S_Medewerker
+go
+
 
 --MERGE [TestIntegrationDB].[dbo].[S_Medewerker] sm
 --USING [TestStagingDB].[dbo].[Medewerker] stgm
