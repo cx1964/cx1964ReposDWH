@@ -10,3 +10,7 @@ go
 -- run procedure to load S_Medewerker
 exec Load_S_Medewerker
 go
+
+-- run procedure to load S_Medewerker
+exec Load_S_Organisatie_Eenheid
+go
