@@ -81,21 +81,25 @@ WHEN NOT MATCHED BY TARGET
 
 -- nog drop toevoegen
 CREATE PROCEDURE Load_S_Medewerker
--- bron: https://www.oraylis.de/blog/data-vault-satellite-loads-explained
-   -- niet gebruikt @LoadProcess BIGINT --Identifier for the loadprocess
-As
+AS
+-- Bron: https://www.oraylis.de/blog/data-vault-satellite-loads-explained
+-- Functie: Stored Procedure tbv het loaden van de SAT Medewerkek obv EndDate methode 
+--
+-- niet gebruikt @LoadProcess BIGINT --Identifier for the loadprocess
+
 DECLARE @RecordSource        nvarchar(100)
-DECLARE @DefaultValidFrom    datetime2(0)     --use datetime2(0) to remove milliseconds
-Declare @DefaultValidTo      datetime2(0)  
-DECLARE @LoadDateTime        datetime2(0)  
+DECLARE @DefaultLoadDate     date
+DECLARE @DEfaultLoadTime     time   --use datetime2(0) to remove milliseconds
+DECLARE @DefaultLoadEndDate  date
+DECLARE @DefaultLoadEndTime  time
+DECLARE @LoadDate            date
+DECLARE @LoadTime            time
 
 SET @RecordSource            = N'fictief'
-SET @DefaultLoadDate         = '1900-01-01'
-SET @DefaultLoadTime         = '00:00"00' 
-
+SET @DefaultLoadEndTime      = '00:00:00' 
 SET @DefaultLoadEndDate      = '9999-12-31'
-
-SET @LoadDateTime            = GETDATE()
+SET @LoadDate                = convert(date, GETDATE())
+SET @LoadTime                = convert(time, GETDATE())
 
 BEGIN TRY
 Begin Transaction
@@ -118,20 +122,21 @@ INSERT INTO S_Medewerker
 )
 SELECT
      [H_MedewerkerHashkey]
-    ,@LoadDateTime                          --LoadDatetimeStamp
 	,[voorletters]
     ,[voorvoegsel]
     ,[achternaam]
     ,[geboortedatum]
     ,[aow_datum]
     -- ,@LoadProcess as LoadProcess
-    ,@RecordSource as RecordSource     
-    ,@LoadDateTime                          --Actual DateTimeStamp
-    ,@DefaultValidTo                        --Default Expiry DateTimestamp
-    ,1                                      --IsCurrent Flag
+    ,@RecordSource as meta_record_source     
+    ,@LoadDate                                -- Actual DateTimeStamp
+	,@LoadTime
+    ,@DefaultLoadEndDate                      -- Default Expiry DateTimestamp
+	,@DefaultLoadEndTime
+    ,1                     as meta_IsCurrent  -- IsCurrent Flag
 FROM 
 (
-     MERGE S_Medewerker AS Target     --Target: Satellite
+     MERGE S_Medewerker AS Target             --Target: Satellite
      USING 
      (
           -- Query distinct set of attributes from source (stage)
@@ -160,16 +165,15 @@ FROM
      )
      -- then outdate the existing record
      THEN UPDATE SET
-          IsCurrent  = 0,
-          ValidTo    = @LoadDateTime
+           IsCurrent  = 0
+          ,meta_load_end_date = @LoadDate 
+		  ,meta_load_end_time = @LoadTime 
      -- when record not exists in satellite, insert the new record
      WHEN NOT MATCHED BY TARGET
      THEN INSERT 
      (
-          H_MedewerkerHashkey
-		 ,LoadTimestamp
-		 
-	     ,[voorletters]
+          [H_MedewerkerHashkey]
+         ,[voorletters]
          ,[voorvoegsel]
          ,[achternaam]
          ,[geboortedatum]
@@ -185,7 +189,6 @@ FROM
      VALUES 
      (
            Source.H_MedewerkerHashkey
-          ,@LoadDateTime
 		  ,Source.[voorletters]
           ,Source.[voorvoegsel]
           ,Source.[achternaam]
@@ -193,9 +196,11 @@ FROM
           ,Source.[aow_datum]
           --@LoadProcess
           ,@RecordSource
-          ,@DefaultValidFrom     --Default Effective DateTimeStamp
-          ,@DefaultValidTo       --Default Expiry DateTimeStamp
-          ,1                     --IsCurrent Flag
+          ,@LoadDate             -- Default Effective DateTimeStamp
+		  ,@LoadTime
+          ,@DefaultLoadEndDate   -- Default Expiry DateTimeStamp
+		  ,@DefaultLoadEndTime
+          ,1                     -- IsCurrent Flag
      )
      -- Output changed records
      OUTPUT 
