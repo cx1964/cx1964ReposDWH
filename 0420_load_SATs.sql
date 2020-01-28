@@ -57,12 +57,12 @@ SELECT
     ,[geboortedatum]
     ,[aow_datum]
     -- ,@LoadProcess as LoadProcess
-    ,@RecordSource as meta_record_source     
-    ,@LoadDate                                -- Actual DateTimeStamp
-	,@LoadTime
-    ,@DefaultLoadEndDate                      -- Default Expiry DateTimestamp
-	,@DefaultLoadEndTime
-    ,1                     as meta_IsCurrent  -- IsCurrent Flag
+    ,@RecordSource       as [meta_record_source]     
+    ,@LoadDate           as [meta_load_date]        -- Actual DateTimeStamp
+	,@LoadTime           as [meta_create_time]
+    ,@DefaultLoadEndDate as [meta_load_end_date]    -- Default Expiry DateTimestamp
+	,@DefaultLoadEndTime as [meta_create_end_time]
+	,1                   as [meta_IsCurrent]        -- IsCurrent Flag
 FROM 
 (
      MERGE S_Medewerker AS Target             --Target: Satellite
@@ -86,17 +86,17 @@ FROM
      --when record already exists in satellite and an attribute value changed
      WHEN MATCHED AND
      (   
-	      Target.[voorletters] <> Source.[voorletters]
-       OR Target.[voorvoegsel] <> Source..[voorvoegsel]
-       OR Target.[achternaam] <> Source.[achternaam]
+	      Target.[voorletters]   <> Source.[voorletters]
+       OR Target.[voorvoegsel]   <> Source.[voorvoegsel]
+       OR Target.[achternaam]    <> Source.[achternaam]
        OR Target.[geboortedatum] <> Source.[geboortedatum]
-       OR Target.[aow_datum] <> Source.[aow_datum]
+       OR Target.[aow_datum]     <> Source.[aow_datum]
      )
      -- then outdate the existing record
      THEN UPDATE SET
            meta_IsCurrent  = 0
           ,meta_load_end_date = @LoadDate 
-		  ,meta_load_end_time = @LoadTime 
+		  ,meta_create_end_time = @LoadTime 
      -- when record not exists in satellite, insert the new record
      WHEN NOT MATCHED BY TARGET
      THEN INSERT 
