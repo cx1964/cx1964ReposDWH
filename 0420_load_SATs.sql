@@ -76,3 +76,152 @@ WHEN NOT MATCHED BY TARGET
 --          stgm.meta_load_date asc
 --		 ,stgm.meta_create_time asc
 --		 ,stgm.nr asc  -- business key
+
+
+
+-- nog drop toevoegen
+CREATE PROCEDURE Load_S_Medewerker
+-- bron: https://www.oraylis.de/blog/data-vault-satellite-loads-explained
+   -- niet gebruikt @LoadProcess BIGINT --Identifier for the loadprocess
+As
+DECLARE @RecordSource        nvarchar(100)
+DECLARE @DefaultValidFrom    datetime2(0)     --use datetime2(0) to remove milliseconds
+Declare @DefaultValidTo      datetime2(0)  
+DECLARE @LoadDateTime        datetime2(0)  
+
+SET @RecordSource            = N'fictief'
+SET @DefaultLoadDate         = '1900-01-01'
+SET @DefaultLoadTime         = '00:00"00' 
+
+SET @DefaultLoadEndDate      = '9999-12-31'
+
+SET @LoadDateTime            = GETDATE()
+
+BEGIN TRY
+Begin Transaction
+--Insert new current records for changed records
+INSERT INTO S_Medewerker
+( 
+	 [H_MedewerkerHashkey]
+    ,[voorletters]
+    ,[voorvoegsel]
+    ,[achternaam]
+    ,[geboortedatum]
+    ,[aow_datum]
+    --	,LoadProcess -- niet gebruikt
+    ,[meta_record_source]
+    ,[meta_load_date]
+    ,[meta_create_time]
+    ,[meta_load_end_date]
+	,[meta_create_end_time]
+	,[meta_IsCurrent]
+)
+SELECT
+     [H_MedewerkerHashkey]
+    ,@LoadDateTime                          --LoadDatetimeStamp
+	,[voorletters]
+    ,[voorvoegsel]
+    ,[achternaam]
+    ,[geboortedatum]
+    ,[aow_datum]
+    -- ,@LoadProcess as LoadProcess
+    ,@RecordSource as RecordSource     
+    ,@LoadDateTime                          --Actual DateTimeStamp
+    ,@DefaultValidTo                        --Default Expiry DateTimestamp
+    ,1                                      --IsCurrent Flag
+FROM 
+(
+     MERGE S_Medewerker AS Target     --Target: Satellite
+     USING 
+     (
+          -- Query distinct set of attributes from source (stage)
+          -- includes lookup of business key by left outer join referenced hub/link
+          SELECT distinct
+             hub.[H_MedewerkerHashkey]
+   	  	    ,stage.[voorletters]
+            ,stage.[voorvoegsel]
+            ,stage.[achternaam]
+            ,stage.[geboortedatum]
+            ,stage.[aow_datum]
+          FROM [TestStagingDB].[dbo].[Medewerker] as stage
+          LEFT OUTER JOIN [TestIntegrationDB].[dbo].[H_Medewerker] as hub on stage.Nr=hub.Nr
+          WHERE hub.[H_MedewerkerHashkey] is not null
+     ) AS Source
+     ON Target.[H_MedewerkerHashkey] = Source.[H_MedewerkerHashkey] --Identify Columns by Hub/Link Surrogate Key
+     AND Target.meta_IsCurrent = 1                                  --and only merge against current records in the target
+     --when record already exists in satellite and an attribute value changed
+     WHEN MATCHED AND
+     (   
+	      Target.[voorletters] <> Source.[voorletters]
+       OR Target.[voorvoegsel] <> Source..[voorvoegsel]
+       OR Target.[achternaam] <> Source.[achternaam]
+       OR Target.[geboortedatum] <> Source.[geboortedatum]
+       OR Target.[aow_datum] <> Source.[aow_datum]
+     )
+     -- then outdate the existing record
+     THEN UPDATE SET
+          IsCurrent  = 0,
+          ValidTo    = @LoadDateTime
+     -- when record not exists in satellite, insert the new record
+     WHEN NOT MATCHED BY TARGET
+     THEN INSERT 
+     (
+          H_MedewerkerHashkey
+		 ,LoadTimestamp
+		 
+	     ,[voorletters]
+         ,[voorvoegsel]
+         ,[achternaam]
+         ,[geboortedatum]
+         ,[aow_datum]
+		 --,LoadProcess
+         ,[meta_record_source]
+         ,[meta_load_date]
+         ,[meta_create_time]
+         ,[meta_load_end_date]
+	     ,[meta_create_end_time]
+	     ,[meta_IsCurrent]
+     ) 
+     VALUES 
+     (
+           Source.H_MedewerkerHashkey
+          ,@LoadDateTime
+		  ,Source.[voorletters]
+          ,Source.[voorvoegsel]
+          ,Source.[achternaam]
+          ,Source.[geboortedatum]
+          ,Source.[aow_datum]
+          --@LoadProcess
+          ,@RecordSource
+          ,@DefaultValidFrom     --Default Effective DateTimeStamp
+          ,@DefaultValidTo       --Default Expiry DateTimeStamp
+          ,1                     --IsCurrent Flag
+     )
+     -- Output changed records
+     OUTPUT 
+          $action AS Action
+          ,Source.*
+) AS MergeOutput
+WHERE MergeOutput.Action = 'UPDATE'
+AND  [H_MedewerkerHashkey] IS NOT NULL;
+ 
+
+Commit
+     SELECT
+          'Success' as ExecutionResult
+     RETURN;
+END TRY
+ 
+BEGIN CATCH
+ 
+     IF @@TRANCOUNT > 0
+     ROLLBACK
+ 
+     SELECT
+          'Failure' as ExecutionResult,
+          ERROR_MESSAGE() AS ErrorMessage;
+     RETURN;
+
+END CATCH
+ 
+GO
