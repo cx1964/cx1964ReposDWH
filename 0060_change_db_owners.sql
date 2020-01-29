@@ -40,3 +40,13 @@ go
 exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerIntegration'
 go
 -- *** Einde Change owner TestIntegrationDB DB ***
+
+-- *** Begin Change owner TestPresentationDB DB ***
+/* Selecteer de nieuwe lege applicatie database */ 
+use TestPresentationDB
+go
+
+/* Maak de Applicatie database user eigenaar van de database */
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerPresentation'
+go
+-- *** Einde Change owner TestIntegrationDB DB ***
