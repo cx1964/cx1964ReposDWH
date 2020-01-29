@@ -7,8 +7,9 @@
 use [TestIntegrationDB]
 go
 
+DROP PROCEDURE [dbo].[Load_S_Medewerker]
+GO
 
--- nog drop toevoegen
 CREATE PROCEDURE Load_S_Medewerker
 AS
 -- Bron: https://www.oraylis.de/blog/data-vault-satellite-loads-explained
