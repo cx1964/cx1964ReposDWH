@@ -17,7 +17,7 @@ is het wel mogelijk om de HUBs, SATs em LINKs parallel te laden. Dit kan dus nu 
 ## Business rules
 Tbv maximale herbruikbaarheid dienen alle softbusiness rules (zoals berekeningen ed)
 gedefineerd te worden in de laag tussen DataVault en DataMart.
-Als implentatie suggestie voor het definieren van deze softbusiness rules is het maken van database views
+Als implementatiesuggestie voor het definieren van deze softbusiness rules is het maken van database views
 op de Datavault.
 
 In dit voorbeeld is dit nog niet toegepast omdat nog geen relevant voorbeeld is verzonnen.
