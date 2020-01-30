@@ -12,7 +12,6 @@ go
 
 -- stap3 check op dubbelen
 
--- stap1 vullen S_Organisatieeenheid en Dim_Organisatie eenheid
 
 -- stap2 nog insert
 -- insert into [dbo].[FACT_gepensioneerde_per_OE]
