@@ -3,26 +3,26 @@
 use [TestPresentationDB]
 go
 
--- stap4
 -- zet fk uit tbv laden
--- nog insert FACT_gepensioneerde_per_OE
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]
+NOCHECK CONSTRAINT FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid;  
+GO  
 
--- zet fk aan na laden
-
-
--- stap3 check op dubbelen
-
-
--- stap2 nog insert
--- insert into [dbo].[FACT_gepensioneerde_per_OE]
+insert into [dbo].[FACT_gepensioneerde_per_OE]
 -- Hoogste niveau select tbv om meta hub gegevens te joinen aan resultaat
 select
-        do.[organisatie_eenheid_key]
-        -- resultaat.code
-       ,resultaat.aantal_gepensioneerden
-	   ,rh.meta_record_source
-	   ,rh.meta_load_date
-	   ,rh.meta_create_time
+        -- Keys naar DIMs
+        do.[organisatie_eenheid_key]         as [Organisatie_Eenheid_key]
+
+        -- debug:  resultaat.code
+		
+		-- Measures
+       ,resultaat.aantal_gepensioneerden     as [aantal_gepensioneerden]
+	   
+	   -- Meta data
+	   ,rh.meta_record_source                as [meta_record_source]
+	   ,rh.meta_load_date                    as [meta_load_date]
+	   ,rh.meta_create_time                  as [meta_create_time]
 from (
   -- tel alle aantallen op als resultaat
   select  
@@ -53,3 +53,10 @@ inner join  [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] rh
       on rh.h_Organisatie_EenheidHashkey = resultaat.h_Organisatie_EenheidHashkey
 inner join [TestPresentationDB].[dbo].[Dim_Organisatie_Eenheid] do
       on do.code = resultaat.code 
+
+
+-- zet fk weer aan na laden
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]
+WITH CHECK CHECK
+     CONSTRAINT FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid;  
+GO  
