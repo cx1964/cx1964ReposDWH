@@ -1,4 +1,4 @@
--- vullen sat S_Medewerker
+-- vullen sat S_Organisatie_Eenheid
 
 -- Artikel over merge statement
 -- https://www.sqlservertutorial.net/sql-server-basics/sql-server-merge/
@@ -7,10 +7,10 @@
 use [TestIntegrationDB]
 go
 
-DROP PROCEDURE [dbo].[Load_S_Medewerker]
+DROP PROCEDURE [dbo].[Load_S_Organisatie_Eenheid]
 GO
 
-CREATE PROCEDURE Load_S_Medewerker
+CREATE PROCEDURE Load_S_Organisatie_Eenheid
 AS
 -- Bron: https://www.oraylis.de/blog/data-vault-satellite-loads-explained
 -- Functie: Stored Procedure tbv het loaden van de SAT Medewerkek obv EndDate methode 
@@ -34,68 +34,53 @@ SET @LoadTime                = convert(time, GETDATE())
 BEGIN TRY
 Begin Transaction
 --Insert new current records for changed records
-INSERT INTO S_Medewerker
+INSERT INTO S_Organisatie_Eenheid
 ( 
-    -- Hub key 
-	[H_MedewerkerHashkey]
-    -- Properties    
-    ,[voorletters]
-    ,[voorvoegsel]
-    ,[achternaam]
-    ,[geboortedatum]
-    ,[aow_datum]
-     --,LoadProcess -- niet gebruikt
+	[H_Organisatie_EenheidHashkey]
+     -- Properties
+    ,[naam]
+    --	,LoadProcess -- niet gebruikt
     -- Meta gegevens
     ,[meta_record_source]
     ,[meta_load_date]
     ,[meta_create_time]
     ,[meta_load_end_date]
-	,[meta_create_end_time]
-	,[meta_IsCurrent]
+    ,[meta_create_end_time]
+    ,[meta_IsCurrent]
 )
 SELECT
-     [H_MedewerkerHashkey]
-	,[voorletters]
-    ,[voorvoegsel]
-    ,[achternaam]
-    ,[geboortedatum]
-    ,[aow_datum]
+     [H_Organisatie_EenheidHashkey]
+    ,[naam]
     -- ,@LoadProcess as LoadProcess
     ,@RecordSource       as [meta_record_source]     
     ,@LoadDate           as [meta_load_date]        -- Actual DateTimeStamp
-	,@LoadTime           as [meta_create_time]
+    ,@LoadTime           as [meta_create_time]
     ,@DefaultLoadEndDate as [meta_load_end_date]    -- Default Expiry DateTimestamp
-	,@DefaultLoadEndTime as [meta_create_end_time]
-	,1                   as [meta_IsCurrent]        -- IsCurrent Flag
+    ,@DefaultLoadEndTime as [meta_create_end_time]
+    ,1                   as [meta_IsCurrent]        -- IsCurrent Flag
 FROM 
 (
-     MERGE S_Medewerker AS Target             --Target: Satellite
+     MERGE S_Organisatie_Eenheid AS Target             --Target: Satellite
      USING 
      (
           -- Query distinct set of attributes from source (stage)
           -- includes lookup of business key by left outer join referenced hub/link
           SELECT distinct
-             hub.[H_MedewerkerHashkey]
-   	  	    ,stage.[voorletters]
-            ,stage.[voorvoegsel]
-            ,stage.[achternaam]
-            ,stage.[geboortedatum]
-            ,stage.[aow_datum]
-          FROM [TestStagingDB].[dbo].[Medewerker] as stage
-          LEFT OUTER JOIN [TestIntegrationDB].[dbo].[H_Medewerker] as hub on stage.Nr=hub.Nr
-          WHERE hub.[H_MedewerkerHashkey] is not null
+             hub.[H_Organisatie_EenheidHashkey]
+   	  	  ,stage.[naam]
+          FROM [TestStagingDB].[dbo].[Organisatie_Eenheid] as stage
+          LEFT OUTER JOIN [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] as hub
+		       on stage.Code=hub.Code -- business key
+          WHERE hub.[H_Organisatie_EenheidHashkey] is not null
      ) AS Source
-     ON Target.[H_MedewerkerHashkey] = Source.[H_MedewerkerHashkey] --Identify Columns by Hub/Link Surrogate Key
+     ON Target.[H_Organisatie_EenheidHashkey] = Source.[H_Organisatie_EenheidHashkey] --Identify Columns by Hub/Link Surrogate Key
      AND Target.meta_IsCurrent = 1                                  --and only merge against current records in the target
      --when record already exists in satellite and an attribute value changed
      WHEN MATCHED AND
      (   
-       -- verschillen detectie  
-	      Target.[voorletters]   <> Source.[voorletters]
-       OR Target.[voorvoegsel]   <> Source.[voorvoegsel]
-       OR Target.[achternaam]    <> Source.[achternaam]
-       OR Target.[geboortedatum] <> Source.[geboortedatum]
-       OR Target.[aow_datum]     <> Source.[aow_datum]
+        -- verschillen detectie  
+	      Target.[naam]   <> Source.[naam]
+       -- OR Target.[propertyX]   <> Source.propertyX]
      )
      -- then outdate the existing record
      THEN UPDATE SET
@@ -106,34 +91,29 @@ FROM
      WHEN NOT MATCHED BY TARGET
      THEN INSERT 
      (
-          [H_MedewerkerHashkey]
-         ,[voorletters]
-         ,[voorvoegsel]
-         ,[achternaam]
-         ,[geboortedatum]
-         ,[aow_datum]
+         -- Hub key
+          [H_Organisatie_EenheidHashkey]
+         -- Properties 
+         ,[naam]
 		 --,LoadProcess
+         -- Meta gegevens  
          ,[meta_record_source]
          ,[meta_load_date]
          ,[meta_create_time]
          ,[meta_load_end_date]
-	     ,[meta_create_end_time]
-	     ,[meta_IsCurrent]
+	    ,[meta_create_end_time]
+	    ,[meta_IsCurrent]
      ) 
      VALUES 
      (
-           Source.H_MedewerkerHashkey
-		  ,Source.[voorletters]
-          ,Source.[voorvoegsel]
-          ,Source.[achternaam]
-          ,Source.[geboortedatum]
-          ,Source.[aow_datum]
+           Source.H_Organisatie_EenheidHashkey
+	     ,Source.[naam]
           --@LoadProcess
           ,@RecordSource
           ,@LoadDate             -- Default Effective DateTimeStamp
-		  ,@LoadTime
+		,@LoadTime
           ,@DefaultLoadEndDate   -- Default Expiry DateTimeStamp
-		  ,@DefaultLoadEndTime
+		,@DefaultLoadEndTime
           ,1                     -- IsCurrent Flag
      )
      -- Output changed records
@@ -142,7 +122,7 @@ FROM
           ,Source.*
 ) AS MergeOutput
 WHERE MergeOutput.Action = 'UPDATE'
-AND  [H_MedewerkerHashkey] IS NOT NULL;
+AND  [H_Organisatie_EenheidHashkey] IS NOT NULL;
  
 
 Commit
