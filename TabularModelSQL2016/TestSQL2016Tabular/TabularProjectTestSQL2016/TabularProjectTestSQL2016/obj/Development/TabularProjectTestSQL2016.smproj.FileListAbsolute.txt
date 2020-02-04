@@ -1,0 +1,7 @@
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\bin\Model.asdatabase
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\bin\Model.deploymenttargets
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\bin\Model.deploymentoptions
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\obj\Development\TabularProjectTestSQL2016.smproj.CoreCompileInputs.cache
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\obj\Development\Model.asdatabase
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\obj\Development\Model.deploymentoptions
+C:\tmp\TestSQL2016Tabular\TabularProjectTestSQL2016\TabularProjectTestSQL2016\obj\Development\Model.deploymenttargets

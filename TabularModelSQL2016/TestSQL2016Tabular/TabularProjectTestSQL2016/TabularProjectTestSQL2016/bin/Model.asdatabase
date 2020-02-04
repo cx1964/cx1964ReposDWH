@@ -1,0 +1,273 @@
+{
+  "name": "TabularProjectTestSQL2016",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "nl-NL",
+    "dataSources": [
+      {
+        "name": "SqlServer C1Z68Y2TEST_C1Z68Y2 TestPresentationDB",
+        "connectionString": "Provider=SQLNCLI11;Data Source=C1Z68Y2\\TEST_C1Z68Y2;Persist Security Info=true;User ID=myTestDBOwnerPresentation;Initial Catalog=TestPresentationDB",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Dim_Medewerker",
+        "columns": [
+          {
+            "name": "medewerker_key",
+            "dataType": "int64",
+            "sourceColumn": "medewerker_key",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "nr",
+            "dataType": "string",
+            "sourceColumn": "nr",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "voorletters",
+            "dataType": "string",
+            "sourceColumn": "voorletters",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "voorvoegsel",
+            "dataType": "string",
+            "sourceColumn": "voorvoegsel",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "achternaam",
+            "dataType": "string",
+            "sourceColumn": "achternaam",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "geboortedatum",
+            "dataType": "dateTime",
+            "sourceColumn": "geboortedatum",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "aow_datum",
+            "dataType": "dateTime",
+            "sourceColumn": "aow_datum",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "meta_record_source",
+            "dataType": "string",
+            "sourceColumn": "meta_record_source",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "meta_load_date",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_load_date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "meta_create_time",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_create_time",
+            "formatString": "General Date",
+            "sourceProviderType": "145"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Medewerker",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[Dim_Medewerker].* FROM [dbo].[Dim_Medewerker] ",
+              "dataSource": "SqlServer C1Z68Y2TEST_C1Z68Y2 TestPresentationDB"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Dim_Medewerker].* FROM [dbo].[Dim_Medewerker] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Medewerker"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Organisatie_Eenheid",
+        "columns": [
+          {
+            "name": "organisatie_eenheid_key",
+            "dataType": "int64",
+            "sourceColumn": "organisatie_eenheid_key",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "code",
+            "dataType": "string",
+            "sourceColumn": "code",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "naam",
+            "dataType": "string",
+            "sourceColumn": "naam",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "meta_record_source",
+            "dataType": "string",
+            "sourceColumn": "meta_record_source",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "meta_load_date",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_load_date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "meta_create_time",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_create_time",
+            "formatString": "General Date",
+            "sourceProviderType": "145"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Organisatie_Eenheid",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[Dim_Organisatie_Eenheid].* FROM [dbo].[Dim_Organisatie_Eenheid] ",
+              "dataSource": "SqlServer C1Z68Y2TEST_C1Z68Y2 TestPresentationDB"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Dim_Organisatie_Eenheid].* FROM [dbo].[Dim_Organisatie_Eenheid] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Dim_Organisatie_Eenheid"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "FACT_gepensioneerde_per_OE",
+        "columns": [
+          {
+            "name": "FACT_gepensioneerde_per_OE_key",
+            "dataType": "int64",
+            "sourceColumn": "FACT_gepensioneerde_per_OE_key",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "Organisatie_Eenheid_key",
+            "dataType": "int64",
+            "sourceColumn": "Organisatie_Eenheid_key",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "aantal_gepensioneerden",
+            "dataType": "int64",
+            "sourceColumn": "aantal_gepensioneerden",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "meta_record_source",
+            "dataType": "string",
+            "sourceColumn": "meta_record_source",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "meta_load_date",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_load_date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "meta_create_time",
+            "dataType": "dateTime",
+            "sourceColumn": "meta_create_time",
+            "formatString": "General Date",
+            "sourceProviderType": "145"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FACT_gepensioneerde_per_OE",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[FACT_gepensioneerde_per_OE].* FROM [dbo].[FACT_gepensioneerde_per_OE] ",
+              "dataSource": "SqlServer C1Z68Y2TEST_C1Z68Y2 TestPresentationDB"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Totaal_aantal_gepensioneerden",
+            "expression": "SUM([aantal_gepensioneerden])"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[FACT_gepensioneerde_per_OE].* FROM [dbo].[FACT_gepensioneerde_per_OE] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "FACT_gepensioneerde_per_OE"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "c1933bd6-27fb-4146-a327-a0da7493d92a",
+        "fromTable": "FACT_gepensioneerde_per_OE",
+        "fromColumn": "Organisatie_Eenheid_key",
+        "toTable": "Dim_Organisatie_Eenheid",
+        "toColumn": "organisatie_eenheid_key"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  }
+}
