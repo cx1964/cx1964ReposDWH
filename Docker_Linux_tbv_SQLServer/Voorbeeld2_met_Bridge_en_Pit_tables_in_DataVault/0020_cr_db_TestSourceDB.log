@@ -1,6 +1,6 @@
-Msg 5105, Level 16, State 2, Server 9eb9074f7bde, Line 1
-A file activation error occurred. The physical file name './TestSourceDB.mdf' may be incorrect. Diagnose and correct additional errors, and retry the operation.
-Msg 1802, Level 16, State 1, Server 9eb9074f7bde, Line 1
+Msg 5120, Level 16, State 101, Server 9eb9074f7bde, Line 3
+Unable to open the physical file "/var/opt/sqlserver/TestSourceDB.mdf". Operating system error 2: "2(The system cannot find the file specified.)".
+Msg 1802, Level 16, State 7, Server 9eb9074f7bde, Line 3
 CREATE DATABASE failed. Some file names listed could not be created. Check related errors.
 Msg 5011, Level 14, State 5, Server 9eb9074f7bde, Line 1
 User does not have permission to alter database 'TestSourceDB', the database does not exist, or the database is not in a state that allows access checks.
