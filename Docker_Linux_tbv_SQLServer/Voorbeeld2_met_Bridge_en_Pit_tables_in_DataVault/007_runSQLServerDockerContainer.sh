@@ -15,7 +15,14 @@ docker run \
        -v mssqlserverdata1:/var/opt/mssql \
        -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 
-# -v sqldata1:/var/opt/mssql
+# Letop tgv -v mssqlserverdata1:/var/opt/mssql
+# Wordt er een docker volume aangemaakt.
+# De docker volume voor de container heet mssqlserverdata1
+# De docker volume mssqlserverdata1 wordt standaard fysiek op de linux host aangemaakt
+# in de directory /var/lib/docker/volumes/mssqlserverdata1
+# Als men database aanmaakt hoeft men geen database filenamen op te geven in het create database command.
+# De database files komen op de linux host in de directory /var/lib/docker/volumes/mssqlserverdata1/_data/data.
+# De filenamen van de database files komen in de container in de directory var/opt/mssql
 
 # check container
 docker ps -a
