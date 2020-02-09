@@ -1,6 +1,5 @@
 ToDo.txt
 
- 2. Laden van HUBs aanpassen door Hashkeys uit staging te halen
  3. Laden S_organisatie_eenheid2 aanpassen geen lookup op de HUB H_S_organisatie_eenheid2 om de hashkey te bepalen.
     Hashkey kan men berekenen obv de business key. Lookups op HUB voor de hashkey voorkomt parallel Laden
  4. Idem als bij 3 maar dan voor SATs van Medewerker
