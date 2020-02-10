@@ -1,12 +1,10 @@
 ToDo.txt
 
- 3. Laden S_organisatie_eenheid2 aanpassen geen lookup op de HUB H_S_organisatie_eenheid2 om de hashkey te bepalen.
-    Hashkey kan men berekenen obv de business key. Lookups op HUB voor de hashkey voorkomt parallel Laden
+ 5. Laad scripts maken voor de SAT vertrouwelijk (vrtrw) op H_Medewerker2 (maak cr_load_procedure_SAT_Medewerker_vrtrw)
+    zonder lookup voor hashkey op hub H_medewerker2, maar uit staging
+    zie voorbeeld procedure voor SAT_medewerker_nvrtrw
 
- 4. Idem als bij 3 maar dan voor SATs van Medewerker
- 5. 2 Laad scripts maken voor de 2 SATs (vertrouwelijk en niet vertrouwelijk) op H_Medewerker2
-
- 7. Laadscripts SATs draaien
+ 7. Laadscripts SAT medewerker vrtrw draaien
 
  9. Maken en laden Bridge tables
 10. Maken en laden PIT tabellen
