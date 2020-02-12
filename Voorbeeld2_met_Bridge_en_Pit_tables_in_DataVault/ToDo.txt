@@ -1,23 +1,19 @@
 ToDo.txt
 
- 5. Laad scripts maken voor de SAT vertrouwelijk (vrtrw) op H_Medewerker2 (maak cr_load_procedure_SAT_Medewerker_vrtrw)
-    zonder lookup voor hashkey op hub H_medewerker2, maar uit staging
-    zie voorbeeld procedure voor SAT_medewerker_nvrtrw
+7. Laden DIMs mbt speciale records obv traditionele manier
+   Gaat nog niets fout met laden van speciale records mbt truncate van 
+   Dim_Organisatie_Eenheid ondanks de FK uit staat.
+   Probleem oplossen
+8. Laden DIMs obv traditionele manier
+9. Laden FACTs obv traditionele manier
 
- 7. Laadscripts SAT medewerker vrtrw draaien
+10. Maken en laden Bridge tables
+11. Maken en laden PIT tabellen
+12. Laden DIMs obv PIT tables
+13. Laden FACT obv Bridge table   
 
- 9. Maken en laden Bridge tables
-10. Maken en laden PIT tabellen
-11. Laden DIMs obv PIT tables
-12. Laden FACT obv Bridge table   
-
-13 nadenken left outer join ipv inner join maken LINK tabel
-   tgv probleem niet verplichte FK 
+14 nadenken mbt probleem niet verplichte FK 
    en facts met fk naar NULL dimensie
-
- Echter voor de LINK is een inner join over fk van child naar parent tabel voldoende.
- Alleen alle child records die een parent hebben zitten in de LINK. Om te bepalen welke child records
- geen relatie hebben met de parent kan men bepalen door de set operatie HUB MINUS LINK op het niveau van de hash van de business key.
-   
-Nog niet beaantwoord, hoe omgaan met met FACTs zonder betreffende DIM. 
+   Of is dit een modeleringsprobleem van de STER.
+   Nog niet beaantwoord, hoe omgaan met met FACTs zonder betreffende DIM. 
 
