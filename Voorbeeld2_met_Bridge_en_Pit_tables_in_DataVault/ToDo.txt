@@ -14,3 +14,10 @@ ToDo.txt
 13 nadenken left outer join ipv inner join maken LINK tabel
    tgv probleem niet verplichte FK 
    en facts met fk naar NULL dimensie
+
+ Echter voor de LINK is een inner join over fk van child naar parent tabel voldoende.
+ Alleen alle child records die een parent hebben zitten in de LINK. Om te bepalen welke child records
+ geen relatie hebben met de parent kan men bepalen door de set operatie HUB MINUS LINK op het niveau van de hash van de business key.
+   
+Nog niet beaantwoord, hoe omgaan met met FACTs zonder betreffende DIM. 
+

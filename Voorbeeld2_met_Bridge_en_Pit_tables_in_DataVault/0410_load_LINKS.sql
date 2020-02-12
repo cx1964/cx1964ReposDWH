@@ -4,6 +4,12 @@ use [TestIntegrationDB2]
 go
 
 insert into L_Medewerker2_Organisatie_Eenheid2
+--
+-- Het opzoeken (tijdens het vullen van de LINK tabel) van de parent bij het child record vindt plaats obv
+-- een INNER JOIN obv de FK tussen child record en parent record, omdat
+-- Alleen alle child records die een parent hebben in de LINK zitten. Om te bepalen welke child records
+-- geen relatie hebben met de parent kan bepaald worden door de set operatie HUB MINUS LINK op het niveau van de hash van de business key.
+--
 select distinct
                 HASHBYTES('SHA2_256', str(eerste.nr)+str(os.code)) as [L_Medewerker_Organisatie_EenheidHashkey]
                 --  ,eerste.id
