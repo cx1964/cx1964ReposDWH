@@ -10,3 +10,7 @@ ToDo.txt
 10. Maken en laden PIT tabellen
 11. Laden DIMs obv PIT tables
 12. Laden FACT obv Bridge table   
+
+13 nadenken left outer join ipv inner join maken LINK tabel
+   tgv probleem niet verplichte FK 
+   en facts met fk naar NULL dimensie
