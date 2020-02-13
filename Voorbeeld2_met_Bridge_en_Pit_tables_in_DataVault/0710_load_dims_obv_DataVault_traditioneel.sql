@@ -26,11 +26,13 @@ select
 		,h.meta_load_date
 		,h.meta_create_time
 from [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] h
-inner join [TestIntegrationDB].[dbo].[S_Organisatie_Eenheid] s
+-- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
+-- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
+left join [TestIntegrationDB].[dbo].[S_Organisatie_Eenheid] s
       on s.H_Organisatie_EenheidHashkey = h.h_Organisatie_EenheidHashkey
 go
 
--- OK
+
 --insert into Dim_Medewerker
 SET IDENTITY_INSERT dbo.Dim_Medewerker OFF;  
 go  
@@ -63,6 +65,8 @@ select
 		,h.meta_load_date
 		,h.meta_create_time
 from [TestIntegrationDB].[dbo].[H_Medewerker] h
-inner join [TestIntegrationDB].[dbo].[S_Medewerker] s
+-- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
+-- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
+left join [TestIntegrationDB].[dbo].[S_Medewerker] s
       on s.H_MedewerkerHashkey = h.H_MedewerkerHashkey 
 go
