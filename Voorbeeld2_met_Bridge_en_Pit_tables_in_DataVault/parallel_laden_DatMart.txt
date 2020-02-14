@@ -1,0 +1,9 @@
+file: parallel_laden_DataMart.txt
+
+Alleen als men Hashkeys gebruikt, kan men de FACT en DIM tabellen parallel
+laden. Zonder Hashkeys als surrogate keys voor de DIMs moet men eerste de
+DIMs laden en om de keys te kunnen bepalen in de FACTs lookups doen op de
+DIMs. Dit veroorzaakt volgordelijk laden.
+
+Wil men in de de FACTs en DIMs parallel laden, moet men de hashkeys uit de
+DataVault laag van de HUBs hergebruiken in de DataMart.
