@@ -1,18 +1,26 @@
 ToDo.txt
 
-7. Laden DIMs mbt speciale records obv traditionele manier
+5. afmaken 0720 in script methode1 obv hashkeys afmaken
+                zie de ToDo in de select query om af te maken
+                en in 0720 mthode2 mbv Visuals Studio method2 helemaal met commentaar markeren
+
+6. DIM en FACT tabellen aanpassen dat keys hashkeys van de HUBS gebruiken
+7. Probleem op lossen voor laden FACT en reload DIMs en FACT mbt active FK; doe dit obv drop en creat ipv disable
+
+
+8. Laden DIMs mbt speciale records obv traditionele manier
    Gaat nog niets fout met laden van speciale records mbt truncate van 
    Dim_Organisatie_Eenheid ondanks de FK uit staat.
    Probleem oplossen
-8. Laden DIMs obv traditionele manier
-9. Laden FACTs obv traditionele manier
+9. Laden DIMs obv traditionele manier
+10. Laden FACTs obv traditionele manier
 
-10. Maken en laden Bridge tables
-11. Maken en laden PIT tabellen
-12. Laden DIMs obv PIT tables
-13. Laden FACT obv Bridge table   
+11. Maken en laden Bridge tables
+12. Maken en laden PIT tabellen
+13. Laden DIMs obv PIT tables
+14. Laden FACT obv Bridge table   
 
-14 nadenken mbt probleem niet verplichte FK 
+15 nadenken mbt probleem niet verplichte FK 
    en facts met fk naar NULL dimensie
    Of is dit een modeleringsprobleem van de STER.
    Nog niet beaantwoord, hoe omgaan met met FACTs zonder betreffende DIM. 
