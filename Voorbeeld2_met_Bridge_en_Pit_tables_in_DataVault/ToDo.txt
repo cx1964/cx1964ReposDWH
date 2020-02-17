@@ -1,9 +1,6 @@
 ToDo.txt
 
-5. afmaken 0720 in script methode1 obv hashkeys afmaken
-                zie de ToDo in de select query om af te maken
-                en in 0720 mthode2 mbv Visuals Studio method2 helemaal met commentaar markeren
-                en script 0720 aanpassen met Drop fk ipv disable fk
+5. afmaken 0720 script 0720 aanpassen met Drop fk ipv disable fk
                 en Datamodel plaats aanpassen ivm andere datatype kolommen in DataMart
 
 6. DIM en FACT tabellen aanpassen dat keys hashkeys van de HUBs gebruiken
