@@ -1,5 +1,5 @@
 ToDo.txt
-1 Documenteren nieuwe datamodellen Bron, Stage, DataVault en DataMart
+Maken nieuwe Tabular obv FACT en DIMs mbv hashkeys
 
 11. Maken en laden Bridge tables
 12. Maken en laden PIT tabellen
