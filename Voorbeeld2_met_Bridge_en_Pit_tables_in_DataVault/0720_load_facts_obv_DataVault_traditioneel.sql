@@ -123,8 +123,9 @@ from (
 --      on do.code = resultaat.code 
 
 
--- zet fk weer aan na laden
-ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]
-WITH CHECK CHECK
-     CONSTRAINT FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid;  
-GO  
+-- voeg FK weer toe na laden
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]  WITH CHECK ADD  CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid] FOREIGN KEY([H_Organisatie2HashKey])
+REFERENCES [dbo].[Dim_Organisatie_Eenheid] ([H_Organisatie2HashKey]);
+GO
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE] CHECK CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid];
+GO

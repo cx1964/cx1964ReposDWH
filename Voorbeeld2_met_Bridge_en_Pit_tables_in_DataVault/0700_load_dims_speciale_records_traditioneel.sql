@@ -18,29 +18,19 @@
 use [TestPresentationDB2]
 go
 
--- zet fk uit tbv laden
-ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]
-NOCHECK CONSTRAINT FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid;  
-GO  
+-- verwijder FK tussen FACT en DIM tbv laden
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE] DROP CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid];
+GO
 
-truncate table Dim_Medewerker
-truncate table Dim_Organisatie_Eenheid -- gaat fout ???  of moet fk droppen?
--- melding: Msg 4712, Level 16, State 1, Line 27
--- Cannot truncate table 'Dim_Organisatie_Eenheid' because it is being referenced by a FOREIGN KEY constraint.
-
-SET IDENTITY_INSERT dbo.Dim_Organisatie_Eenheid ON;  
-go 
-insert into Dim_Organisatie_Eenheid (organisatie_eenheid_key,code,naam,meta_record_source,meta_load_date,meta_create_time) values (-1, 'Niet gevonden', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
-insert into Dim_Organisatie_Eenheid (organisatie_eenheid_key,code,naam,meta_record_source,meta_load_date,meta_create_time) values (-2, 'Onbekend', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
+truncate table Dim_Medewerker;
+truncate table Dim_Organisatie_Eenheid;
 go
-SET IDENTITY_INSERT dbo.Dim_Organisatie_Eenheid OFF;  
+
+
+insert into Dim_Organisatie_Eenheid (H_Organisatie2HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-1', 'Niet gevonden', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Organisatie_Eenheid (H_Organisatie2HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-2', 'Onbekend', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
 go  
 
-
-SET IDENTITY_INSERT dbo.Dim_Medewerker ON;  
-go  
-insert into Dim_Medewerker (medewerker_key,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-1,'??????',NULL,NULL,'Niet gevonden','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
-insert into Dim_Medewerker (medewerker_key,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-2,'??????',NULL,NULL,'Onbekend','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
-go
-SET IDENTITY_INSERT dbo.Dim_Medewerker OFF;  
+insert into Dim_Medewerker (H_Medewerker2Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-1,'??????',NULL,NULL,'Niet gevonden','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Medewerker (H_Medewerker2Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-2,'??????',NULL,NULL,'Onbekend','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
 go  

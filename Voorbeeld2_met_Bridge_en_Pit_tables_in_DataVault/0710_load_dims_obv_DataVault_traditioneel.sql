@@ -4,12 +4,12 @@ use [TestPresentationDB2]
 go
 
 -- insert into Dim_Organisatie_eenheid
-SET IDENTITY_INSERT dbo.Dim_Organisatie_eenheid OFF;  
-go
 insert into [Dim_Organisatie_Eenheid]
 (
+      --hashkey tbv surrogate key
+       [H_Organisatie2HashKey]
       -- Business key 
-       [code]
+      ,[code]
       -- Properties
       ,[naam]
 	  ,[meta_record_source]
@@ -17,29 +17,31 @@ insert into [Dim_Organisatie_Eenheid]
 	  ,[meta_create_time]
 )
 select 
+         --hashkey tbv surrogate key
+         h.h_Organisatie_Eenheid2Hashkey
         -- Business key 
-         h.code
+        ,h.code
         -- Properties
 		,s.naam
 		-- Meta data
 		,h.meta_record_source
 		,h.meta_load_date
 		,h.meta_create_time
-from [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] h
+from [TestIntegrationDB2].[dbo].[H_Organisatie_Eenheid2] h
 -- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
 -- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
 left join [TestIntegrationDB].[dbo].[S_Organisatie_Eenheid] s
-      on s.H_Organisatie_EenheidHashkey = h.h_Organisatie_EenheidHashkey
+      on s.H_Organisatie_EenheidHashkey = h.h_Organisatie_Eenheid2Hashkey
 go
 
 
 --insert into Dim_Medewerker
-SET IDENTITY_INSERT dbo.Dim_Medewerker OFF;  
-go  
 insert into [Dim_Medewerker]
 (
+      --hashkey tbv surrogate key
+        H_Medewerker2Hashkey
       -- Business key 
-       [nr]
+       ,[nr]
       -- Properties
       ,[voorletters]
       ,[voorvoegsel]
@@ -52,8 +54,10 @@ insert into [Dim_Medewerker]
 	  ,[meta_create_time]
 )
 select 
+         --hashkey tbv surrogate key
+         h.H_Medewerker2Hashkey
          -- Business key
-         h.nr
+        ,h.nr
 		 -- Properties
 	    ,s.voorletters
         ,s.voorvoegsel
@@ -64,9 +68,9 @@ select
 		,h.meta_record_source
 		,h.meta_load_date
 		,h.meta_create_time
-from [TestIntegrationDB].[dbo].[H_Medewerker] h
+from [TestIntegrationDB2].[dbo].[H_Medewerker2] h
 -- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
 -- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
-left join [TestIntegrationDB].[dbo].[S_Medewerker] s
-      on s.H_MedewerkerHashkey = h.H_MedewerkerHashkey 
+left join [TestIntegrationDB2].[dbo].[S_Medewerker2_vrtrw] s
+      on s.H_Medewerker2Hashkey = h.H_Medewerker2Hashkey 
 go
