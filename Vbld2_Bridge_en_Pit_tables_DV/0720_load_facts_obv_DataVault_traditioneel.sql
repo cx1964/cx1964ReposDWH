@@ -45,7 +45,11 @@ from (
          ,min(data.meta_load_date)            as meta_load_date
 	     ,min(data.meta_create_time)          as meta_create_time
   from (
-    -- bepaal per organisatie eenheid medewerkers met aow_datum > geboortedatum
+    -- Bepaal per organisatie eenheid medewerkers waarvoor geldt:
+    --
+    --    convert(date, getdate()) > aow_datm
+    --
+    -- Medewerkers met convert(date, getdate()) > aow_datum zijn met pensioen.
     select 
               l.H_Organisatie_Eenheid2Hashkey 
              ,sm.aow_datum  
@@ -58,7 +62,8 @@ from (
     from [TestIntegrationDB2].[dbo].[L_Medewerker2_Organisatie_Eenheid2] l
     inner join [TestIntegrationDB2].[dbo].[S_Medewerker2_vrtrw] sm
           on sm.H_Medewerker2Hashkey = l.H_Medewerker2Hashkey
-    where sm.aow_datum > sm.geboortedatum
+    where 1=1
+      and convert(date, getdate()) > sm.aow_datum1
   ) data
     --group by data.code, data.h_Organisatie_EenheidHashkey
     group by data.H_Organisatie_Eenheid2Hashkey
