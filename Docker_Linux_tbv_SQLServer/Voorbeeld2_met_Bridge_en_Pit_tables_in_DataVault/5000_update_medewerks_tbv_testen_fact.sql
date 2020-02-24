@@ -1,7 +1,10 @@
-Changed database context to 'TestSourceDB2'.
+-- tbv test AOW datum
+-- Geef medewerker een reeele geboortedatum
+update TestSourceDB2.dbo.Medewerker2
+set geboortedatum = '19250531'
+where nr = '000010';
 
-(1 rows affected)
-
-(1 rows affected)
-
-(1 rows affected)
+-- Geef medewerker een bijpassende AOW_Datum in het verleden
+update TestSourceDB2.dbo.Medewerker2
+set aow_datum = '19900531'
+where nr = '000010';
