@@ -30,8 +30,8 @@ select
 from [TestIntegrationDB2].[dbo].[H_Organisatie_Eenheid2] h
 -- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
 -- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
-left join [TestIntegrationDB].[dbo].[S_Organisatie_Eenheid] s
-      on s.H_Organisatie_EenheidHashkey = h.h_Organisatie_Eenheid2Hashkey
+left join [TestIntegrationDB2].[dbo].[S_Organisatie_Eenheid2] s
+      on s.H_Organisatie_Eenheid2Hashkey = h.h_Organisatie_Eenheid2Hashkey
 go
 
 
