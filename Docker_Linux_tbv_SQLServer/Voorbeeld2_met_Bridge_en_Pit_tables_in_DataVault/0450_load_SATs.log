@@ -1,0 +1,22 @@
+Changed database context to 'TestIntegrationDB2'.
+
+(0 rows affected)
+ExecutionResult
+---------------
+Success        
+
+(1 rows affected)
+
+(1 rows affected)
+ExecutionResult
+---------------
+Success        
+
+(1 rows affected)
+
+(0 rows affected)
+ExecutionResult
+---------------
+Success        
+
+(1 rows affected)

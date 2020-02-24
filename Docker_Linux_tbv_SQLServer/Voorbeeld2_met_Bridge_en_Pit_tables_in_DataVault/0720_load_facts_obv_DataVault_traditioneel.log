@@ -1,0 +1,9 @@
+Changed database context to 'TestPresentationDB2'.
+
+(1 rows affected)
+Msg 547, Level 16, State 1, Server c8395777ea97, Line 125
+The ALTER TABLE statement conflicted with the FOREIGN KEY constraint "FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid". The conflict occurred in database "TestPresentationDB2", table "dbo.Dim_Organisatie_Eenheid", column 'H_Organisatie2HashKey'.
+Msg 4917, Level 16, State 1, Server c8395777ea97, Line 1
+Constraint 'FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid' does not exist.
+Msg 4916, Level 16, State 1, Server c8395777ea97, Line 1
+Could not enable or disable the constraint. See previous errors.

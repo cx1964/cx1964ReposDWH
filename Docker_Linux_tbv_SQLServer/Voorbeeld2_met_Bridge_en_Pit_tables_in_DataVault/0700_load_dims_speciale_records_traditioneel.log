@@ -1,0 +1,13 @@
+Changed database context to 'TestPresentationDB2'.
+Msg 3728, Level 16, State 1, Server c8395777ea97, Line 3
+'FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid' is not a constraint.
+Msg 3727, Level 16, State 1, Server c8395777ea97, Line 3
+Could not drop constraint. See previous errors.
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)

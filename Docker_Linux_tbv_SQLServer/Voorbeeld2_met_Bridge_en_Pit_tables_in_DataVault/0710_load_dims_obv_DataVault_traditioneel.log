@@ -1,0 +1,10 @@
+file: 0710_load_dims_obv_DataVault_traditioneel.log
+Probleem: Laden medewerkers tgv primary key constraint.
+        Null record zijn al geladen. Script heeft gewerkt.
+
+Changed database context to 'TestPresentationDB2'.
+
+(7 rows affected)
+Msg 2627, Level 14, State 1, Server c8395777ea97, Line 4
+Violation of PRIMARY KEY constraint 'PK_Dim_Medewerker'. Cannot insert duplicate key in object 'dbo.Dim_Medewerker'. The duplicate key value is (ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä).
+The statement has been terminated.
