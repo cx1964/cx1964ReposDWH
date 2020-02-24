@@ -63,7 +63,7 @@ from (
     inner join [TestIntegrationDB2].[dbo].[S_Medewerker2_vrtrw] sm
           on sm.H_Medewerker2Hashkey = l.H_Medewerker2Hashkey
     where 1=1
-      and convert(date, getdate()) > sm.aow_datum1
+      and convert(date, getdate()) > sm.aow_datum
   ) data
     --group by data.code, data.h_Organisatie_EenheidHashkey
     group by data.H_Organisatie_Eenheid2Hashkey
