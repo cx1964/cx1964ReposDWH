@@ -1,5 +1,8 @@
 ToDo.txt
-Maken nieuwe Tabular obv FACT en DIMs mbv hashkeys
+1. Laden van Dim Medewerker gaat nog verkeerd, tgv dubbellen in PK, tgv meer dan 1 SAT record ( Voor P Paaltjes)
+   Na denken hoe omgaan met meerdere SAT records in een DIM.
+   Gebruikt men alleen het actutuele SAT record? Er is voor P Paaltjes namelijk een mutatie geweest.
+   Wat zegt boek Dan Linsted?
 
 11. Maken en laden Bridge tables
 12. Maken en laden PIT tabellen
