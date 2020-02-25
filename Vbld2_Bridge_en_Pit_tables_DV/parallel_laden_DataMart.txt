@@ -7,3 +7,17 @@ DIMs. Dit veroorzaakt volgordelijk laden.
 
 Wil men in de de FACTs en DIMs parallel laden, moet men de hashkeys uit de
 DataVault laag van de HUBs hergebruiken in de DataMart.
+
+Echter tbv het laden van de DIMs zijn de hashkeys uit de HUBs niet uniek
+om als PK voor de DIMs te worden gebruikt.
+Dit kan men oplossen door:
+1. de DIMs te vullen obv de meest actuele SAT (dat de hashkeys niet een unieke keys
+   voor de DIMs komt doordat een HUB record meerdere SAT records kan hebben)
+2. als men toch alle SAT records wil laden in de DIM, dan moet er 
+   of een andere PK gebruikt worden of de PK obv van de hashkey  moet
+   aangevuld worden. Als aanvulling zijn de loaddatum en loadtijd van de SAT een
+   goede kandidaten.
+   Echter als men een nieuwe PK gaat gebruiken voor de DIMs dient ook de FKs in de 
+   FACTs hierop aangepast moeten worden.
+
+   
