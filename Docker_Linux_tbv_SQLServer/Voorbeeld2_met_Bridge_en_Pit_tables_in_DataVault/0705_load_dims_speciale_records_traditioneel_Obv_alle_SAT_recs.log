@@ -1,5 +1,13 @@
 Changed database context to 'TestPresentationDB2'.
-Msg 515, Level 16, State 2, Server 7607c2be76c5, Line 3
-Cannot insert the value NULL into column 'meta_load_end_date', table 'TestPresentationDB2.dbo.Dim_Organisatie_Eenheid_Compleet'; column does not allow nulls. INSERT fails.
-The statement has been terminated.
-SqlState 24000, Invalid cursor state
+Msg 3728, Level 16, State 1, Server 7607c2be76c5, Line 3
+'FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet' is not a constraint.
+Msg 3727, Level 16, State 1, Server 7607c2be76c5, Line 3
+Could not drop constraint. See previous errors.
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
