@@ -14,27 +14,27 @@ insert into [Dim_Organisatie_Eenheid_Compleet]
        [H_Organisatie2HashKey]
       ,[meta_load_date]
       ,[meta_create_time]
+      ,[meta_load_end_date]
+      ,[meta_create_end_time]
       -- Business key 
       ,[code]
        -- Properties
       ,[naam]
       ,[meta_record_source]
-      ,[meta_load_end_date]
-      ,[meta_create_end_time]
 )
 select 
-         --hashkey + loaddatum + laadtijd  tbv surrogate key
+         --hashkey + loaddatum + laadtijd + end loaddatum en tijd tbv surrogate key
          h.h_Organisatie_Eenheid2Hashkey
         ,h.meta_load_date
         ,h.meta_create_time
+        ,s.meta_load_end_date
+        ,s.meta_create_end_time
          -- Business key 
         ,h.code
          -- Properties
         ,s.naam
          -- Meta data
         ,h.meta_record_source
-        ,s.meta_load_end_date
-        ,s.meta_create_end_time
 from [TestIntegrationDB2].[dbo].[H_Organisatie_Eenheid2] h
 -- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
 -- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties
@@ -51,7 +51,9 @@ insert into [Dim_Medewerker_Compleet]
       --hashkey tbv surrogate key
        [H_Medewerker2Hashkey]
       ,[meta_load_date]
-      ,[meta_create_time]   
+      ,[meta_create_time]  
+      ,[meta_load_end_date]
+      ,[meta_create_end_time]       
       -- Business key 
       ,[nr]
        -- Properties
@@ -62,14 +64,14 @@ insert into [Dim_Medewerker_Compleet]
       ,[aow_datum]
        -- Meta data
       ,[meta_record_source]
-      ,[meta_load_end_date]
-      ,[meta_create_end_time]
 )
 select 
-         --hashkey + loaddatum + laadtijd  tbv surrogate key
+         --hashkey + loaddatum + laadtijd + end loaddatum en tijd tbv surrogate key
          h.H_Medewerker2Hashkey
         ,h.meta_load_date
         ,h.meta_create_time
+        ,s.meta_load_end_date
+        ,s.meta_create_end_time        
          -- Business key
         ,h.nr
          -- Properties
@@ -80,8 +82,6 @@ select
         ,s.aow_datum
          -- Meta data
         ,h.meta_record_source
-        ,s.meta_load_end_date
-        ,s.meta_create_end_time
 from [TestIntegrationDB2].[dbo].[H_Medewerker2] h
 -- Obv Boek Dan Linstedt vind join tussen HUB en SAT plaats obv left join
 -- zodat je ook een DIM record kan hebben met alleen een business key en zonder properties

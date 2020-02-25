@@ -1,3 +1,1 @@
 Changed database context to 'TestPresentationDB2'.
-Msg 4902, Level 16, State 1, Server b3a67fd05e16, Line 4
-Cannot find the object "dbo.FACT_gepensioneerde_per_OE_Compleet" because it does not exist or you do not have permissions.
