@@ -23,6 +23,8 @@ ToDo.txt
 
    script 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql laad nu FACT tabel goed.
    Probleem zit alleen nog in aanzetten FK tussen FACT en DIM
+   Als men script 8000_TestFact.sql draait levert de join tussen FACT en DIM geen records.
+   Dat betekent dat er iets fout gaat met de waarden van FKs en PKs of in FACT of in DIM
 
    *******************************************
 
