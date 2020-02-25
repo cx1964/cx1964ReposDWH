@@ -1,5 +1,7 @@
 Changed database context to 'TestPresentationDB2'.
-
-(7 rows affected)
-
-(4 rows affected)
+Msg 2627, Level 14, State 1, Server b3a67fd05e16, Line 5
+Violation of PRIMARY KEY constraint 'PK_Dim_Organisatie_Eenheid_Compleet'. Cannot insert duplicate key in object 'dbo.Dim_Organisatie_Eenheid_Compleet'. The duplicate key value is (IH–3i¶‚a-"°½É,Ò?¹!ÍÔNPô]~†´µ ", 2020-02-09, 14:07:12.5700000, 9999-12-31, 00:00:00.0000000).
+The statement has been terminated.
+Msg 2627, Level 14, State 1, Server b3a67fd05e16, Line 6
+Violation of PRIMARY KEY constraint 'PK_Dim_Medewerker_Compleet'. Cannot insert duplicate key in object 'dbo.Dim_Medewerker_Compleet'. The duplicate key value is (ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä, 2020-02-09, 14:07:12.5800000, 2020-02-24, 12:34:25.1700000).
+The statement has been terminated.
