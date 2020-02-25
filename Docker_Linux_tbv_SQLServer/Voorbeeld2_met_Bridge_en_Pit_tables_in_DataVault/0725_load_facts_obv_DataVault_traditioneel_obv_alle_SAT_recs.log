@@ -1,5 +1,5 @@
 Changed database context to 'TestPresentationDB2'.
-Msg 547, Level 16, State 1, Server b3a67fd05e16, Line 13
-The INSERT statement conflicted with the FOREIGN KEY constraint "FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet". The conflict occurred in database "TestPresentationDB2", table "dbo.Dim_Organisatie_Eenheid_Compleet".
-The statement has been terminated.
-SqlState 24000, Invalid cursor state
+
+(1 rows affected)
+Msg 547, Level 16, State 1, Server 7607c2be76c5, Line 137
+The ALTER TABLE statement conflicted with the FOREIGN KEY constraint "FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet". The conflict occurred in database "TestPresentationDB2", table "dbo.Dim_Organisatie_Eenheid_Compleet".

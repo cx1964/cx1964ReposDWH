@@ -144,8 +144,24 @@ from (
 
 
 -- voeg FK weer toe na laden
-ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE]  WITH CHECK ADD  CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid] FOREIGN KEY([H_Organisatie2HashKey])
-REFERENCES [dbo].[Dim_Organisatie_Eenheid] ([H_Organisatie2HashKey]);
+ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE_Compleet]
+WITH CHECK
+ADD CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet]
+FOREIGN KEY(
+             [H_Organisatie2HashKey]
+            ,[meta_load_date]
+            ,[meta_create_time]
+            ,[meta_load_end_date]
+            ,[meta_create_end_time]     
+)
+REFERENCES [dbo].[Dim_Organisatie_Eenheid_Compleet] (
+             [H_Organisatie2HashKey]
+            ,[meta_load_date]
+            ,[meta_create_time]
+            ,[meta_load_end_date]
+            ,[meta_create_end_time]     
+);
 GO
-ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE] CHECK CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Dim_Organisatie_Eenheid];
-GO
+--ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE_Compleet] 
+--CHECK CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet];
+--GO
