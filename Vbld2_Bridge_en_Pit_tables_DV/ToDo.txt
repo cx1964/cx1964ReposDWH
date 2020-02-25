@@ -15,6 +15,16 @@ ToDo.txt
    To doe is toevoegen van loadend datum en tijd in de fact !!!!!
 
 
+   Probleem: *********************************
+   FACT tabel is aangepast op database FACT TestPresentationDB2.dbo.FACT_gepensioneerde_per_OE_Compleet
+   query om deze fact tabel te vullen is FACT_gepensioneerde_per_OE_Compleet
+   dit betreft script
+   0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
+
+   Probleem met FK tijdens laden script 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
+
+   *******************************************
+
 11. Maken en laden Bridge tables
 12. Maken en laden PIT tabellen
 13. Laden DIMs obv PIT tables
