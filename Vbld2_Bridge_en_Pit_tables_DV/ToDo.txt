@@ -21,7 +21,8 @@ ToDo.txt
    dit betreft script
    0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
 
-   Probleem met FK tijdens laden script 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
+   script 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql laad nu FACT tabel goed.
+   Probleem zit alleen nog in aanzetten FK tussen FACT en DIM
 
    *******************************************
 
