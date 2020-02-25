@@ -16,8 +16,12 @@ Dit kan men oplossen door:
 2. als men toch alle SAT records wil laden in de DIM, dan moet er 
    of een andere PK gebruikt worden of de PK obv van de hashkey  moet
    aangevuld worden. Als aanvulling zijn de loaddatum en loadtijd van de SAT een
-   goede kandidaten.
+   goede kandidaten. In de praktijk blijkt dat het toevoegen van de
+   loaddatum en loadtijd van de SAT aan de PK van de DIM naast de hashkey niet
+   voldoende is om de PK van de DIM unike te maken.
+   Pas als men de PK van de DIM definieert obv hashkey van de hub, aangevuld meest
+   de load datum en tijd en loadend datum en tijd van de SAT, de PK wel uniek is als
+   alle SAT records worden geladen.
    Echter als men een nieuwe PK gaat gebruiken voor de DIMs dient ook de FKs in de 
    FACTs hierop aangepast moeten worden.
-
    

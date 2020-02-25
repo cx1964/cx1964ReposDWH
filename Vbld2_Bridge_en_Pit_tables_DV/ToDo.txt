@@ -6,6 +6,13 @@ ToDo.txt
 
    Als oplossing voor dit probleem wordt methode2
    uit parallel_laden_DataMart.txt geimplementeerd in aparte DIM en FACT tabellen.
+   Door load datum en tijd en endload datum tijd van SAT in key van de DIM op te
+   nemen samen met hashkey kan men wel alle SAT records laden in d DIMs.
+
+   Nu alleen de FACT hierop aanpassen.
+   FACT was al aangepast op toevoeging naast hashkey met load datum en tijd van de SAT
+   maar nog niet met loadend datum en tijd.
+   To doe is toevoegen van loadend datum en tijd in de fact !!!!!
 
 
 11. Maken en laden Bridge tables
