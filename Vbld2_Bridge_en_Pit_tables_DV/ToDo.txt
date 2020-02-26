@@ -7,7 +7,7 @@ ToDo.txt
    Als oplossing voor dit probleem wordt methode2
    uit parallel_laden_DataMart.txt geimplementeerd in aparte DIM en FACT tabellen.
    Door load datum en tijd en endload datum tijd van SAT in key van de DIM op te
-   nemen samen met hashkey kan men wel alle SAT records laden in d DIMs.
+   nemen samen met hashkey kan men wel alle SAT records laden in de DIMs.
 
    Nu alleen de FACT hierop aanpassen.
    FACT was al aangepast op toevoeging naast hashkey met load datum en tijd van de SAT
@@ -25,6 +25,17 @@ ToDo.txt
    Probleem zit alleen nog in aanzetten FK tussen FACT en DIM
    Als men script 8000_TestFact.sql draait levert de join tussen FACT en DIM geen records.
    Dat betekent dat er iets fout gaat met de waarden van FKs en PKs of in FACT of in DIM
+
+   Probleem gevonden: zie script 8005_Test_Join_HUB_en_SAT_Organisatie_eenheid2_obv_hashkey.sql
+   Als men TestPresentationDB2.dbo.Dim_Organisatie_Eenheid_Compleet joint aan
+   TestPresentationDB2.dbo.FACT_gepensioneerde_per_OE_Compleet obv PK en FK, dan krijgt men geen records.
+   Joint men slechts op een deel van kolommen van de PK/FK, worden wel records teruggegeven.
+   De volgende kolommen kunnen niet gebruikt wordeb voor de join omdat de waarde niet overeen komen:
+           --and d.meta_load_date    = f.meta_load_date
+           --and d.meta_create_time  = f.meta_create_time   
+
+   Check aanmaak van de kolommen het laadscript voor de DIM 0715_load_dims_obv_DataVault_traditioneel_Obv_alle_SAT_recs.sql
+   en het laad script voor de FACT 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
 
    *******************************************
 
