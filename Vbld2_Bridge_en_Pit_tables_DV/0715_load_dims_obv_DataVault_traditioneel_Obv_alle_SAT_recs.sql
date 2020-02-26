@@ -5,6 +5,12 @@
 use [TestPresentationDB2]
 go
 
+truncate table Dim_Organisatie_Eenheid_Compleet;
+truncate table Dim_Medewerker_Compleet;
+go
+
+
+
 -- *** eerste select query ****
 
 -- insert into Dim_Organisatie_eenheid
