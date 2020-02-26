@@ -25,8 +25,8 @@ insert into [Dim_Organisatie_Eenheid_Compleet]
 select 
          --hashkey + loaddatum + laadtijd + end loaddatum en tijd tbv surrogate key
          h.h_Organisatie_Eenheid2Hashkey
-        ,h.meta_load_date
-        ,h.meta_create_time
+        ,s.meta_load_date --h.meta_load_date
+        ,s.meta_create_time --,h.meta_create_time
         ,s.meta_load_end_date
         ,s.meta_create_end_time
          -- Business key 
@@ -68,8 +68,8 @@ insert into [Dim_Medewerker_Compleet]
 select 
          --hashkey + loaddatum + laadtijd + end loaddatum en tijd tbv surrogate key
          h.H_Medewerker2Hashkey
-        ,h.meta_load_date
-        ,h.meta_create_time
+        ,s.meta_load_date -- h.meta_load_date
+        ,s.meta_create_time -- h.meta_create_time
         ,s.meta_load_end_date
         ,s.meta_create_end_time        
          -- Business key
