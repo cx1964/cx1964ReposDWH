@@ -50,7 +50,12 @@ SELECT *
 FROM TestPresentationDB2.dbo.FACT_gepensioneerde_per_OE_Compleet f;
 go
 
-
+-- Oorzaak verschillen
+-- Als men nu scripts 0725 tbv laden facts en script 0715 tbv laden met elkaar vergelijkt
+-- valt op dat de load datum+tijd en loadend datum+tijd
+-- voor het laden van de fact uit de SAT van medewerker wordt gehaald en voor
+-- de DIM uit de SAT van organisatie eenheid. Daarom komen
+-- de load datum+tijd en loadend datum+tijd niet overeen.
 
 select d.H_Organisatie2HashKey
       ,d.meta_load_date
