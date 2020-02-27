@@ -60,10 +60,10 @@ from (
     select 
               -- maak FK naar DIM_Organisatie_Eenheid_compleet
               l.H_Organisatie_Eenheid2Hashkey 
-             ,sm.meta_load_date
-             ,sm.meta_create_time
-             ,sm.meta_load_end_date
-             ,sm.meta_create_end_time
+             ,so.meta_load_date  -- uit de SAT van Organisatie_Eenheid
+             ,so.meta_create_time -- uit de SAT van Organisatie_Eenheid
+             ,so.meta_load_end_date -- uit de SAT van Organisatie_Eenheid
+             ,so.meta_create_end_time -- uit de SAT van Organisatie_Eenheid
              -- Meetwaarden 
              ,sm.aow_datum  
              ,sm.geboortedatum
@@ -71,8 +71,13 @@ from (
              -- Meta gegevens uit SAT
              ,sm.meta_record_source
     from [TestIntegrationDB2].[dbo].[L_Medewerker2_Organisatie_Eenheid2] l
+	-- Tbv Medewerker properties in FACT is SAT medewerker nodig
     inner join [TestIntegrationDB2].[dbo].[S_Medewerker2_vrtrw] sm
           on sm.H_Medewerker2Hashkey = l.H_Medewerker2Hashkey
+    -- Tbv FK velden voor de fact van FACT naar DIM_organisatieeenheid is join
+	-- met SAT organisatie eenheid nodig
+    inner join [TestIntegrationDB2].[dbo].[S_Organisatie_Eenheid2] so
+	      on so.H_Organisatie_Eenheid2Hashkey = l.H_Organisatie_Eenheid2Hashkey
     where 1=1
       and convert(date, getdate()) > sm.aow_datum
   ) data
