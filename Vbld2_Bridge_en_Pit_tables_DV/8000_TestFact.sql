@@ -1,3 +1,6 @@
+-- File: 8000_TestFact.sql
+-- Functie: script tbv testen fact
+
 use [TestPresentationDB2]
 go
 
@@ -13,6 +16,40 @@ inner join TestPresentationDB2.dbo.Dim_Organisatie_Eenheid_Compleet d
            and d.meta_load_end_date = f.meta_load_end_date 
            and d.meta_create_end_time = f.meta_create_end_time 
          );
+
+-- Analyse 
+-- Bekend is dat het huidige vulling van de DBs als volgt is.
+-- In de bron is er een mutatie geweest voor medewerker P. Paaltjes (nr='000010')
+-- waardoor Er in de SAT nu twee records zijn voor dezwe medewerker.
+
+-- Tbv de FACT is onderstaande brongegevens in de bron tabel Organisatie_Eenheid2
+-- en Medewerker2 belangrijk om te weten bij welke Organisatie_Eenheid
+-- medewerker Paaltjes werkt.
+select  m.nr
+       ,m.achternaam
+	   ,m.voorletters
+	   ,m.aow_datum
+	   ,convert(date, getdate()) as datum_van_vandaag
+	   ,case when convert(date, getdate()) > m.aow_datum
+	         then 'Ja'
+		     else 'Nee'
+		end as IsMetPensioen
+	   ,m.werkt_voor_org_eenheid
+	   ,o.code
+	   ,o.naam
+from [TestSourceDB2].dbo.Medewerker2 m
+inner join [TestSourceDB2].dbo.Organisatie_Eenheid2 o
+      on o.id = m.werkt_voor_org_eenheid
+where 1=1
+  and achternaam = 'Paaltjes'
+
+-- Test of FACT TestPresentationDB2.dbo.FACT_gepensioneerde_per_OE_Compleet
+-- alleen voor Paaltjes die met Pensioen is Organisatie_Eenheid 46500 oplevert.
+
+SELECT *
+FROM TestPresentationDB2.dbo.FACT_gepensioneerde_per_OE_Compleet f;
+go
+
 
 
 select d.H_Organisatie2HashKey
