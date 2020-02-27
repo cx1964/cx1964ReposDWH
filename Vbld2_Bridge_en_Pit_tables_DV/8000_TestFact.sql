@@ -4,7 +4,10 @@
 use [TestPresentationDB2]
 go
 
--- geeft geen records
+-- Na bugfix leeft Query nu wel records op.
+-- Probleem werd veroorzaakt doordat in de FACT tbv de FK de kolommen voor load datum_tijd en loadend datum_tijd
+-- uit de verkeerde SAT werd gehaald.
+-- Na de fix kunnen DIM aan FACT gejoid worden.
 SELECT   d.code
         ,d.naam 
         ,f.aantal_gepensioneerden 
