@@ -17,7 +17,7 @@
 # for avaiable SQL Server Docker containers see
 # https://hub.docker.com/_/microsoft-mssql-server
 
-docker pull mcr.microsoft.com/mssql/server
+# docker pull mcr.microsoft.com/mssql/server
 # Run Docker conrainer met Docker volume
 # c:\SQLDatabase
 docker run -d --name 'sql2019' -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=Welkom01 -p 1433:1433 -v c:\SQLDatabase:/sql mcr.microsoft.com/mssql/server:2019-latest
