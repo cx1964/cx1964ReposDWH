@@ -6,30 +6,24 @@
 #          -- server name: gebruik de waarde van de hostname van de machine waarop de conrainer draait (in cmd shell geef commando hostname)
 #          -- login: sa
 #          -- Password: Welkom01 (= password opgegeven in het docker run command)      
-
-# --- ToDo 
-#          Nog oplossen !!!!
-# --- letop in dit script werkt het gebruik van docker volumes nog niet goed
-#     Dit getekent, dat an het stoppen van de Docker image, de data wweg is  
-
-
-
+#         
 # for avaiable SQL Server Docker containers see
 # https://hub.docker.com/_/microsoft-mssql-server
 
 # docker pull mcr.microsoft.com/mssql/server
-# Run Docker conrainer met Docker volume
-# c:\SQLDatabase
-docker run -d --name 'sql2019' -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD=Welkom01 -p 1433:1433 -v c:\SQLDatabase:/sql mcr.microsoft.com/mssql/server:2019-latest
 
-# Letop tgv -v mssqlserverdata1:/var/opt/mssql
-# Wordt er een docker volume aangemaakt.
-# De docker volume voor de container heet mssqlserverdata1
-# De docker volume mssqlserverdata1 wordt standaard fysiek op de linux host aangemaakt
-# in de directory /var/lib/docker/volumes/mssqlserverdata1
-# Als men database aanmaakt hoeft men geen database filenamen op te geven in het create database command.
-# De database files komen op de linux host in de directory /var/lib/docker/volumes/mssqlserverdata1/_data/data.
-# De filenamen van de database files komen in de container in de directory var/opt/mssql
+# Onderstaande werkt
+# Run Docker conrainer met Docker volume
+# zie https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-configure-docker?view=sql-server-ver15
+# Hierin is C:\SQLDatabase een local directory op host waarop Docker draait.
+# C:\SQLDatabase  wordt in onderstaand command gebruikt als Dockervolume, zodat de data persistent is, na het stoppen van de container.
+# Deze directory voor de docker volume wordt automatisch aangemaakt als deze nog niet bestaat.
+# Docker gebruikt / in directorynamen van local directories
+# Connect met deze database obv sa database user en opgegeven password en servername = hostname van de host waarop Dokcer draait .
+# Deze werkt:
+# docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Welkom01" -p 1433:1433 -v C:/SQLDatabase/data:/var/opt/mssql/data -v C:/SQLDatabase/log:/var/opt/mssql/log -v C:/SQLDatabase/secrets:/var/opt/mssql/secrets -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+# Deze werkt:
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Welkom01" -p 1433:1433 -v C:/SQLDatabase/data:/var/opt/mssql/data -v C:/SQLDatabase/log:/var/opt/mssql/log -v C:/SQLDatabase/secrets:/var/opt/mssql/secrets -d mcr.microsoft.com/mssql/server:2019-latest
 
 # check container
 docker ps -a
@@ -44,7 +38,7 @@ docker ps -a
 #   Autehnitaction: SQL Server Authentication
 #   username: sa
 #   pwassword: Welkom01
-#   Diver name: MS SQL Server/SQL Server
+#   Driver name: MS SQL Server/SQL Server
 #   Settings
 #           Thrust Server Certificate ON
 #
