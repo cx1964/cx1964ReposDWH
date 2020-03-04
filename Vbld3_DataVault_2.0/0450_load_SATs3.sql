@@ -1,6 +1,5 @@
 -- vullen sat S_Medewerker en S_Organisatie_Eenheid
 
-
 use [TestIntegrationDB3]
 go
 
