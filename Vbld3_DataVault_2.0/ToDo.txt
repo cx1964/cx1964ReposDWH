@@ -1,0 +1,9 @@
+File: ToDo.txt
+
+Script 0450_load_SATs3.sql
+heeft een 
+Violation of PRIMARY KEY constraint 'PK_S_Medewerker3_nvrtrw'. Cannot insert duplicate key in object 'dbo.S_Medewerker3_nvrtrw'. The duplicate key value is (ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä, 2020-03-04, 08:51:49.8900000).
+als het script 2 of meer keer wordt gedraait.
+
+Script aanpassen, dat als script2 of meerdere keren draait dat, dan query geen records oplevert
+Iets met een exist?
