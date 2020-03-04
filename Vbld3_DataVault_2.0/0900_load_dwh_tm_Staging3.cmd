@@ -1,5 +1,5 @@
-rem file: full_load_dwh.cmd
-rem Functie: full load van alle lagen van het DWH 
+rem file: 0900_load_dwh_tm_Staging3.cmd
+rem Functie: Laad DWH t/m staging laag
 rem Opmerking: Als dit script tegen de native SQL server (zonder docker draait) wordt gebruik gemkaat van een database met een database instance
 
 rem load bron
