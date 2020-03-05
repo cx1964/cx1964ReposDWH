@@ -29,14 +29,12 @@ where not exists
 	      from TestIntegrationDB3.dbo.S_Medewerker3_nvrtrw sat
 		  where 1=1
             and sat.H_Medewerker3Hashkey = stg.hashkey
-            and sat.meta_load_date = stg.meta_load_date
-            and sat.meta_create_time = stg.meta_create_time
-			-- een van de properties is veranderd
+			-- datum en tijd zijn niet van belang
 			and (
 			  -- verschillen detectie  
-  	             sat.[hoogste_opleiding] <> stg.[hoogste_opleiding]
-              OR sat.[bril_dragend]      <> stg.[bril_dragend]
-              OR sat.[schoenmaat]        <> stg.[schoenmaat]
+  	              sat.[hoogste_opleiding] = stg.[hoogste_opleiding]
+              and sat.[bril_dragend]      = stg.[bril_dragend]
+              and sat.[schoenmaat]        = stg.[schoenmaat]
             ))
 go
 
