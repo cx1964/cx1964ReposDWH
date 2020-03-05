@@ -24,11 +24,20 @@ select
 	   ,stg.[meta_create_time]
 from TestStagingDB3.dbo.Medewerker3 stg
 -- Voeg alleen nieuwe nog niet voorkomende records toe in de SAT
-left join TestIntegrationDB3.dbo.S_Medewerker3_nvrtrw sat
-      on (    sat.H_Medewerker3Hashkey = stg.hashkey
-          and sat.meta_load_date = stg.meta_load_date
-          and sat.meta_create_time = stg.meta_create_time
-      )
+where not exists
+      (   select 'dummy'
+	      from TestIntegrationDB3.dbo.S_Medewerker3_nvrtrw sat
+		  where 1=1
+            and sat.H_Medewerker3Hashkey = stg.hashkey
+            and sat.meta_load_date = stg.meta_load_date
+            and sat.meta_create_time = stg.meta_create_time
+			-- een van de properties is veranderd
+			and (
+			  -- verschillen detectie  
+  	             sat.[hoogste_opleiding] <> stg.[hoogste_opleiding]
+              OR sat.[bril_dragend]      <> stg.[bril_dragend]
+              OR sat.[schoenmaat]        <> stg.[schoenmaat]
+            ))
 go
 
 -- Load S_Medewerker3_vrtrw
