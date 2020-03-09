@@ -33,10 +33,12 @@ where not exists
             and sat.H_Medewerker3Hashkey = stg.hashkey
 			-- datum en tijd zijn niet van belang
 			and (
-			  -- verschillen detectie  
-  	              sat.[hoogste_opleiding] = stg.[hoogste_opleiding]
-              and sat.[bril_dragend]      = stg.[bril_dragend]
-              and sat.[schoenmaat]        = stg.[schoenmaat]
+			      -- verschillen detectie
+			      -- gebruik coalese voor niet verplichte velden om te testen
+			      -- ivm perdefinitie NULL <> NULL
+  	               COALESCE(sat.[hoogste_opleiding], '') =  COALESCE(stg.[hoogste_opleiding], '')
+              and  COALESCE(sat.[bril_dragend], '')      =  COALESCE(stg.[bril_dragend], '')
+              and  COALESCE(sat.[schoenmaat], '')        =  COALESCE(stg.[schoenmaat], ')'
             ))
 go
 
@@ -72,13 +74,15 @@ where not exists
             and sat.H_Medewerker3Hashkey = stg.hashkey
 			-- datum en tijd zijn niet van belang
 			and (
-			  -- verschillen detectie  
-	              sat.[voorletters]   = stg.[voorletters]
-	          and sat.[voorvoegsel]   = stg.[voorvoegsel]
-	          and sat.[achternaam]    = stg.[achternaam]
-	          and sat.[geboortedatum] = stg.[geboortedatum]
-	          and sat.[aow_datum]     = stg.[aow_datum]
-            ))
+			      -- verschillen detectie
+			      -- gebruik coalese voor niet verplichte velden om te testen
+			      -- ivm perdefinitie NULL <> NULL
+	              COALESCE(sat.[voorletters], '')   = COALESCE(stg.[voorletters], '')
+	          and COALESCE(sat.[voorvoegsel], '')   = COALESCE(stg.[voorvoegsel], '') -- dit is een kolom die NULL kan bevatten 
+	          and COALESCE(sat.[achternaam], '')    = COALESCE(stg.[achternaam], '')
+	          and COALESCE(sat.[geboortedatum], '') = COALESCE(stg.[geboortedatum], '')
+	          and COALESCE(sat.[aow_datum], '')     = COALESCE(stg.[aow_datum], '')
+           ))
 go
 
 -- load S_Organisatie_Eenheid3
@@ -105,8 +109,10 @@ where not exists
             and sat.H_Organisatie_Eenheid3Hashkey = stg.hashkey
 			-- datum en tijd zijn niet van belang
 			and (
-			  -- verschillen detectie  
-  	              sat.[Naam] = stg.[Naam]
+			      -- verschillen detectie
+			      -- gebruik coalese voor niet verplichte velden om te testen
+			      -- ivm perdefinitie NULL <> NULL
+  	              COALESCE(sat.[Naam], '') =  COALESCE(stg.[Naam], '')
             ))
 go
 
