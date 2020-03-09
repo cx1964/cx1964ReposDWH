@@ -31,12 +31,12 @@ go
 
 
 insert into Dim_Organisatie_Eenheid_Compleet
-(H_Organisatie2HashKey,meta_load_date,meta_create_time,code,naam,meta_record_source)
+(H_Organisatie3HashKey,meta_load_date,meta_create_time,code,naam,meta_record_source)
 values
 ('-1','99991231','00:00:00','Niet gevonden', NULL, 'system');
 
 insert into Dim_Organisatie_Eenheid_Compleet
-(H_Organisatie2HashKey,meta_load_date,meta_create_time,code,naam,meta_record_source)
+(H_Organisatie3HashKey,meta_load_date,meta_create_time,code,naam,meta_record_source)
 values
 ('-2','99991231','00:00:00','Onbekend', NULL, 'system');
 go  
@@ -44,13 +44,13 @@ go
 
 
 insert into Dim_Medewerker_Compleet
-(H_Medewerker2Hashkey,meta_load_date,meta_create_time,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source)
+(H_Medewerker3Hashkey,meta_load_date,meta_create_time,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source)
 values
  ('-1','99991231','00:00:00','-1', '?', '?', '?', '99991231', '99991231', 'system');
 
 
 insert into Dim_Medewerker_Compleet
-(H_Medewerker2Hashkey,meta_load_date,meta_create_time,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source)
+(H_Medewerker3Hashkey,meta_load_date,meta_create_time,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source)
 values
 ('-2','99991231','00:00:00','-2', '?', '?', '?', '99991231', '99991231', 'system');
 go  

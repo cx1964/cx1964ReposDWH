@@ -27,10 +27,10 @@ truncate table Dim_Organisatie_Eenheid_Compleet;
 go
 
 
-insert into Dim_Organisatie_Eenheid_Compleet (H_Organisatie2HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-1', 'Niet gevonden', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
-insert into Dim_Organisatie_Eenheid_Compleet (H_Organisatie2HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-2', 'Onbekend', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Organisatie_Eenheid_Compleet (H_Organisatie3HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-1', 'Niet gevonden', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Organisatie_Eenheid_Compleet (H_Organisatie3HashKey,code,naam,meta_record_source,meta_load_date,meta_create_time) values ('-2', 'Onbekend', NULL, 'system', convert(date, getdate()) , convert(time, getdate()));
 go  
 
-insert into Dim_Medewerker_Compleet (H_Medewerker2Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-1,'??????',NULL,NULL,'Niet gevonden','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
-insert into Dim_Medewerker_Compleet (H_Medewerker2Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-2,'??????',NULL,NULL,'Onbekend','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Medewerker_Compleet (H_Medewerker3Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-1,'??????',NULL,NULL,'Niet gevonden','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
+insert into Dim_Medewerker_Compleet (H_Medewerker3Hashkey,nr,voorletters,voorvoegsel,achternaam,geboortedatum,aow_datum,meta_record_source,meta_load_date,meta_create_time) values (-2,'??????',NULL,NULL,'Onbekend','99991231','99991231','system', convert(date, getdate()) , convert(time, getdate()));
 go  
