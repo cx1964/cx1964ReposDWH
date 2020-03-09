@@ -38,7 +38,7 @@ where not exists
 			      -- ivm perdefinitie NULL <> NULL
   	               COALESCE(sat.[hoogste_opleiding], '') =  COALESCE(stg.[hoogste_opleiding], '')
               and  COALESCE(sat.[bril_dragend], '')      =  COALESCE(stg.[bril_dragend], '')
-              and  COALESCE(sat.[schoenmaat], '')        =  COALESCE(stg.[schoenmaat], ')'
+              and  COALESCE(sat.[schoenmaat], '')        =  COALESCE(stg.[schoenmaat], '')
             ))
 go
 
