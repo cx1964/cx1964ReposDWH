@@ -1,5 +1,5 @@
 -- filenaam: queryMajidProgrammaHierarchieElement3.sql
--- Functie: query tbv Hierarchie op Coda Element3 tbv Programmah ierarchie
+-- Functie: query tbv Hierarchie op Coda Element3 tbv Programmahierarchie
 
 SELECT DISTINCT 
        OAS_HIMLIST.code [hierarchiecode], 
