@@ -1,15 +1,17 @@
 -- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
--- Functie: query deelproduct hierarchie tbv programmastructuur obv staging database DWH ivm belasing bron
+-- Functie: query deelproduct hierarchie tbv programmastructuur 
+--          query omgeboud van bron op staging database DWH zodat bron net wordt belast
+--          Deze query gebrukt staging DWH
+
 
 -- use codafin
 use DWH_STG;
 go
 
-
 -- check ook de queries in SSRS rapporten
--- Referentie DWH sem.SV_KOSTENPLAATS
+-- Referentie DWH sem.SV_DEELPRODUCT
 
--- elm=2 kan ook crediteuren en debiteuren zijn
+-- vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
 
 select     element.code,
            element.name,
@@ -26,18 +28,21 @@ select     element.code,
            himlist.leafname,
            himlist.leafhdrtxt,
            himlist.leaforder
-from codafin.dbo.oas_element element
-left join codafin.dbo.oas_grplist grplist
+-- from codafin.dbo.oas_element element
+from dwh_stg.codafin12.oas_element element
+-- left join codafin.dbo.oas_grplist grplist
+left join dwh_stg.codafin12.oas_grplist grplist
       on (
           element.cmpcode  = grplist.cmpcode
       and element.code     = grplist.code
       and element.elmlevel = grplist.elmlevel
       )
-inner join codafin.dbo.oas_himlist himlist
+--inner join codafin.dbo.oas_himlist himlist
+inner join dwh_stg.codafin12.oas_himlist himlist
       on (
           himlist.cmpcode = grplist.cmpcode
       and himlist.grpcode = grplist.grpcode     
       )     
 where 1=1
-  and element.elmlevel = 3
+  and element.elmlevel = 3 -- deelproduct
 go

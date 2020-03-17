@@ -1,5 +1,8 @@
 -- filenaam: queryMajidProgrammaHierarchieElement3.sql
 -- Functie: query tbv Hierarchie op Coda Element3 tbv Programmahierarchie
+--          Deze query gebruikt staging vDWH
+
+-- vergelijk output van deze query met codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
 
 SELECT DISTINCT 
        OAS_HIMLIST.code [hierarchiecode], 
