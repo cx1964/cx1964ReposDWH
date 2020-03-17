@@ -1,4 +1,4 @@
--- Filenaam: codafin_hierarchie_element3_deelproduct_tbv_programmastructuur
+-- Filenaam: codafin_hierarch_elem3_deelprodt_tbv_progstruct_obv_bron.sql
 -- Functie: query deelproduct hierarchie tbv programmastructuur
 
 use codafin

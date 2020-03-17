@@ -1,4 +1,4 @@
--- Filenaam: codafin_hierarchie_element2_kostenplaats.sql
+-- Filenaam: codafin_hierarch_elem2_kostenplts.sql
 -- Functie: query kostenplaast hierarchie
 
 use codafin

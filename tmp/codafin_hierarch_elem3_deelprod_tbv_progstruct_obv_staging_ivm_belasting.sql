@@ -1,4 +1,4 @@
--- Filenaam: codafin_hierarchie_element3_deelproduct_tbv_programmastructuur_obv_staging_DWH_ivm_belasting
+-- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
 -- Functie: query deelproduct hierarchie tbv programmastructuur obv staging database DWH ivm belasing bron
 
 -- use codafin
