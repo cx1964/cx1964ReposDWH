@@ -7,6 +7,8 @@
 use DWH_STG;
 go
 
+-- ToDo
+
 -- Nog vergelijken met:
 -- 1. Codalive SSRS rapport Informatieportaal productie
 -- 2. vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
@@ -14,6 +16,9 @@ go
 -- check ook de queries in SSRS rapporten
 -- Referentie DWH sem.SV_DEELPRODUCT
 
+-- nog te veel records !!!
+
+-- weg halen test condities !!!!!!!!!
 select  
         himlist.code as [hierarchiecode] 
        ,himlist.l1name as [programma_code_alias_ambitie_code] 
@@ -26,9 +31,11 @@ select
        ,himlist.leafhdrtxt as [product_omschrijving_alias_productnaam] 
        ,element.code as [deelproduct_code_alias_deelproductcode]  -- <<---------------
        ,element.name as [deelproduct_omschrijving_alias_deelproductnaam]
-
--- Nog column mbt geldig ??????????????????
-
+       ,case
+          when element.endyear = '0' 
+          then 'ja'
+          else 'nee'
+        end as geldig --  klopt dit ??????????????????
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
@@ -49,7 +56,8 @@ where 1=1
   and himlist.code = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  and himlist.l1name = '9'
+  and himlist.l1name = '9'     -- ambitiecode
+  and himlist.l3name = '9-1-1' -- beleidsprestatiecode
 
 order by himlist.l1name
         ,himlist.l2name
