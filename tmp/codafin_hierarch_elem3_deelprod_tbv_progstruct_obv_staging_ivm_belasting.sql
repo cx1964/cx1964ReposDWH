@@ -26,6 +26,9 @@ select
        ,himlist.leafhdrtxt as [product_omschrijving_alias_productnaam] 
        ,element.code as [deelproduct_code_alias_deelproductcode]  -- <<---------------
        ,element.name as [deelproduct_omschrijving_alias_deelproductnaam]
+
+-- Nog column mbt geldig ??????????????????
+
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
@@ -44,6 +47,10 @@ inner join dwh_stg.codafin12.oas_himlist himlist
 where 1=1
   and element.elmlevel = 3 -- deelproduct
   and himlist.code = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
+
+  -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  and himlist.l1name = '9'
+
 order by himlist.l1name
         ,himlist.l2name
         ,himlist.l3name
