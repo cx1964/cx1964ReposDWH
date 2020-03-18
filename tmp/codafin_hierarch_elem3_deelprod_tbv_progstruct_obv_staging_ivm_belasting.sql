@@ -7,10 +7,12 @@
 use DWH_STG;
 go
 
+-- Nog vergelijken met:
+-- 1. Codalive SSRS rapport Informatieportaal productie
+-- 2. vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
+
 -- check ook de queries in SSRS rapporten
 -- Referentie DWH sem.SV_DEELPRODUCT
-
--- vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
 
 select  
         himlist.code [hierarchiecode] 
