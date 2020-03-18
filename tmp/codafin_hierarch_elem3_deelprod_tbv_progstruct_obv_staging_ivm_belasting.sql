@@ -15,18 +15,17 @@ go
 -- Referentie DWH sem.SV_DEELPRODUCT
 
 select  
-        himlist.code [hierarchiecode] 
-       ,himlist.l1name [programma_code] 
-       ,himlist.l1hdrtxt [programma_omschrijving] 
-       ,himlist.l2name AS [doel_code] 
-       ,himlist.l2hdrtxt [doel_omschrijving] 
-       ,himlist.l3name [taak_code] 
-       ,himlist.l3hdrtxt [taak_omschrijving] 
-       ,himlist.leafname [product_code] 
-       ,himlist.leafhdrtxt [product_omschrijving] 
-       ,element.code [deelproduct_code]  -- <<---------------
-       ,element.name [deelproduct_omschrijving]
-       ,element.code AS [deelproduct2024] -- <<---------------
+        himlist.code as [hierarchiecode] 
+       ,himlist.l1name as [programma_code_alias_ambitie_code] 
+       ,himlist.l1hdrtxt as [programma_omschrijving_alias_ambitie] 
+       ,himlist.l2name as [doel_code_alias_beleidsdoelcode] 
+       ,himlist.l2hdrtxt as [doel_omschrijving_alias_beleidsdoel] 
+       ,himlist.l3name as [taak_code_alias_beleidsprestatiecode] 
+       ,himlist.l3hdrtxt as [taak_omschrijving_alias_beleidsprestatie] 
+       ,himlist.leafname  as [product_code_alias_productcode] 
+       ,himlist.leafhdrtxt as [product_omschrijving_alias_productnaam] 
+       ,element.code as [deelproduct_code_alias_deelproductcode]  -- <<---------------
+       ,element.name as [deelproduct_omschrijving_alias_deelproductnaam]
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
