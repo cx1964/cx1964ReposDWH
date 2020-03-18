@@ -3,7 +3,6 @@
 --          query omgeboud van bron op staging database DWH zodat bron net wordt belast
 --          Deze query gebrukt staging DWH
 
-
 -- use codafin
 use DWH_STG;
 go
@@ -13,25 +12,23 @@ go
 
 -- vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
 
-select     element.code,
-           element.name,
-           grplist.cmpcode,
-           grplist.code,
-           grplist.grpcode,
-           CAST(himlist.code AS VARCHAR(20)) AS hierarchie,
-           himlist.l1name,
-           himlist.l1hdrtxt,
-           himlist.l1order,
-           himlist.l2name,
-           himlist.l2hdrtxt,
-           himlist.l2order,
-           himlist.leafname,
-           himlist.leafhdrtxt,
-           himlist.leaforder
+select  
+        himlist.code [hierarchiecode] 
+       ,himlist.l1name [programma_code] 
+       ,himlist.l1hdrtxt [programma_omschrijving] 
+       ,himlist.l2name AS [doel_code] 
+       ,himlist.l2hdrtxt [doel_omschrijving] 
+       ,himlist.l3name [taak_code] 
+       ,himlist.l3hdrtxt [taak_omschrijving] 
+       ,himlist.leafname [product_code] 
+       ,himlist.leafhdrtxt [product_omschrijving] 
+       ,element.code [deelproduct_code]  -- <<---------------
+       ,element.name [deelproduct_omschrijving]
+       ,element.code AS [deelproduct2024] -- <<---------------
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
-left join dwh_stg.codafin12.oas_grplist grplist
+inner join dwh_stg.codafin12.oas_grplist grplist
       on (
           element.cmpcode  = grplist.cmpcode
       and element.code     = grplist.code
@@ -45,4 +42,11 @@ inner join dwh_stg.codafin12.oas_himlist himlist
       )     
 where 1=1
   and element.elmlevel = 3 -- deelproduct
+  and himlist.code = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
+order by himlist.l1name
+        ,himlist.l2name
+        ,himlist.l3name
+        ,himlist.leafname
+        ,element.code;
 go
+-- @ 20200318 2359 rows
