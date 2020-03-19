@@ -2,7 +2,7 @@
 -- Functie: query dekkingsbron hierarchie
 --          query omgebouwd van bron op staging database DWH zodat bron net wordt belast
 --          Deze query gebrukt staging DWH
---          nog output vergeleken met ssrs rapport CI40827 "CODA Element 4 hierarchie dekkingsbron 2020-2024"
+--          Output vergeleken met ssrs rapport CI40827 "CODA Element 4 hierarchie dekkingsbron 2020-2024"
 
 -- use codafin
 use DWH_STG;
