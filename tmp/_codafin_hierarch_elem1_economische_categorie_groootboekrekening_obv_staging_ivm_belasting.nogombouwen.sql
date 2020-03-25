@@ -19,8 +19,9 @@ select
        ,himlist.l3name as [l3name]               -- niet gebruikt
        ,himlist.l3hdrtxt as [l3hdrtxt]           -- niet gebruikt 
        ,himlist.leafname  as [economische_categorie_code] 
-       ,himlist.leafhdrtxt as [economische_categorie]
-       -- ** ontbreekt nog veld Economische categorie naam -- niet ontsloten  ******
+       /* ,himlist.leafhdrtxt as [economische_categorie] */
+       ,grp.sname as [economische_categorie]
+       ,grp.name as [economische_categorie_naam]
        ,element.code as [grootboekrekening_nummer]  
        ,element.name as [grootboekrekening_naam]
        ,case
@@ -42,21 +43,32 @@ inner join dwh_stg.codafin12.oas_himlist himlist
       on (
           himlist.cmpcode = grplist.cmpcode
       and himlist.grpcode = grplist.grpcode     
-      )     
+      )
+-- extra       
+inner join dwh_stg.codafin12.oas_group grp
+       on (
+           grp.cmpcode   = grplist.cmpcode
+       and grp.groupwhat = grplist.elmlevel
+       and grp.code      = grplist.grpcode
+       )
 where 1=1
   and element.elmlevel = 1 -- economische catgeorie (grootboekrekening)
   and himlist.code = 'PZHECOCAT' -- bepaalt welke kostenplaats hierarchie wordt gebruikt
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  and element.code = '00101'     -- grootboekrekeningnummer
+  -- and element.code = '00101'     -- grootboekrekeningnummer
 
 order by 
          himlist.l1name
-        ,himlist.l2name
-        ,himlist.l3name
-        ,himlist.leafname
+--       ,himlist.l2name
+--       ,himlist.l3name
+--       ,himlist.leafname
         ,element.code;
 go
+
+-- select *
+-- from dwh_stg.codafin12.oas_group as grp -- group is reserverd word !
+
 
 /*
 select  distinct
