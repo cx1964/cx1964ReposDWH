@@ -12,16 +12,17 @@ go
 
 select  
         himlist.code as [hierarchiecode] 
-       ,himlist.l1name as [organisatie_eenheid_code] 
-       ,himlist.l1hdrtxt as [organisatie_eenheid_naam] 
-       ,himlist.l2name as [afdelings-code] 
-       ,himlist.l2hdrtxt as [afdelings-naam] 
+       ,himlist.l1name as [hoofd_knooppunt_code] 
+       ,himlist.l1hdrtxt as [hoofd_knooppunt]   
+       ,himlist.l2name as [l2name]              -- niet gebruikt
+       ,himlist.l2hdrtxt as [l2hdrtxt]    -- niet gebruikt
        ,himlist.l3name as [l3name]               -- niet gebruikt
        ,himlist.l3hdrtxt as [l3hdrtxt]           -- niet gebruikt 
-       ,himlist.leafname  as [bureau-code] 
-       ,himlist.leafhdrtxt as [bureau-naam] 
-       ,element.code as [kostenplaats_code]  
-       ,element.name as [kostenplaats_naam]
+       ,himlist.leafname  as [economische_categorie_code] 
+       ,himlist.leafhdrtxt as [economische_categorie]
+       -- ** ontbreekt nog veld Economische categorie naam -- niet ontsloten  ******
+       ,element.code as [grootboekrekening_nummer]  
+       ,element.name as [grootboekrekening_naam]
        ,case
           when element.endyear = '0' 
           then 'ja'
@@ -47,7 +48,7 @@ where 1=1
   and himlist.code = 'PZHECOCAT' -- bepaalt welke kostenplaats hierarchie wordt gebruikt
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  -- and himlist.l2name = 'A2107'     -- afdeingscode
+  and element.code = '00101'     -- grootboekrekeningnummer
 
 order by 
          himlist.l1name
