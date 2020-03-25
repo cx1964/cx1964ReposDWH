@@ -2,6 +2,7 @@
 -- Functie:  query economische categorie (grootboekrekening) hierarchie
 --           Deze query gebrukt staging DWH
 --           output vergeleken met ssrs rapport CI40942 "CODA Element 1 Hierarchie economische categorie"
+--           20200325 Obv van een steekproef van 5 metingen klopt de query in vergelijk met het ssrs rapport
 
 -- use codafin
 use DWH_STG;
@@ -56,6 +57,12 @@ where 1=1
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   -- and element.code = '00101'     -- grootboekrekeningnummer
+  -- and grp.sname = '1.0.1'  -- economische_categorie 20200325 klopt
+  -- and grp.sname = '2.1'    -- economische_categorie 20200325 klopt
+  -- and grp.sname = '6.0'    -- economische_categorie 20200325 klopt
+  -- and grp.sname = '7.7'    -- economische_categorie 20200325 klopt
+  -- and grp.sname = '8.2'    -- economische_categorie 20200325 klopt
+
 
 order by 
          element.code;
