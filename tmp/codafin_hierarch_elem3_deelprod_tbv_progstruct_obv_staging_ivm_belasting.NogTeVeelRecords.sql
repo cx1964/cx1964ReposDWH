@@ -1,6 +1,6 @@
 -- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
 -- Functie: query deelproduct hierarchie tbv programmastructuur 
---          query omgeboud van bron op staging database DWH zodat bron net wordt belast
+--          query omgebouwd van bron op staging database DWH zodat bron net wordt belast
 --          Deze query gebrukt staging DWH
 
 -- use codafin
@@ -31,11 +31,18 @@ select
        ,himlist.leafhdrtxt as [product_omschrijving_alias_productnaam] 
        ,element.code as [deelproduct_code_alias_deelproductcode]  -- <<---------------
        ,element.name as [deelproduct_omschrijving_alias_deelproductnaam]
+       -- uit SSRS rapport gehaald
+       /***
        ,case
-          when element.endyear = '0' 
-          then 'ja'
-          else 'nee'
-        end as geldig --  klopt dit ??????????????????
+          when year(getdate()) * 10000 + month(getdate())
+               between 
+                  (case when Prog.startyear &gt; 0 then Prog.startyear else 1900 end * 10000 + Prog.startperiod)
+                  and
+                  (case when Prog.endyear &gt; 0 then Prog.endyear else 9999 end * 10000 + Prog.endperiod)
+          then ('ja')
+          else ('nee')
+        end as geldig
+        ***/
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
@@ -53,10 +60,26 @@ inner join dwh_stg.codafin12.oas_himlist himlist
       )     
 where 1=1
   and element.elmlevel = 3 -- deelproduct
-  and himlist.code = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
+  and grplist.elmlevel = 3 -- extra conditie uit rapport  CI40826 0078b Element 3 programmastructuur 2016-2019.rdl
+--  and element.cmpcode  = 'PZH'
+--  and himlist.code     = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
+  and himlist.code     = 'PZHPROG1620' -- tbv test 
+
+
+-- Dit levert wel records op op ph429 @ 20200325
+-- select *
+-- from dwh_stg.codafin12.oas_himlist himlist
+-- where himlist.code     = 'PZHPROG1620' 
+
+
+
+
+
+
+
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  and himlist.l1name = '9'     -- ambitiecode
+  --and himlist.l1name = '9'     -- ambitiecode
   and himlist.l3name = '9-1-1' -- beleidsprestatiecode
 
 order by himlist.l1name
