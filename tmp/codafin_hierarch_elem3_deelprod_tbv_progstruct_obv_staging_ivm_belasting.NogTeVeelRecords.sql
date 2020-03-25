@@ -1,6 +1,6 @@
 -- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
 -- Functie: query deelproduct hierarchie tbv programmastructuur 
---          query omgebouwd van bron op staging database DWH zodat bron net wordt belast
+--          query omgebouwd van bron op staging database DWH zodat bron niet wordt belast
 --          Deze query gebrukt staging DWH
 
 -- use codafin
@@ -10,13 +10,11 @@ go
 -- ToDo
 
 -- Nog vergelijken met:
--- 1. Codalive SSRS rapport Informatieportaal productie
--- 2. vergelijk uitkomst van deze query met queryMajidProgrammaHierarchieElement3.sql
+-- 1. Codalive SSRS rapport Informatieportaal productie CI40826 "CODA Element 3 programmastructuur 2020-2024"
 
--- check ook de queries in SSRS rapporten
 -- Referentie DWH sem.SV_DEELPRODUCT
 
--- nog te veel records !!!
+-- nog afwijkend aantal records !!!
 
 -- weg halen test condities !!!!!!!!!
 select  
@@ -61,13 +59,13 @@ inner join dwh_stg.codafin12.oas_himlist himlist
 where 1=1
   and element.elmlevel = 3 -- deelproduct
   and grplist.elmlevel = 3 -- extra conditie uit rapport  CI40826 0078b Element 3 programmastructuur 2016-2019.rdl
---  and element.cmpcode  = 'PZH'
---  and himlist.code     = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
-  and himlist.code     = 'PZHPROG1620' -- tbv test 
+  --  and element.cmpcode  = 'PZH'
+  and himlist.code     = 'PZHPROG2024' -- bepaalt welke programmabegroting voor welke collegeperiode
+  --  and himlist.code     = 'PZHPROG1620' -- tbv test 
 
   -- tbv test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   --and himlist.l1name = '9'     -- ambitiecode
-  -- and himlist.l3name = '9-1-1' -- beleidsprestatiecode
+  and himlist.l3name = '9-1-1' -- beleidsprestatiecode
 
 order by himlist.l1name
         ,himlist.l2name
@@ -146,6 +144,9 @@ where
   oas_element.elmlevel = oas_grplist.elmlevel and
   oas_element.cmpcode  = oas_grplist.cmpcode and
   oas_element.cmpcode  = 'PZH' and
-  oas_himlist.code     = 'PZHPROG1620'
+  -- oas_himlist.code     = 'PZHPROG1620'
+  oas_himlist.code     = 'PZHPROG2024' and
+  -- tbv test
+  oas_himlist.l3name = '9-1-1' -- beleidsprestatiecode
 ) as Prog;
 go
