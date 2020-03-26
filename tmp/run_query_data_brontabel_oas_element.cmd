@@ -1,0 +1,2 @@
+# Opmerking: Draai dit script van beheerserver bia001.accetatie.local ivm het gebruik van sqlcmd command
+sqlcmd -S acc429.acceptatie.local\dm -U etl -P <password> -i query_data_brontabel_oas_element.sql -o query_data_brontabel_oas_element.data
