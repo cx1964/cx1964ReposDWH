@@ -15,4 +15,5 @@
 
 import pyodbc
 
+
 print("Einde verwerking")
