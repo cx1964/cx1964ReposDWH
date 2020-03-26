@@ -1,4 +1,4 @@
--- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_vDWH_ivm_belasting.sql
+-- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_vDWH_Staging_ivm_belasting.sql
 -- Functie:  Query deelproduct hierarchie tbv programmastructuur 
 --           Query omgebouwd van bron op staging database vDWH zodat bron niet wordt belast
 --           Deze query gebrukt staging vDWH
@@ -9,6 +9,7 @@
 --            evenveel records op voor zelfde testcase als in SSRS rapport 
 --            CI40826 "CODA Element 3 programmastructuur 2020-2024".rdl en
 --            CI40826 "0078b Element 3 programmastructuur 2016-2019".rdl
+--            De query met exact even veel records opleveren als query codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_DWH_STG_ivm_belasting.sql
 
 -- use codafin
 -- use DWH_STG;
