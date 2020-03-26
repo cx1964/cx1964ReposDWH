@@ -1,6 +1,6 @@
--- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_staging_ivm_belasting.sql
--- Functie: query deelproduct hierarchie tbv programmastructuur 
---          query omgebouwd van bron op staging database DWH zodat bron niet wordt belast
+-- Filenaam: codafin_hierarch_elem3_deelprod_tbv_progstruct_obv_DWH_STG_ivm_belasting.sql
+-- Functie: Query deelproduct hierarchie tbv programmastructuur 
+--          Query omgebouwd van bron op staging database DWH zodat bron niet wordt belast
 --          Deze query gebrukt staging DWH
 -- Referenties: Codalive SSRS rapport Informatieportaal productie CI40826 "CODA Element 3 programmastructuur 2020-2024" zoals op 20200325 op informatieportaal
 --              Codalive SSRS rapport Informatieportaal productie CI40826 "0078b Element 3 programmastructuur 2016-2019" 

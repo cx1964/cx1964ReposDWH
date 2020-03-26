@@ -1,4 +1,4 @@
--- Filenaam: codafin_hierarch_elem1_economische_categorie_grootboekrekening_obv_staging_ivm_belasting.sql
+-- Filenaam: codafin_hierarch_elem1_economische_categorie_grootboekrekening_obv_DWH_STG_ivm_belasting.sql
 -- Functie:  query economische categorie (grootboekrekening) hierarchie
 --           Deze query gebrukt staging DWH
 --           output vergeleken met ssrs rapport CI40942 "CODA Element 1 Hierarchie economische categorie"
@@ -24,11 +24,18 @@ select
        ,grp.name as [economische_categorie_naam]
        ,element.code as [grootboekrekening_nummer]  
        ,element.name as [grootboekrekening_naam]
+       -- uit SSRS rapport "0078b Element 3 programmastructuur 2016-2019.rdl" gehaald
        ,case
-          when element.endyear = '0' 
-          then 'ja'
-          else 'nee'
-        end as geldig --  klopt dit ??????????????????
+          when year(getdate()) * 10000 + month(getdate())
+            between 
+              --(case when Prog.startyear &gt; 0 then Prog.startyear else 1900 end * 10000 + Prog.startperiod)
+              (case when element.startyear > 0 then element.startyear else 1900 end * 10000 + element.startperiod)
+              and
+              --(case when Prog.endyear &gt; 0 then Prog.endyear else 9999 end * 10000 + Prog.endperiod)
+              (case when element.endyear > 0 then element.endyear else 9999 end * 10000 + element.endperiod)
+          then ('ja')
+          else ('nee')
+        end as geldig
 -- from codafin.dbo.oas_element element
 from dwh_stg.codafin12.oas_element element
 -- left join codafin.dbo.oas_grplist grplist
