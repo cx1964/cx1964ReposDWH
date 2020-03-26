@@ -1,5 +1,7 @@
-USE [DWH_STG]
-GO
+-- USE [DWH_STG]
+-- GO
+use [TestStagingDB3];
+go
 
 /****** Object:  Table [codafin12].[oas_grplist]    Script Date: 3/26/2020 9:29:32 AM ******/
 SET ANSI_NULLS ON
