@@ -7,11 +7,3 @@ python3 -m venv env_python3_DWH
 
 .\env_python3_DWH\Scripts\activate.bat
 
-rem upgrade pip
-python -m pip install --upgrade pip
-
-rem install bednodigde python libraries
-pip install pyodbc
-
-rem toon geinstalleerde python libraries
-pip list
