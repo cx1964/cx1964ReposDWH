@@ -17,7 +17,6 @@
 import pyodbc
 import pandas as pd
 
-# df = pd.read_csv("testtextfile.csv", delimiter = ' ')
-df = pd.read_csv("bla.csv")
-#print(df.head(7))
+df = pd.read_csv("testtextfile.csv", delimiter = ' ')
+print(df.head(7))
 print("Einde verwerking")

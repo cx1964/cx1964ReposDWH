@@ -6,6 +6,7 @@ python -m pip install --upgrade pip
 
 rem install bednodigde python libraries
 pip install pyodbc
+pip install pandas
 
 rem toon geinstalleerde python libraries
 pip list
