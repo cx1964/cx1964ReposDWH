@@ -11,12 +11,20 @@
 #               - localhost_db_TestStagingDB3
 #               - localhost_db_TestIntegrationDB3
 #               - localhost_db_TestPresentationDB3
-#               Draai dit script vanuit Microsoft Visual Code mbv de rechter muis optie "Run Selection/Line in Python terminal"
+#               Draai dit script vanuit Microsoft Visual Code mbv de rechter muis optie "Run Python file in terminal"
+#               Zorg dat in Visual code de python interpreter wordt gebruikt uit virtual env env_python3_DWH
 # Referenties: https://www.got-it.ai/solutions/sqlquerychat/sql-help/data-manipulation/read-and-write-data-to-and-from-sql-server-using-pandas-library-in-python-querychat/
 
 import pyodbc
 import pandas as pd
 
-df = pd.read_csv("testtextfile.csv", delimiter = ' ')
-print(df.head(7))
+#werkt 
+data = pd.read_csv("testtextfile.csv", skiprows=6, sep=';', skip_blank_lines=True)
+
+# zorg dat de kolommen zijn ge-quote en kolommen gescheiden zijn obv ;
+#data = pd.read_csv("C:\tmp\weg\Data\query_data_brontabel_oas_himlist.data", skiprows=6, sep=';', skip_blank_lines=True)
+
+# Preview the first 5 lines of the loaded data 
+print(data.head(5))
+
 print("Einde verwerking")
