@@ -27,4 +27,22 @@ data = pd.read_csv("testtextfile.csv", skiprows=6, sep=';', skip_blank_lines=Tru
 # Preview the first 5 lines of the loaded data 
 print(data.head(5))
 
+# Debug Toon DSN info
+# dsn_desc = pyodbc.dataSources()
+# print (dsn_desc)
+
+# *** Schrijf de Data weg naar een SQL server database obv een odbc dsn ***
+# zie ook connect_azuresqldb_v005.py
+#         pyodbc_voorbeeld_naar_sqlserver_py3.py
+sql_conn = pyodbc.connect('DSN=localhost_db_TestSourceDB3;UID=sa;PWD=Welkom01')
+cursor = sql_conn.cursor() 
+for index, row in df.iterrows(): 
+  print(row) 
+  cursor.execute("INSERT INTO Persoon([Id],[Voorletters],[Achternaam],[Geboortedatum]) values(?,?,?,?)", row['Id'], row['Voorletters'], row['Achternaam'], row['Geboortedatum']) 
+sql_conn.commit() 
+cursor.close() 
+sql_conn.close() 
+
+
+
 print("Einde verwerking")
