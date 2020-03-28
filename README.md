@@ -30,3 +30,17 @@ Als implementatiesuggestie voor het definieren van deze softbusiness rules is he
 op de Datavault.
 
 In dit voorbeeld is dit nog niet toegepast omdat nog geen relevant voorbeeld is verzonnen.
+
+## Werkende voorbeelden
+### Directories:
+.\Vbld2_Bridge_en_Pit_tables_DV    Laden van een DataMart obv een 1.0 (update en enddating in SATs) DataVault 
+                                   De DIMs en de FACTs worden geladen obv queries op DataVault (DIMs
+                                   obv join HUB en SATs, en FACTs obv join LINK en SATs)
+                                   Zie pdf mbt documentatie van de datamodellen.
+                                   Voorbeeld mbt het laden DIMs en FACTs obv Bridge en PIT tables is nog uitgewerkt !! 
+.\Vbld3_DataVault_2.0              Laden van een DataMart obv een 2.0 (insert only in SATs) DataVault
+                                   De DIMs en de FACTs worden geladen obv queries op DataVault (DIMs
+                                   obv join HUB en SATs, en FACTs obv join LINK en SATs)
+                                   Zie pdf mbt documentatie van de datamodellen.
+.\Utilities\Bron_Queries           Aantal queries tbv bevragen van het finaniciele bronsysteem tav de hierarchen op boekingsleutels (element1 t/m element4) 
+.\Utilities\python3                python3 scripts tbv het importen van textfiles
