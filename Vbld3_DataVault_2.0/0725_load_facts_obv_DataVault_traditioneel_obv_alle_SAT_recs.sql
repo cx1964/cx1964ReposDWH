@@ -1,5 +1,11 @@
 -- file: 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
 
+-- ToDo: Dit script is nog niet geschikt voor incremneteel laden van de facts
+--       Dit script moet aangevuld worden bij IEDERE join op een SAT met een EXIST operator
+--       erzorgt voor dat alleen gewijzigde SATs worden geladen inde FACT tabel
+--       Een derglijke constructie mbt EXIST voor de join met de SAT moet ook in de DIM gedaan worden
+--       zodat DIMs ook incrementeel geladen kunnen worden.
+
 -- vullen Facts obv tranditionele manier (zonder bridge table)
 
 -- Methode1 obv Hashkey zonder Look-up naar HUB en DIM
@@ -68,10 +74,13 @@ from (
 	-- Tbv Medewerker properties in FACT is SAT medewerker nodig
     inner join [TestIntegrationDB3].[dbo].[S_Medewerker3_vrtrw] sm
           on sm.H_Medewerker3Hashkey = l.H_Medewerker3Hashkey
+    -- **** hier ergens moet MOGELIJK nog een EXIST conditie commen om te zorgen dat alleen gewijzigde SATs worden geladen ****
     -- Tbv FK velden voor de fact van FACT naar DIM_organisatieeenheid is join
-	-- met SAT organisatie eenheid nodig
+	  -- met SAT organisatie eenheid nodig
     inner join [TestIntegrationDB3].[dbo].[S_Organisatie_Eenheid3] so
 	      on so.H_Organisatie_Eenheid3Hashkey = l.H_Organisatie_Eenheid3Hashkey
+    -- **** hier ergens moet ZEKER nog een EXIST conditie kommen om te zorgen dat alleen gewijzigde SATs worden geladen ****
+    -- **** hier is het nodig omdat van dit deel de meta_load_date en meta_create_time worden gevuld.
     where 1=1
       and convert(date, getdate()) > sm.aow_datum
   ) data
