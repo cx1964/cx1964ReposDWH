@@ -13,10 +13,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Persoon](
-	[id] [varchar](3) NOT NULL,
-	[voorletters] [varchar](15) NOT NULL,
-	[achternaam] [varchar](30) NOT NULL,
-	[geboortedatum] [varchar](10) NOT NULL
+	[id]			[varchar](3)	NOT NULL,
+	[voorletters]	[varchar](15)	NOT NULL,
+	[achternaam]	[varchar](30)	NOT NULL,
+	[geboortedatum]	[date]			NOT NULL
 ) ON [PRIMARY]
 GO
 

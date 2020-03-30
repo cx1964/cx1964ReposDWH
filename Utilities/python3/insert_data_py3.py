@@ -29,7 +29,15 @@ import pyodbc
 import pandas as pd
 
 #werkt 
-data = pd.read_csv("testtextfile_quoted.csv", skiprows=6, sep=';', skip_blank_lines=True)
+# Voor verwerken van datum velden in CSV
+# zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
+datum_kolommen = ["Geboortedatum"]
+#data = pd.read_csv("testtextfile_quoted.csv"
+data = pd.read_csv("testtextfile.csv"
+                   ,skiprows=6
+                   ,sep=';'
+                   ,skip_blank_lines=True
+                   ,parse_dates=datum_kolommen, dayfirst=True )
 
 # zorg dat de kolommen zijn ge-quote en kolommen gescheiden zijn obv ;
 #data = pd.read_csv("C:\tmp\weg\Data\query_data_brontabel_oas_himlist.data", skiprows=6, sep=';', skip_blank_lines=True)
