@@ -47,7 +47,7 @@ data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_grplist_recs_262
 #data = pd.read_csv("C:\tmp\weg\Data\query_data_brontabel_oas_himlist.data", skiprows=6, sep=';', skip_blank_lines=True)
 
 # Preview the first 5 lines of the loaded data
-print("Eerste 5 records")  
+print("Toon Eerste 5 records van de ingelezen set:")  
 print(data.head(5))
 # print(data)
 # print (type(data))
