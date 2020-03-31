@@ -68,7 +68,6 @@ cursor = sql_conn.cursor()
 # Maak de tabel leeg, voor het geval al data bevat
 cursor.execute("truncate table [codafin12].[oas_grplist]")
 
-'''
 # Lees de data uit de textfile in de database 
 for index, row in data.iterrows(): 
   print(row) 
@@ -82,13 +81,13 @@ for index, row in data.iterrows():
                  )\
                  values(?,?,?,?,?)",
                     row['cmpcode']
-                   ,row['codes']
+                   ,row['code']
                    ,row['elmlevel']
                    ,row['lstseqno']                   
                    ,row['grpcode']) 
 sql_conn.commit() 
 cursor.close() 
 sql_conn.close() 
-'''
+
 
 print("Einde verwerking")
