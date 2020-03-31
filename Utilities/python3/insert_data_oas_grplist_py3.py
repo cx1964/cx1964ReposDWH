@@ -46,10 +46,14 @@ data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_grplist_recs_262
 # zorg dat de kolommen zijn ge-quote en kolommen gescheiden zijn obv ;
 #data = pd.read_csv("C:\tmp\weg\Data\query_data_brontabel_oas_himlist.data", skiprows=6, sep=';', skip_blank_lines=True)
 
-# Preview the first 5 lines of the loaded data 
-#print(data.head(5))
-print(data)
-# Print aaantal records in file
+# Preview the first 5 lines of the loaded data
+print("Eerste 5 records")  
+print(data.head(5))
+# print(data)
+# print (type(data))
+# print("Aantal gelezen records: ", data.shape)
+print("Aantal gelezen kolommen: ", data.shape[1])
+print("Aantal gelezen records : ", data.shape[0])
 
 # Debug Toon DSN info
 # dsn_desc = pyodbc.dataSources()
