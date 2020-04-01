@@ -106,8 +106,7 @@ for index, row in data.iterrows():
                       ?,?,?\
                  )",
 	                row['cmpcode']
-                #  ,row['punchoutcode']
-	              ,'test' 
+                  ,row['punchoutcode']
 	               ,row['longname'])
 
 '''
@@ -394,8 +393,6 @@ for index, row in data.iterrows():
 	               ,row['longname'])
 '''                  
 sql_conn.commit() 
-
-
 cursor.close() 
 sql_conn.close() 
 
