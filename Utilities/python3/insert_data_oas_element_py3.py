@@ -28,7 +28,11 @@ import pandas as pd
 # Voor verwerken van datum velden in CSV
 # zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
 
-datum_kolommen = ["Geboortedatum"]
+# datum_kolommen bevat alle kolomnamen van alle kolommen van het dataype date op de database
+datum_kolommen = ["Geboortedatum",""] # <--------------------------- aanpassen
+
+
+
 data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_test.csv"
 #data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_262628.csv"
                    ,skiprows=0
@@ -64,7 +68,7 @@ print("De data wordt nu naar de database weggeschreven ...")
 for index, row in data.iterrows(): 
   #print(row)
   #print alleen de business key
-  print(row.)  
+# uitzoeken  print(row.)  
   # oas_grplist
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	               ,[cmpcode]\
