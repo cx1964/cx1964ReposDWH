@@ -21,26 +21,44 @@
 #         Ook worden alle velden als varchar velden ingelezen in de database.
 #         Ook de datum velden.
 
+import math
 import pyodbc
 import pandas as pd
+
 
 # werkt 
 # Voor verwerken van datum velden in CSV
 # zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
 
+# gebruik van pandas pandas read_csv https://www.marsja.se/pandas-read-csv-tutorial-to-csv/ 
+
 # datum_kolommen bevat alle kolomnamen van alle kolommen van het dataype date op de database
-datum_kolommen = ["Geboortedatum",""] # <--------------------------- aanpassen
-
-
+datum_kolommen = [ 
+                   "adddate"
+                  ,"moddate"
+                  ,"deldate"
+                  ,"crlimdate"
+                  ,"crratingdate"
+                  ,"dateaccopened"
+                 ]
 
 data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_test.csv"
 #data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_262628.csv"
                    ,skiprows=0
                    ,sep=','
                    ,skip_blank_lines=True
+                   ,na_values='Null'
+                   ,dtype={'cmpcode':str, 'punchoutcode':str, 'longname':str}
                    ,parse_dates=datum_kolommen, dayfirst=True )
 
-# Preview the first 5 lines of the loaded data
+# Debug toon row1. row111 en row132
+for index, row in data.iterrows(): 
+  print( row[  1-1], type(row[1-1])
+        ,row[111-1], type(row[1-1])
+        ,row[132-1], type(row[1-1])
+  ) 
+
+# Preview the first 10 lines of the loaded data
 print("Toon Eerste 10 records van de ingelezen set:")  
 print(data.head(10))
 # print(data)
@@ -61,6 +79,7 @@ cursor = sql_conn.cursor()
 
 # Maak de tabel leeg, voor het geval al data bevat
 cursor.execute("truncate table [codafin12].[oas_element]")
+print("Table is nu leeg")
 
 # Lees de data uit de textfile in de database
 print("Even geduld a.u.b")
@@ -68,10 +87,30 @@ print("De data wordt nu naar de database weggeschreven ...")
 for index, row in data.iterrows(): 
   #print(row)
   #print alleen de business key
-# uitzoeken  print(row.)  
-  # oas_grplist
+  # uitzoeken  print(row.)  
+  # oas_element
+
+  # debug
+  # if (row['punchoutcode'] == math.isnan(float('nan'))):
+  #    print('punchoutcode:', row['punchoutcode']) 
+  # else:
+  #   print("Null")
+
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
-	               ,[cmpcode]\
+	                [cmpcode]\
+	               ,[punchoutcode]\
+               	,[longname]\
+                 ) values (\
+                      ?,?,?\
+                 )",
+	                row['cmpcode']
+                #  ,row['punchoutcode']
+	              ,'test' 
+	               ,row['longname'])
+
+'''
+  cursor.execute("INSERT INTO [codafin12].[oas_element](\
+	                [cmpcode]\
 	               ,[cmpcode_cs]\
 	               ,[code]\
 	               ,[code_cs]\
@@ -329,7 +368,7 @@ for index, row in data.iterrows():
 	               ,row['repcode1']
 	               ,row['repcode2']
 	               ,row['repcode3']
-	               ,row['punchoutcode']
+                  ,row['punchoutcode']
 	               ,row['punchouturl']
 	               ,row['punchoutdomain']
 	               ,row['punchoutuser']
@@ -351,7 +390,10 @@ for index, row in data.iterrows():
 	               ,row['procemailsub']
 	               ,row['euvatcode']
 	               ,row['longname'])
+'''                  
 sql_conn.commit() 
+
+
 cursor.close() 
 sql_conn.close() 
 
