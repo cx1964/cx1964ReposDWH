@@ -109,6 +109,9 @@ for index, row in data.iterrows():
                   ,row['punchoutcode']
 	               ,row['longname'])
 
+# ToDo
+# werkt voor bovenste 3 kolommen !!!
+
 '''
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
