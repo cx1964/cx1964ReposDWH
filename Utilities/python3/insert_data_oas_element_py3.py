@@ -48,17 +48,15 @@ data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_
                    ,sep=','
                    ,skip_blank_lines=True
                    ,na_filter= False
-                   ,na_values='leeg'
-                   #,dtype={'cmpcode':str, 'punchoutcode':str, 'longname':str}
                    ,parse_dates=datum_kolommen, dayfirst=True )
 
 # Debug toon row1. row111 en row132
-for index, row in data.iterrows(): 
-  print( row[  1-1], type(row[1-1])
-        ,row[111-1], type(row[1-1])
-        ,row[132-1], type(row[1-1])
-        ,row['punchoutcode'] # alternatief
-  ) 
+# for index, row in data.iterrows(): 
+#   print( row[  1-1], type(row[1-1])
+#         ,row[111-1], type(row[1-1])
+#         ,row[132-1], type(row[1-1])
+#         ,row['punchoutcode'] # alternatief voor row111
+#   ) 
 
 
 
