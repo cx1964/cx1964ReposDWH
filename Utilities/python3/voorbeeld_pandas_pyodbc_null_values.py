@@ -1,5 +1,6 @@
-# Filenaam: insert_data_oas_grplist_py3.py
+# Filenaam: voorbeeld_pandas_pyodbc_null_values.py
 # Functie:  werkend python3 script om data via odbc in SQL server database te importeren.
+#           Dit voorbeeld laat expliciet zien met numerieke veld op de database omgeggaan moet worden incombinatie met NULL values
 # Gebruikte python versie: 3.8.2
 # Referenties: https://www.got-it.ai/solutions/sqlquerychat/sql-help/data-manipulation/read-and-write-data-to-and-from-sql-server-using-pandas-library-in-python-querychat/
 # Opmerking:
@@ -21,34 +22,48 @@
 #         Ook worden alle velden als varchar velden ingelezen in de database.
 #         Ook de datum velden.
 
+import math
 import pyodbc
 import pandas as pd
+
 
 # werkt 
 # Voor verwerken van datum velden in CSV
 # zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
-# datum_kolommen = ["Geboortedatum"]
-#data = pd.read_csv("testtextfile_quoted.csv"
 
+# gebruik van pandas pandas read_csv https://www.marsja.se/pandas-read-csv-tutorial-to-csv/ 
 
-# data = pd.read_csv("testtextfile.csv"
-#                   ,skiprows=6
-#                   ,sep=';'
-#                   ,skip_blank_lines=True
-#                   ,parse_dates=datum_kolommen, dayfirst=True )
+# datum_kolommen bevat alle kolomnamen van alle kolommen van het dataype date op de database
+datum_kolommen = [ 
+                   "adddate"
+                  ,"moddate"
+                  ,"deldate"
+                  ,"crlimdate"
+                  ,"crratingdate"
+                  ,"dateaccopened"
+                 ]
 
-
-data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_grplist_recs_262628.csv"
+data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_test.csv"
+#data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_262628.csv"
                    ,skiprows=0
                    ,sep=','
-                   ,skip_blank_lines=True)
+                   ,skip_blank_lines=True
+                   ,na_filter= False
+                   ,parse_dates=datum_kolommen, dayfirst=True )
 
-# zorg dat de kolommen zijn ge-quote en kolommen gescheiden zijn obv ;
-#data = pd.read_csv("C:\tmp\weg\Data\query_data_brontabel_oas_himlist.data", skiprows=6, sep=';', skip_blank_lines=True)
+# Debug toon row1. row111 en row132
+# for index, row in data.iterrows(): 
+#   print( row[  1-1], type(row[1-1])
+#         ,row[111-1], type(row[1-1])
+#         ,row[132-1], type(row[1-1])
+#         ,row['punchoutcode'] # alternatief voor row111
+#   ) 
 
-# Preview the first 5 lines of the loaded data
-print("Toon Eerste 5 records van de ingelezen set:")  
-print(data.head(5))
+
+
+# Preview the first 10 lines of the loaded data
+print("Toon Eerste 10 records van de ingelezen set:")  
+print(data.head(10))
 # print(data)
 # print (type(data))
 # print("Aantal gelezen records: ", data.shape)
@@ -66,27 +81,86 @@ sql_conn = pyodbc.connect('DSN=localhost_db_TestSourceDB3;UID=sa;PWD=Welkom01')
 cursor = sql_conn.cursor() 
 
 # Maak de tabel leeg, voor het geval al data bevat
-cursor.execute("truncate table [codafin12].[oas_grplist]")
+cursor.execute("truncate table [codafin12].[oas_element]")
+print("Table is nu leeg")
 
-# Lees de data uit de textfile in de database 
+# Lees de data uit de textfile in de database
+print("Even geduld a.u.b")
+print("De data wordt nu naar de database weggeschreven ...")  
 for index, row in data.iterrows(): 
-  print(row) 
-  # oas_grplist
-  '''
-  cursor.execute("INSERT INTO [codafin12].[oas_grplist](\
-                     [cmpcode] \
-                    ,[code] \
-                    ,[elmlevel] \
-	                 ,[lstseqno] \
-                    ,[grpcode] \
-                 )\
-                 values(?,?,?,?,?)",
-                    row['cmpcode']
-                   ,row['code']
-                   ,row['elmlevel']
-                   ,row['lstseqno']                   
-                   ,row['grpcode'])
-  '''                 
+  # oas_element
+
+  # aanpassing voor smallint dataype
+  # omdat python geen NULL kent wordt gebruik gemaakt van None
+  punchoutenc_waarde 		= 0  if 1==1 else -1
+  punchoutenc_waarde		= 0 if row['punchoutenc']		== 'NULL' else None
+  punchoutmktplace_waarde	= 0 if row['punchoutmktplace']	== 'NULL' else None
+  custsuppaccext_waarde		= 0 if row['custsuppaccext']	== 'NULL' else None
+  autoreceipt_waarde		= 0 if row['autoreceipt']		== 'NULL' else None
+  procstatus_waarde			= 0 if row['procstatus']		== 'NULL' else None
+  tolerancecode_waarde		= 0 if row['tolerancecode']		== 'NULL' else None
+  matchingoffset_waarde		= 0 if row['matchingoffset']	== 'NULL' else None
+
+  proctranslimit_dp_waarde	= 0 if row['proctranslimit_dp']	== 'NULL' else None
+
+
+  cursor.execute("INSERT INTO [codafin12].[oas_element](\
+	                [cmpcode]\
+	               ,[punchoutcode]\
+	               ,[punchouturl]\
+	               ,[punchoutdomain]\
+	               ,[punchoutuser]\
+	               ,[punchoutpasswd]\
+	               ,[punchoutidcode]\
+	               ,[punchoutenc]\
+	               ,[punchoutmktplace]\
+	               ,[custsuppaccext]\
+	               ,[autoreceipt]\
+	               ,[procstatus]\
+	               ,[tolerancecode]\
+	               ,[matchingoffset]\
+	               ,[proctranslimit]\
+	               ,[proctranslimit_dp]\
+	               ,[proccalloffs]\
+	               ,[procgrns]\
+	               ,[procreturns]\
+	               ,[procemailsal]\
+	               ,[procemailsub]\
+	               ,[euvatcode]\
+               	   ,[longname]\
+                 ) values (\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+                      ?,?,?\
+                 )",
+	                row['cmpcode']
+                   ,row['punchoutcode']
+	               ,row['punchouturl']
+	               ,row['punchoutdomain']
+	               ,row['punchoutuser']
+	               ,row['punchoutpasswd']
+	               ,row['punchoutidcode']
+	               ,punchoutenc_waarde
+	               ,punchoutmktplace_waarde
+	               ,custsuppaccext_waarde
+	               ,autoreceipt_waarde
+	               ,procstatus_waarde
+	               ,tolerancecode_waarde
+	               ,matchingoffset_waarde
+	               ,row['proctranslimit']
+	               ,proctranslimit_dp_waarde
+	               ,row['proccalloffs']
+	               ,row['procgrns']
+	               ,row['procreturns']
+	               ,row['procemailsal']
+	               ,row['procemailsub']
+	               ,row['euvatcode']
+	               ,row['longname'])
+
+# ToDo
+# werkt voor bovenste 3 kolommen !!!
+
+'''
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
 	               ,[cmpcode_cs]\
@@ -367,8 +441,8 @@ for index, row in data.iterrows():
 	               ,row['procemailsal']
 	               ,row['procemailsub']
 	               ,row['euvatcode']
-	               ,row['longname'])                   
-
+	               ,row['longname'])
+'''                  
 sql_conn.commit() 
 cursor.close() 
 sql_conn.close() 
