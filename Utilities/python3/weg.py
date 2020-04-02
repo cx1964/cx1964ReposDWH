@@ -453,7 +453,10 @@ for index, row in data.iterrows():
 	               ,row['longname'])
 
 # ToDo
-# werkt voor bovenste 3 kolommen !!!
+# Nu runtime error:
+# TypeError: 'str' object cannot be interpreted as an integer
+# 
+# check verwerkimg kolommen van datatype money
 
 '''
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
