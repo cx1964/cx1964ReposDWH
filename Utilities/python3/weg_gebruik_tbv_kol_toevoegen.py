@@ -176,7 +176,10 @@ for index, row in data.iterrows():
 
 # gedeeltelijk om fout te zoeken
 # gaat goed: [punchoutcode] t/m [longname] + cmpcode
-
+#
+# ToDo
+# Werkwijze :::::::::::::::::::::::::::::::::::::::
+# Voeg iedere keer 1 nieuwe kolom toe vanaf cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
 	               ,[punchoutcode]\
@@ -232,7 +235,7 @@ for index, row in data.iterrows():
 
 
 '''
-# volledige aan gepast
+# volledige aan gepast  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # niet aan komen  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
@@ -519,13 +522,9 @@ for index, row in data.iterrows():
 	               ,row['longname'])
 '''
 
-# ToDo
-# probleem zit in eerste 55 kolommen
-# Nu runtime error:
-# 
-# 
-# check verwerkimg kolommen van datatype money
 
+# hieronder bewaren   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# bevat de volledige set kolommen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '''
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
