@@ -43,8 +43,8 @@ datum_kolommen = [
                   ,"dateaccopened"
                  ]
 
-data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_test.csv"
 #data = pd.read_csv("C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_262628.csv"
+data = pd.read_csv( "C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10_test.csv"
                    ,skiprows=0
                    ,sep=','
                    ,skip_blank_lines=True
@@ -162,12 +162,193 @@ for index, row in data.iterrows():
 
   # aanpassing voor int dataype
   # omdat python geen NULL kent wordt gebruik gemaakt van None
-  cmpcode_cs_waarde			= 0 if row['cmpcode_cs']			== 'NULL' else None
-  code_cs_waarde			= 0 if row['code_cs']				== 'NULL' else None
-  elmlevel_cs_waarde		= 0 if row['elmlevel_cs_waarde']	== 'NULL' else None
-  statpayint_waarde			= 0 if row['statpayint_waarde']		== 'NULL' else None
-  maxtemporaryid			= 0 if row['maxtemporaryid']		== 'NULL' else None
+  cmpcode_cs_waarde			= 0 if row['cmpcode_cs']		== 'NULL' else None
+  code_cs_waarde			= 0 if row['code_cs']			== 'NULL' else None
+  elmlevel_cs_waarde		= 0 if row['elmlevel_cs']		== 'NULL' else None
+  statpayint_waarde			= 0 if row['statpayint']		== 'NULL' else None
+  maxtemporaryid			= 0 if row['maxtemporaryid']	== 'NULL' else None
 
+  # aanpassing voor money dataype
+  # omdat python geen NULL kent wordt gebruik gemaakt van None
+  crlim_waarde			= 0 if row['crlim']					== 'NULL' else None
+  proctranslimit_waarde	= 0 if row['proctranslimit']		== 'NULL' else None
+
+
+# gedeeltelijk om fout te zoeken
+  cursor.execute("INSERT INTO [codafin12].[oas_element](\
+	                [cmpcode]\
+	               ,[cmpcode_cs]\
+	               ,[code]\
+	               ,[code_cs]\
+	               ,[elmlevel]\
+	               ,[elmlevel_cs]\
+	               ,[indirectcode]\
+	               ,[tstamp]\
+	               ,[name]\
+	               ,[sname]\
+	               ,[cur]\
+	               ,[tax]\
+	               ,[accounttype]\
+	               ,[statuser]\
+	               ,[statpay]\
+	               ,[statrec]\
+	               ,[descr]\
+	               ,[matchable]\
+	               ,[statpayint]\
+	               ,[summary]\
+	               ,[split]\
+	               ,[settle]\
+	               ,[paper]\
+	               ,[elec]\
+	               ,[subanal]\
+	               ,[taxrepesl]\
+	               ,[taxrepintra]\
+	               ,[crliminforce]\
+	               ,[crlim]\
+	               ,[crlim_dp]\
+	               ,[taxmethod]\
+	               ,[terms]\
+	               ,[keepturn]\
+	               ,[ten99]\
+	               ,[custsuppacc]\
+	               ,[discenable]\
+	               ,[forcedisperse]\
+	               ,[enablepay]\
+	               ,[paymode]\
+	               ,[priority]\
+	               ,[medcode]\
+	               ,[tag]\
+	               ,[qty1_used]\
+	               ,[qty1_title]\
+	               ,[qty1_mand]\
+	               ,[qty1_balcode]\
+	               ,[qty1_dp]\
+	               ,[qty2_used]\
+	               ,[qty2_title]\
+	               ,[qty2_mand]\
+	               ,[qty2_balcode]\
+	               ,[qty2_dp]\
+	               ,[qty3_used]\
+	               ,[qty3_title]\
+	               ,[qty3_mand]\
+	               ,[punchoutcode]\
+				   ,[punchouturl]\
+	               ,[punchoutdomain]\
+	               ,[punchoutuser]\
+	               ,[punchoutpasswd]\
+	               ,[punchoutidcode]\
+	               ,[punchoutenc]\
+	               ,[punchoutmktplace]\
+	               ,[custsuppaccext]\
+	               ,[autoreceipt]\
+	               ,[procstatus]\
+	               ,[tolerancecode]\
+	               ,[matchingoffset]\
+	               ,[proctranslimit]\
+	               ,[proctranslimit_dp]\
+	               ,[proccalloffs]\
+	               ,[procgrns]\
+	               ,[procreturns]\
+	               ,[procemailsal]\
+	               ,[procemailsub]\
+	               ,[euvatcode]\
+               	   ,[longname]\
+                 ) values (\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?,?,?,?\
+                    ?,?,?,?,?,?,?\
+                 )",
+	                row['cmpcode']
+
+				   ,cmpcode_cs_waarde ###
+	               ,row['code']
+	               ,code_cs_waarde ###
+	               ,elmlevel_waarde
+	               ,elmlevel_cs_waarde ###
+	               ,row['indirectcode']
+	               ,tstamp_waarde
+	               ,row['name']
+	               ,row['sname']
+	               ,row['cur']
+	               ,row['tax']
+	               ,accounttype_waarde
+	               ,row['statuser']
+	               ,statpay_waarde
+	               ,statrec_waarde
+	               ,descr_waarde
+	               ,matchable_waarde
+	               ,statpayint_waarde ###
+	               ,summary_waarde
+	               ,split_waarde
+	               ,row['settle']
+	               ,paper_waarde
+	               ,elec_waarde
+	               ,subanal_waarde
+	               ,taxrepesl_waarde
+	               ,taxrepintra_waarde
+	               ,crliminforce_waarde
+	               ,row['crlim']
+	               ,crlim_dp_waarde
+	               ,taxmethod_waarde
+	               ,row['terms']
+	               ,keepturn_waarde
+	               ,ten99_waarde
+	               ,custsuppacc_waarde
+	               ,discenable_waarde
+	               ,forcedisperse_waarde
+	               ,enablepay_waarde
+	               ,row['paymode']
+	               ,priority_waarde
+	               ,row['medcode']
+	               ,tag_waarde
+	               ,qty1_used_waarde
+	               ,row['qty1_title']
+	               ,qty1_mand_waarde
+	               ,row['qty1_balcode']
+	               ,qty1_dp_waarde
+	               ,qty2_used_waarde
+	               ,row['qty2_title']
+	               ,qty2_mand_waarde
+	               ,row['qty2_balcode']
+	               ,qty2_dp_waarde
+	               ,qty3_used_waarde
+	               ,row['qty3_title']
+	               ,qty3_mand_waarde
+
+
+
+
+                   ,row['punchoutcode']
+	               ,row['punchouturl']
+	               ,row['punchoutdomain']
+	               ,row['punchoutuser']
+	               ,row['punchoutpasswd']
+	               ,row['punchoutidcode']
+	               ,punchoutenc_waarde
+	               ,punchoutmktplace_waarde
+	               ,custsuppaccext_waarde
+	               ,autoreceipt_waarde
+	               ,procstatus_waarde
+	               ,tolerancecode_waarde
+	               ,matchingoffset_waarde
+	               ,row['proctranslimit']
+	               ,proctranslimit_dp_waarde
+	               ,row['proccalloffs']
+	               ,row['procgrns']
+	               ,row['procreturns']
+	               ,row['procemailsal']
+	               ,row['procemailsub']
+	               ,row['euvatcode']
+	               ,row['longname'])
+
+
+'''
+# volledige aan gepast
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
 	               ,[cmpcode_cs]\
@@ -451,10 +632,12 @@ for index, row in data.iterrows():
 	               ,row['procemailsub']
 	               ,row['euvatcode']
 	               ,row['longname'])
+'''
 
 # ToDo
+# probleem zit in eerste 55 kolommen
 # Nu runtime error:
-# TypeError: 'str' object cannot be interpreted as an integer
+# 
 # 
 # check verwerkimg kolommen van datatype money
 
