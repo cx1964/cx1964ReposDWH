@@ -182,7 +182,7 @@ for index, row in data.iterrows():
 # Voeg iedere keer 1 nieuwe kolom toe vanaf cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
-				   ,[dateaccopened]\
+				   ,[adddate]\
                    ,[paymentindex]\
                    ,[taxadjustment]\
                    ,[matchtopo]\
@@ -243,14 +243,20 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
 
 				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
-				   ,row['dateaccopened'] # dit geeft probleem
+
+				   ,row['adddate']
+				   #,row['moddate']
+				   #,row['deldate']
+				   #,row['dateaccopened'] # dit geeft probleem
+				   #,row['crratingdate'] # dit geeft ook een probleem
+
 				   ,row['paymentindex']
                    ,taxadjustment_waarde
                    ,matchtopo_waarde
