@@ -297,8 +297,8 @@ for index, row in data.iterrows():
 	               ,procstatus_waarde
 	               ,tolerancecode_waarde
 	               ,matchingoffset_waarde
-	               ,row['proctranslimit']
-	               ,proctranslimit_dp_waarde
+	               ,proctranslimit_waarde
+				   ,proctranslimit_dp_waarde
 	               ,row['proccalloffs']
 	               ,row['procgrns']
 	               ,row['procreturns']
