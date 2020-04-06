@@ -182,6 +182,14 @@ for index, row in data.iterrows():
 # Voeg iedere keer 1 nieuwe kolom toe vanaf cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
+                   ,[statmemo]\
+				   ,[balancingacc]\
+				   ,[catcode]\
+				   ,[assetelement]\
+				   ,[extcode]\
+		   		   ,[extconfig]\
+	               ,[procorders]\
+				   ,[procreq]\
 		           ,[repcode1]\
 		           ,[repcode2]\
 				   ,[repcode3]\
@@ -210,15 +218,25 @@ for index, row in data.iterrows():
                  ) values (\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
 
 				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
+                   ,row['statmemo']
+				   ,row['balancingacc']
+				   ,row['catcode']
+				   ,assetelement_waarde
+				   ,row['extcode']
+				   ,extconfig_waarde
+				   ,row['procorders']
+				   ,row['procreq']
 				   ,row['repcode1']
 				   ,row['repcode2']
                    ,row['repcode3']
+
 
                    ,row['punchoutcode']
 	               ,row['punchouturl']
