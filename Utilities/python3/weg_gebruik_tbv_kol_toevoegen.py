@@ -166,7 +166,7 @@ for index, row in data.iterrows():
   code_cs_waarde			= 0 if row['code_cs']			== 'NULL' else None
   elmlevel_cs_waarde		= 0 if row['elmlevel_cs']		== 'NULL' else None
   statpayint_waarde			= 0 if row['statpayint']		== 'NULL' else None
-  maxtemporaryid			= 0 if row['maxtemporaryid']	== 'NULL' else None
+  maxtemporaryid_waarde		= 0 if row['maxtemporaryid']	== 'NULL' else None
 
   # aanpassing voor money dataype
   # omdat python geen NULL kent wordt gebruik gemaakt van None
@@ -182,6 +182,18 @@ for index, row in data.iterrows():
 # Voeg iedere keer 1 nieuwe kolom toe vanaf cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
+				   ,[maxtemporaryid]\
+                   ,[allowtaxnum]\
+                   ,[allowlangcode]\
+                   ,[allowctycode]\
+                   ,[forceterms]\
+                   ,[forcetaxnum]\
+                   ,[forceaddress]\
+                   ,[force1099]\
+                   ,[startyear]\
+                   ,[startperiod]\
+                   ,[endyear]\
+                   ,[endperiod]\
                    ,[statmemo]\
 				   ,[balancingacc]\
 				   ,[catcode]\
@@ -219,12 +231,26 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,\
 					  ?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
 
 				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
+				   ,maxtemporaryid_waarde
+                   ,allowtaxnum_waarde
+                   ,allowlangcode_waarde
+                   ,allowctycode_waarde
+                   ,forceterms_waarde
+                   ,forcetaxnum_waarde
+                   ,forceaddress_waarde
+                   ,force1099_waarde
+                   ,startyear_waarde
+                   ,startperiod_waarde
+                   ,endyear_waarde
+                   ,endperiod_waarde
                    ,row['statmemo']
 				   ,row['balancingacc']
 				   ,row['catcode']
