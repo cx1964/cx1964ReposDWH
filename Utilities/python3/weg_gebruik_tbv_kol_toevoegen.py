@@ -52,12 +52,14 @@ data = pd.read_csv( "C:\\tmp\\weg\Data\\20200330data_dwh_stg_oas_element_recs_10
                    ,parse_dates=datum_kolommen, dayfirst=True )
 
 # Debug toon row1. row111 en row132
-# for index, row in data.iterrows(): 
-#   print( row[  1-1], type(row[1-1])
+for index, row in data.iterrows(): 
+  print(
+#          row[  1-1], type(row[1-1])
 #         ,row[111-1], type(row[1-1])
 #         ,row[132-1], type(row[1-1])
 #         ,row['punchoutcode'] # alternatief voor row111
-#   ) 
+   "adddate: ",row['adddate'], "moddate:", row['moddate']
+  ) 
 
 
 
@@ -252,7 +254,12 @@ for index, row in data.iterrows():
 				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
 
 				   ,row['adddate']
+				   # ToDo: !!!!!!!!!!!!!!!!!!!!!!!!!
+                   # adddate werkt wel en moddate niet,
+				   # komt dat doordat addadte geen NULL bevat en moddadte wel.
+				   # oplossen met if operator zoals ander _waarde velden
 				   #,row['moddate']
+				   
 				   #,row['deldate']
 				   #,row['dateaccopened'] # dit geeft probleem
 				   #,row['crratingdate'] # dit geeft ook een probleem
