@@ -192,9 +192,33 @@ for index, row in data.iterrows():
 # gaat goed: [punchoutcode] t/m [longname] + cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
+                   ,[qty1_used]\
+                   ,[qty1_title]\
+                   ,[qty1_mand]\
+                   ,[qty1_balcode]\
+                   ,[qty1_dp]\
+                   ,[qty2_used]\
+                   ,[qty2_title]\
+                   ,[qty2_mand]\
+                   ,[qty2_balcode]\
+                   ,[qty2_dp]\
+                   ,[qty3_used]\
+                   ,[qty3_title]\
+                   ,[qty3_mand]\
+                   ,[qty3_balcode]\
+                   ,[qty3_dp]\
+                   ,[qty4_used]\
+                   ,[qty4_title]\
+                   ,[qty4_mand]\
+                   ,[qty4_balcode]\
+                   ,[qty4_dp]\
 				   ,[adddate]\
 				   ,[moddate]\
 				   ,[deldate]\
+                   ,[usrname]\
+                   ,[accountsummary]\
+                   ,[crlimdate]\
+                   ,[crlimcurr]\
                    ,[elmstat]\
                    ,[sic]\
                    ,[crmanager]\
@@ -265,16 +289,40 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,\
-			          ?,?,?\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,\
+					  ?,?,?\
                  )",
 	                row['cmpcode']
 
-				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
+                   ,qty1_used_waarde
+                   ,row['qty1_title']
+                   ,qty1_mand_waarde
+                   ,row['qty1_balcode']
+                   ,qty1_dp_waarde
+                   ,qty2_used_waarde
+                   ,row['qty2_title']
+                   ,qty2_mand_waarde
+                   ,row['qty2_balcode']
+                   ,qty2_dp_waarde
+                   ,qty3_used_waarde
+                   ,row['qty3_title']
+                   ,qty3_mand_waarde
+                   ,row['qty3_balcode']
+                   ,qty3_dp_waarde
+                   ,qty4_used_waarde
+                   ,row['qty4_title']
+                   ,qty4_mand_waarde
+                   ,row['qty4_balcode']
+                   ,qty4_dp_waarde
 				   ,adddate_waarde
-				   ,moddate_waarde # row['moddate']		               		   
-				   ,deldate_waarde #,row['deldate']
-
+				   ,moddate_waarde
+				   ,deldate_waarde
+                   ,row['usrname']
+                   ,row['accountsummary']
+                   ,crlimdate_waarde
+                   ,crlimcurr_waarde
                    ,row['elmstat']
                    ,row['sic']
                    ,row['crmanager']
