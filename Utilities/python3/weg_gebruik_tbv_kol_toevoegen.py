@@ -192,6 +192,47 @@ for index, row in data.iterrows():
 # gaat goed: [punchoutcode] t/m [longname] + cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
+,[cmpcode_cs]\
+,[code]\
+,[code_cs]\
+,[elmlevel]\
+,[elmlevel_cs]\
+,[indirectcode]\
+,[tstamp]\
+,[name]\
+,[sname]\
+,[cur]\
+,[tax]\
+,[accounttype]\
+,[statuser]\
+,[statpay]\
+,[statrec]\
+,[descr]\
+,[matchable]\
+,[statpayint]\
+,[summary]\
+,[split]\
+,[settle]\
+,[paper]\
+,[elec]\
+,[subanal]\
+,[taxrepesl]\
+,[taxrepintra]\
+,[crliminforce]\
+,[crlim]\
+,[crlim_dp]\
+,[taxmethod]\
+,[terms]\
+,[keepturn]\
+,[ten99]\
+,[custsuppacc]\
+,[discenable]\
+,[forcedisperse]\
+,[enablepay]\
+,[paymode]\
+,[priority]\
+,[medcode]\
+,[tag]\
                    ,[qty1_used]\
                    ,[qty1_title]\
                    ,[qty1_mand]\
@@ -291,10 +332,57 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,?,?,?,?,\
-					  ?,?,?\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?\
                  )",
 	                row['cmpcode']
+
+,cmpcode_cs_waarde
+,row['code']
+,code_cs_waarde
+,elmlevel_waarde
+,elmlevel_cs_waarde
+,row['indirectcode']
+,tstamp_waarde
+,row['name']
+,row['sname']
+,row['cur']
+,row['tax']
+,accounttype_waarde
+,row['statuser']
+,statpay_waarde
+,statrec_waarde
+,descr_waarde
+,matchable_waarde
+,statpayint_waarde
+,summary_waarde
+,split_waarde
+,row['settle']
+,paper_waarde
+,elec_waarde
+,subanal_waarde
+,taxrepesl_waarde
+,taxrepintra_waarde
+,crliminforce_waarde
+,crlim_waarde
+,crlim_dp_waarde
+,taxmethod_waarde
+,row['terms']
+,keepturn_waarde
+,ten99_waarde
+,custsuppacc_waarde
+,discenable_waarde
+,forcedisperse_waarde
+,enablepay_waarde
+,row['paymode']
+,priority_waarde
+,row['medcode']
+,tag_waarde
+
 
                    ,qty1_used_waarde
                    ,row['qty1_title']
