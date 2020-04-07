@@ -195,6 +195,13 @@ for index, row in data.iterrows():
 				   ,[adddate]\
 				   ,[moddate]\
 				   ,[deldate]\
+                   ,[elmstat]\
+                   ,[sic]\
+                   ,[crmanager]\
+                   ,[crrating]\
+				   ,[crratingdate]\
+                   ,[crref]\
+                   ,[cragency]\
 				   ,[dateaccopened]\
                    ,[paymentindex]\
                    ,[taxadjustment]\
@@ -257,7 +264,8 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,?,?,?,\
+					  ?,?,?,?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
@@ -267,9 +275,13 @@ for index, row in data.iterrows():
 				   ,moddate_waarde # row['moddate']		               		   
 				   ,deldate_waarde #,row['deldate']
 
-
-				   #,row['crratingdate'] # dit geeft ook een probleem
-
+                   ,row['elmstat']
+                   ,row['sic']
+                   ,row['crmanager']
+                   ,row['crrating']
+				   ,crratingdate_waarde
+                   ,row['crref']
+                   ,row['cragency']
 				   ,dateaccopened_waarde
 				   ,row['paymentindex']
                    ,taxadjustment_waarde
