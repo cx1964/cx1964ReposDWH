@@ -64,8 +64,8 @@ for index, row in data.iterrows():
 # print(data)
 # print (type(data))
 # print("Aantal gelezen records: ", data.shape)
-print("Aantal gelezen kolommen: ", data.shape,[1])
-print("Aantal gelezen records : ", data.shape,[0])
+print("Aantal gelezen kolommen: ", data.shape[1])
+print("Aantal gelezen records : ", data.shape[0])
 
 # Debug Toon DSN info
 # dsn_desc = pyodbc.dataSources()
