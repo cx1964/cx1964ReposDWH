@@ -58,13 +58,13 @@ for index, row in data.iterrows():
 #         ,row[111-1], type(row[1-1])
 #         ,row[132-1], type(row[1-1])
 #         ,row['punchoutcode'] # alternatief voor row111
-   "adddate: ",row['adddate'], "moddate:", row['moddate']
+   "adddate: ",row['adddate'], "moddate:", row['moddate'], "deldate:", row['deldate'], "taxadjustment:", row['taxadjustment']
   ) 
 
 
 
-# Preview the first 10 lines of the loaded data
-print("Toon Eerste 10 records van de ingelezen set:")  
+# Preview the first 1None lines of the loaded data
+print("Toon Eerste 1None records van de ingelezen set:")  
 print(data.head(10))
 # print(data)
 # print (type(data))
@@ -77,7 +77,7 @@ print("Aantal gelezen records : ", data.shape[0])
 # print (dsn_desc)
 
 # *** Schrijf de Data weg naar een SQL server database obv een odbc dsn ***
-# zie ook connect_azuresqldb_v005.py
+# zie ook connect_azuresqldb_vNoneNone5.py
 #         pyodbc_voorbeeld_naar_sqlserver_py3.py
 sql_conn = pyodbc.connect('DSN=localhost_db_TestSourceDB3;UID=sa;PWD=Welkom01')
 cursor = sql_conn.cursor() 
@@ -94,87 +94,92 @@ for index, row in data.iterrows():
 
   # aanpassing voor smallint dataype
   # omdat python geen NULL kent wordt gebruik gemaakt van None
-  elmlevel_waarde			= 0 if row['elmlevel']			== 'NULL' else None
-  tstamp_waarde				= 0 if row['tstamp']			== 'NULL' else None
-  accounttype_waarde		= 0 if row['accounttype']		== 'NULL' else None
-  statpay_waarde			= 0 if row['statpay']			== 'NULL' else None
-  statrec_waarde			= 0 if row['statrec']			== 'NULL' else None
-  descr_waarde				= 0 if row['descr']				== 'NULL' else None
-  matchable_waarde			= 0 if row['matchable']			== 'NULL' else None
-  summary_waarde			= 0 if row['summary']			== 'NULL' else None
-  split_waarde				= 0 if row['split']				== 'NULL' else None
-  paper_waarde				= 0 if row['paper']				== 'NULL' else None
-  elec_waarde				= 0 if row['elec']				== 'NULL' else None
-  subanal_waarde			= 0 if row['subanal']			== 'NULL' else None
-  taxrepesl_waarde			= 0 if row['taxrepesl']			== 'NULL' else None
-  taxrepintra_waarde		= 0 if row['taxrepintra']		== 'NULL' else None
-  crliminforce_waarde		= 0 if row['crliminforce']		== 'NULL' else None
-  crlim_dp_waarde			= 0 if row['crlim_dp']			== 'NULL' else None
-  taxmethod_waarde			= 0 if row['taxmethod']			== 'NULL' else None
-  keepturn_waarde			= 0 if row['keepturn']			== 'NULL' else None
-  ten99_waarde				= 0 if row['ten99']				== 'NULL' else None
-  custsuppacc_waarde		= 0 if row['custsuppacc']		== 'NULL' else None
-  discenable_waarde			= 0 if row['discenable']		== 'NULL' else None
-  forcedisperse_waarde		= 0 if row['forcedisperse']		== 'NULL' else None
-  enablepay_waarde			= 0 if row['enablepay']			== 'NULL' else None
-  priority_waarde			= 0 if row['priority']			== 'NULL' else None
-  tag_waarde				= 0 if row['tag']				== 'NULL' else None
-  qty1_used_waarde			= 0 if row['qty1_used']			== 'NULL' else None
-  qty1_mand_waarde			= 0 if row['qty1_mand']			== 'NULL' else None
-  qty1_dp_waarde			= 0 if row['qty1_dp']			== 'NULL' else None
-  qty2_used_waarde			= 0 if row['qty2_used']			== 'NULL' else None
-  qty2_mand_waarde			= 0 if row['qty2_mand']			== 'NULL' else None
-  qty2_dp_waarde			= 0 if row['qty2_dp']			== 'NULL' else None
-  qty3_used_waarde			= 0 if row['qty3_used']			== 'NULL' else None
-  qty3_mand_waarde			= 0 if row['qty3_mand']			== 'NULL' else None
-  qty3_dp_waarde			= 0 if row['qty3_dp']			== 'NULL' else None
-  qty4_used_waarde			= 0 if row['qty4_used']			== 'NULL' else None
-  qty4_mand_waarde			= 0 if row['qty4_mand']			== 'NULL' else None
-  qty4_dp_waarde			= 0 if row['qty4_dp']			== 'NULL' else None
-  crlimcurr_waarde			= 0 if row['crlimcurr']			== 'NULL' else None
-  taxadjustment_waarde		= 0 if row['taxadjustment']		== 'NULL' else None
-  matchtopo_waarde			= 0 if row['matchtopo']			== 'NULL' else None
-  arcpaid_waarde			= 0 if row['arcpaid']			== 'NULL' else None
-  arcrecon_waarde			= 0 if row['arcrecon']			== 'NULL' else None
-  subslevel_waarde			= 0 if row['subslevel']			== 'NULL' else None
-  temporaryelm_waarde		= 0 if row['temporaryelm']		== 'NULL' else None
-  allowtaxnum_waarde		= 0 if row['allowtaxnum']		== 'NULL' else None
-  allowlangcode_waarde		= 0 if row['allowlangcode']		== 'NULL' else None
-  allowctycode_waarde		= 0 if row['allowctycode']		== 'NULL' else None
-  forceterms_waarde			= 0 if row['forceterms']		== 'NULL' else None
-  forcetaxnum_waarde		= 0 if row['forcetaxnum']		== 'NULL' else None
-  forceaddress_waarde		= 0 if row['forceaddress']		== 'NULL' else None
-  force1099_waarde			= 0 if row['force1099']			== 'NULL' else None
-  startyear_waarde			= 0 if row['startyear']			== 'NULL' else None
-  startperiod_waarde		= 0 if row['startperiod']		== 'NULL' else None
-  endyear_waarde			= 0 if row['endyear']			== 'NULL' else None
-  endperiod_waarde			= 0 if row['endperiod']			== 'NULL' else None
-  assetelement_waarde		= 0 if row['assetelement']		== 'NULL' else None
-  extconfig_waarde			= 0 if row['extconfig']			== 'NULL' else None
+  elmlevel_waarde			= None if row['elmlevel']			== 'NULL' else None
+  tstamp_waarde				= None if row['tstamp']				== 'NULL' else None
+  accounttype_waarde		= None if row['accounttype']		== 'NULL' else None
+  statpay_waarde			= None if row['statpay']			== 'NULL' else None
+  statrec_waarde			= None if row['statrec']			== 'NULL' else None
+  descr_waarde				= None if row['descr']				== 'NULL' else None
+  matchable_waarde			= None if row['matchable']			== 'NULL' else None
+  summary_waarde			= None if row['summary']			== 'NULL' else None
+  split_waarde				= None if row['split']				== 'NULL' else None
+  paper_waarde				= None if row['paper']				== 'NULL' else None
+  elec_waarde				= None if row['elec']				== 'NULL' else None
+  subanal_waarde			= None if row['subanal']			== 'NULL' else None
+  taxrepesl_waarde			= None if row['taxrepesl']			== 'NULL' else None
+  taxrepintra_waarde		= None if row['taxrepintra']		== 'NULL' else None
+  crliminforce_waarde		= None if row['crliminforce']		== 'NULL' else None
+  crlim_dp_waarde			= None if row['crlim_dp']			== 'NULL' else None
+  taxmethod_waarde			= None if row['taxmethod']			== 'NULL' else None
+  keepturn_waarde			= None if row['keepturn']			== 'NULL' else None
+  ten99_waarde				= None if row['ten99']				== 'NULL' else None
+  custsuppacc_waarde		= None if row['custsuppacc']		== 'NULL' else None
+  discenable_waarde			= None if row['discenable']			== 'NULL' else None
+  forcedisperse_waarde		= None if row['forcedisperse']		== 'NULL' else None
+  enablepay_waarde			= None if row['enablepay']			== 'NULL' else None
+  priority_waarde			= None if row['priority']			== 'NULL' else None
+  tag_waarde				= None if row['tag']				== 'NULL' else None
+  qty1_used_waarde			= None if row['qty1_used']			== 'NULL' else None
+  qty1_mand_waarde			= None if row['qty1_mand']			== 'NULL' else None
+  qty1_dp_waarde			= None if row['qty1_dp']			== 'NULL' else None
+  qty2_used_waarde			= None if row['qty2_used']			== 'NULL' else None
+  qty2_mand_waarde			= None if row['qty2_mand']			== 'NULL' else None
+  qty2_dp_waarde			= None if row['qty2_dp']			== 'NULL' else None
+  qty3_used_waarde			= None if row['qty3_used']			== 'NULL' else None
+  qty3_mand_waarde			= None if row['qty3_mand']			== 'NULL' else None
+  qty3_dp_waarde			= None if row['qty3_dp']			== 'NULL' else None
+  qty4_used_waarde			= None if row['qty4_used']			== 'NULL' else None
+  qty4_mand_waarde			= None if row['qty4_mand']			== 'NULL' else None
+  qty4_dp_waarde			= None if row['qty4_dp']			== 'NULL' else None
+  crlimcurr_waarde			= None if row['crlimcurr']			== 'NULL' else None
+  taxadjustment_waarde		= None if row['taxadjustment']		== 'NULL' else row['taxadjustment']
+  matchtopo_waarde			= None if row['matchtopo']			== 'NULL' else None
+  arcpaid_waarde			= None if row['arcpaid']			== 'NULL' else None
+  arcrecon_waarde			= None if row['arcrecon']			== 'NULL' else None
+  subslevel_waarde			= None if row['subslevel']			== 'NULL' else None
+  temporaryelm_waarde		= None if row['temporaryelm']		== 'NULL' else None
+  allowtaxnum_waarde		= None if row['allowtaxnum']		== 'NULL' else None
+  allowlangcode_waarde		= None if row['allowlangcode']		== 'NULL' else None
+  allowctycode_waarde		= None if row['allowctycode']		== 'NULL' else None
+  forceterms_waarde			= None if row['forceterms']			== 'NULL' else None
+  forcetaxnum_waarde		= None if row['forcetaxnum']		== 'NULL' else None
+  forceaddress_waarde		= None if row['forceaddress']		== 'NULL' else None
+  force1099_waarde		    = None if row['force1099']			== 'NULL' else row['force1099']
+  startyear_waarde			= None if row['startyear']			== 'NULL' else None
+  startperiod_waarde		= None if row['startperiod']		== 'NULL' else None
+  endyear_waarde			= None if row['endyear']			== 'NULL' else None
+  endperiod_waarde			= None if row['endperiod']			== 'NULL' else None
+  assetelement_waarde		= None if row['assetelement']		== 'NULL' else None
+  extconfig_waarde			= None if row['extconfig']			== 'NULL' else None
 
-  punchoutenc_waarde		= 0 if row['punchoutenc']		== 'NULL' else None
-  punchoutmktplace_waarde	= 0 if row['punchoutmktplace']	== 'NULL' else None
-  custsuppaccext_waarde		= 0 if row['custsuppaccext']	== 'NULL' else None
-  autoreceipt_waarde		= 0 if row['autoreceipt']		== 'NULL' else None
-  procstatus_waarde			= 0 if row['procstatus']		== 'NULL' else None
-  tolerancecode_waarde		= 0 if row['tolerancecode']		== 'NULL' else None
-  matchingoffset_waarde		= 0 if row['matchingoffset']	== 'NULL' else None
+  punchoutenc_waarde		= None if row['punchoutenc']		== 'NULL' else row['punchoutenc']
+  punchoutmktplace_waarde	= None if row['punchoutmktplace']	== 'NULL' else row['punchoutmktplace']
+  custsuppaccext_waarde		= None if row['custsuppaccext']		== 'NULL' else row['custsuppaccext']
+  autoreceipt_waarde		= None if row['autoreceipt']		== 'NULL' else row['autoreceipt']
+  procstatus_waarde			= None if row['procstatus']			== 'NULL' else row['procstatus']
+  tolerancecode_waarde		= None if row['tolerancecode']		== 'NULL' else row['tolerancecode']
+  matchingoffset_waarde		= None if row['matchingoffset']		== 'NULL' else row['matchingoffset']
 
-  proctranslimit_dp_waarde	= 0 if row['proctranslimit_dp']	== 'NULL' else None
+  proctranslimit_dp_waarde	= None if row['proctranslimit_dp']	== 'NULL' else row['proctranslimit_dp']
 
   # aanpassing voor int dataype
   # omdat python geen NULL kent wordt gebruik gemaakt van None
-  cmpcode_cs_waarde			= 0 if row['cmpcode_cs']		== 'NULL' else None
-  code_cs_waarde			= 0 if row['code_cs']			== 'NULL' else None
-  elmlevel_cs_waarde		= 0 if row['elmlevel_cs']		== 'NULL' else None
-  statpayint_waarde			= 0 if row['statpayint']		== 'NULL' else None
-  maxtemporaryid_waarde		= 0 if row['maxtemporaryid']	== 'NULL' else None
+  cmpcode_cs_waarde			= None if row['cmpcode_cs']			== 'NULL' else row['cmpcode_cs']
+  code_cs_waarde			= None if row['code_cs']			== 'NULL' else row['code_cs']
+  elmlevel_cs_waarde		= None if row['elmlevel_cs']		== 'NULL' else row['elmlevel_cs']
+  statpayint_waarde			= None if row['statpayint']			== 'NULL' else row['statpayint']
+  maxtemporaryid_waarde		= None if row['maxtemporaryid']		== 'NULL' else row['maxtemporaryid']
 
-  # aanpassing voor money dataype
+  # aanpassing voor money datatype
   # omdat python geen NULL kent wordt gebruik gemaakt van None
-  crlim_waarde			= 0 if row['crlim']					== 'NULL' else None
-  proctranslimit_waarde	= 0 if row['proctranslimit']		== 'NULL' else None
+  crlim_waarde			= None if row['crlim']					== 'NULL' else row['crlim']
+  proctranslimit_waarde	= None if row['proctranslimit']			== 'NULL' else row['proctranslimit']
 
+
+  # aanpassing voor datetime datatype
+  adddate_waarde		= None if row['adddate']				== 'NULL' else row['adddate']
+  moddate_waarde		= None if row['moddate']				== 'NULL' else row['moddate']
+  deldate_waarde		= None if row['deldate']				== 'NULL' else row['deldate']
 
 # gedeeltelijk om fout te zoeken
 # gaat goed: [punchoutcode] t/m [longname] + cmpcode
@@ -185,6 +190,8 @@ for index, row in data.iterrows():
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
 				   ,[adddate]\
+				   ,[moddate]\
+				   ,[deldate]\
                    ,[paymentindex]\
                    ,[taxadjustment]\
                    ,[matchtopo]\
@@ -246,21 +253,17 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,\
+					  ?,?,?,?,?,?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
 
 				   #letop niet varchar velden, gebruik variable *_waarde ipv row['..']
 
-				   ,row['adddate']
-				   # ToDo: !!!!!!!!!!!!!!!!!!!!!!!!!
-                   # adddate werkt wel en moddate niet,
-				   # komt dat doordat addadte geen NULL bevat en moddadte wel.
-				   # oplossen met if operator zoals ander _waarde velden
-				   #,row['moddate']
-				   
-				   #,row['deldate']
+				   ,adddate_waarde
+				   ,moddate_waarde # row['moddate']		               		   
+				   ,deldate_waarde #,row['deldate']
+
 				   #,row['dateaccopened'] # dit geeft probleem
 				   #,row['crratingdate'] # dit geeft ook een probleem
 
@@ -421,7 +424,7 @@ for index, row in data.iterrows():
 	               ,[forceterms]\
 	               ,[forcetaxnum]\
 	               ,[forceaddress]\
-	               ,[force1099]\
+	               ,[force1None99]\
 	               ,[startyear]\
 	               ,[startperiod]\
 	               ,[endyear]\
@@ -570,7 +573,7 @@ for index, row in data.iterrows():
 	               ,forceterms_waarde
 	               ,forcetaxnum_waarde
 	               ,forceaddress_waarde
-	               ,force1099_waarde
+	               ,force1None99_waarde
 	               ,startyear_waarde
 	               ,startperiod_waarde
 	               ,endyear_waarde
@@ -710,7 +713,7 @@ for index, row in data.iterrows():
 	               ,[forceterms]\
 	               ,[forcetaxnum]\
 	               ,[forceaddress]\
-	               ,[force1099]\
+	               ,[force1None99]\
 	               ,[startyear]\
 	               ,[startperiod]\
 	               ,[endyear]\
@@ -858,7 +861,7 @@ for index, row in data.iterrows():
 	               ,row['forceterms']
 	               ,row['forcetaxnum']
 	               ,row['forceaddress']
-	               ,row['force1099']
+	               ,row['force1None99']
 	               ,row['startyear']
 	               ,row['startperiod']
 	               ,row['endyear']
