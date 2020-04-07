@@ -11,11 +11,11 @@ use master;
 go
 
 BACKUP DATABASE [TestSourceDB3]
-TO  DISK = 'C:\tmp\cx1964ReposDWH\TestSourceDB3_20200326.bak'
+TO  DISK = 'C:\tmp\cx1964ReposDWH\TestSourceDB3_20200407.bak'
 WITH
   NOFORMAT,
   INIT,
-  NAME = 'SourceDB3 full Database Backup 20200326',
+  NAME = 'SourceDB3 full Database Backup 20200407',
   SKIP,
   NOREWIND,
   NOUNLOAD,
