@@ -195,6 +195,7 @@ for index, row in data.iterrows():
 				   ,[adddate]\
 				   ,[moddate]\
 				   ,[deldate]\
+				   ,[dateaccopened]\
                    ,[paymentindex]\
                    ,[taxadjustment]\
                    ,[matchtopo]\
@@ -256,7 +257,7 @@ for index, row in data.iterrows():
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
 					  ?,?,?,?,?,?,?,?,?,?,\
-					  ?,?,?,?,?,?,\
+					  ?,?,?,?,?,?,?,\
 			          ?,?,?\
                  )",
 	                row['cmpcode']
@@ -266,9 +267,10 @@ for index, row in data.iterrows():
 				   ,moddate_waarde # row['moddate']		               		   
 				   ,deldate_waarde #,row['deldate']
 
-				   #,row['dateaccopened'] # dit geeft probleem
+
 				   #,row['crratingdate'] # dit geeft ook een probleem
 
+				   ,dateaccopened_waarde
 				   ,row['paymentindex']
                    ,taxadjustment_waarde
                    ,matchtopo_waarde
