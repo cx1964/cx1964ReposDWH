@@ -1,6 +1,7 @@
 # Filenaam: weg_gebruik_tbv_kol_toevoegen.py
 # Functie:  werkend python3 script om data via odbc in SQL server database te importeren.
-#           Dit voorbeeld laat expliciet zien met numerieke veld op de database omgeggaan moet worden incombinatie met NULL values
+#           Dit voorbeeld laat expliciet zien met numerieke veld op de database omgegaan
+#           moet worden in combinatie met NULL values voor verschillende SQL server datatypen
 # Gebruikte python versie: 3.8.2
 # Referenties: https://www.got-it.ai/solutions/sqlquerychat/sql-help/data-manipulation/read-and-write-data-to-and-from-sql-server-using-pandas-library-in-python-querychat/
 # Opmerking:
@@ -26,8 +27,7 @@ import math
 import pyodbc
 import pandas as pd
 
-
-# werkt 
+# Werkt 
 # Voor verwerken van datum velden in CSV
 # zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
 
@@ -62,10 +62,9 @@ for index, row in data.iterrows():
   ) 
 
 
-
-# Preview the first 1None lines of the loaded data
-print("Toon Eerste 1None records van de ingelezen set:")  
-print(data.head(10))
+# Debug: Preview the first 10 lines of the loaded data
+# Debug: print("Toon Eerste 1None records van de ingelezen set:")  
+# Debug: print(data.head(10))
 # print(data)
 # print (type(data))
 # print("Aantal gelezen records: ", data.shape)
@@ -185,54 +184,49 @@ for index, row in data.iterrows():
   crratingdate_waarde	= None if row['crratingdate']			== 'NULL' else row['crratingdate']	
   dateaccopened_waarde	= None if row['dateaccopened']			== 'NULL' else row['dateaccopened']
 
-#
-# ToDo
-# Werkwijze :::::::::::::::::::::::::::::::::::::::
-# Voeg iedere keer 1 nieuwe kolom toe vanaf cmpcode
-# gaat goed: [punchoutcode] t/m [longname] + cmpcode
   cursor.execute("INSERT INTO [codafin12].[oas_element](\
 	                [cmpcode]\
-,[cmpcode_cs]\
-,[code]\
-,[code_cs]\
-,[elmlevel]\
-,[elmlevel_cs]\
-,[indirectcode]\
-,[tstamp]\
-,[name]\
-,[sname]\
-,[cur]\
-,[tax]\
-,[accounttype]\
-,[statuser]\
-,[statpay]\
-,[statrec]\
-,[descr]\
-,[matchable]\
-,[statpayint]\
-,[summary]\
-,[split]\
-,[settle]\
-,[paper]\
-,[elec]\
-,[subanal]\
-,[taxrepesl]\
-,[taxrepintra]\
-,[crliminforce]\
-,[crlim]\
-,[crlim_dp]\
-,[taxmethod]\
-,[terms]\
-,[keepturn]\
-,[ten99]\
-,[custsuppacc]\
-,[discenable]\
-,[forcedisperse]\
-,[enablepay]\
-,[paymode]\
-,[priority]\
-,[medcode]\
-,[tag]\
+                   ,[cmpcode_cs]\
+                   ,[code]\
+                   ,[code_cs]\
+                   ,[elmlevel]\
+                   ,[elmlevel_cs]\
+                   ,[indirectcode]\
+                   ,[tstamp]\
+                   ,[name]\
+                   ,[sname]\
+                   ,[cur]\
+                   ,[tax]\
+                   ,[accounttype]\
+                   ,[statuser]\
+                   ,[statpay]\
+                   ,[statrec]\
+                   ,[descr]\
+                   ,[matchable]\
+                   ,[statpayint]\
+                   ,[summary]\
+                   ,[split]\
+                   ,[settle]\
+                   ,[paper]\
+                   ,[elec]\
+                   ,[subanal]\
+                   ,[taxrepesl]\
+                   ,[taxrepintra]\
+                   ,[crliminforce]\
+                   ,[crlim]\
+                   ,[crlim_dp]\
+                   ,[taxmethod]\
+                   ,[terms]\
+                   ,[keepturn]\
+                   ,[ten99]\
+                   ,[custsuppacc]\
+                   ,[discenable]\
+                   ,[forcedisperse]\
+                   ,[enablepay]\
+                   ,[paymode]\
+                   ,[priority]\
+                   ,[medcode]\
+                   ,[tag]\
                    ,[qty1_used]\
                    ,[qty1_title]\
                    ,[qty1_mand]\
@@ -340,50 +334,47 @@ for index, row in data.iterrows():
 					  ?,?\
                  )",
 	                row['cmpcode']
-
-,cmpcode_cs_waarde
-,row['code']
-,code_cs_waarde
-,elmlevel_waarde
-,elmlevel_cs_waarde
-,row['indirectcode']
-,tstamp_waarde
-,row['name']
-,row['sname']
-,row['cur']
-,row['tax']
-,accounttype_waarde
-,row['statuser']
-,statpay_waarde
-,statrec_waarde
-,descr_waarde
-,matchable_waarde
-,statpayint_waarde
-,summary_waarde
-,split_waarde
-,row['settle']
-,paper_waarde
-,elec_waarde
-,subanal_waarde
-,taxrepesl_waarde
-,taxrepintra_waarde
-,crliminforce_waarde
-,crlim_waarde
-,crlim_dp_waarde
-,taxmethod_waarde
-,row['terms']
-,keepturn_waarde
-,ten99_waarde
-,custsuppacc_waarde
-,discenable_waarde
-,forcedisperse_waarde
-,enablepay_waarde
-,row['paymode']
-,priority_waarde
-,row['medcode']
-,tag_waarde
-
-
+                   ,cmpcode_cs_waarde
+                   ,row['code']
+                   ,code_cs_waarde
+                   ,elmlevel_waarde
+                   ,elmlevel_cs_waarde
+                   ,row['indirectcode']
+                   ,tstamp_waarde
+                   ,row['name']
+                   ,row['sname']
+                   ,row['cur']
+                   ,row['tax']
+                   ,accounttype_waarde
+                   ,row['statuser']
+                   ,statpay_waarde
+                   ,statrec_waarde
+                   ,descr_waarde
+                   ,matchable_waarde
+                   ,statpayint_waarde
+                   ,summary_waarde
+                   ,split_waarde
+                   ,row['settle']
+                   ,paper_waarde
+                   ,elec_waarde
+                   ,subanal_waarde
+                   ,taxrepesl_waarde
+                   ,taxrepintra_waarde
+                   ,crliminforce_waarde
+                   ,crlim_waarde
+                   ,crlim_dp_waarde
+                   ,taxmethod_waarde
+                   ,row['terms']
+                   ,keepturn_waarde
+                   ,ten99_waarde
+                   ,custsuppacc_waarde
+                   ,discenable_waarde
+                   ,forcedisperse_waarde
+                   ,enablepay_waarde
+                   ,row['paymode']
+                   ,priority_waarde
+                   ,row['medcode']
+                   ,tag_waarde
                    ,qty1_used_waarde
                    ,row['qty1_title']
                    ,qty1_mand_waarde
@@ -476,585 +467,9 @@ for index, row in data.iterrows():
 	               ,row['procemailsub']
 	               ,row['euvatcode']
 	               ,row['longname'])
-
-
-'''
-# volledige aan gepast  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# niet aan komen  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  cursor.execute("INSERT INTO [codafin12].[oas_element](\
-	                [cmpcode]\
-	               ,[cmpcode_cs]\
-	               ,[code]\
-	               ,[code_cs]\
-	               ,[elmlevel]\
-	               ,[elmlevel_cs]\
-	               ,[indirectcode]\
-	               ,[tstamp]\
-	               ,[name]\
-	               ,[sname]\
-	               ,[cur]\
-	               ,[tax]\
-	               ,[accounttype]\
-	               ,[statuser]\
-	               ,[statpay]\
-	               ,[statrec]\
-	               ,[descr]\
-	               ,[matchable]\
-	               ,[statpayint]\
-	               ,[summary]\
-	               ,[split]\
-	               ,[settle]\
-	               ,[paper]\
-	               ,[elec]\
-	               ,[subanal]\
-	               ,[taxrepesl]\
-	               ,[taxrepintra]\
-	               ,[crliminforce]\
-	               ,[crlim]\
-	               ,[crlim_dp]\
-	               ,[taxmethod]\
-	               ,[terms]\
-	               ,[keepturn]\
-	               ,[ten99]\
-	               ,[custsuppacc]\
-	               ,[discenable]\
-	               ,[forcedisperse]\
-	               ,[enablepay]\
-	               ,[paymode]\
-	               ,[priority]\
-	               ,[medcode]\
-	               ,[tag]\
-	               ,[qty1_used]\
-	               ,[qty1_title]\
-	               ,[qty1_mand]\
-	               ,[qty1_balcode]\
-	               ,[qty1_dp]\
-	               ,[qty2_used]\
-	               ,[qty2_title]\
-	               ,[qty2_mand]\
-	               ,[qty2_balcode]\
-	               ,[qty2_dp]\
-	               ,[qty3_used]\
-	               ,[qty3_title]\
-	               ,[qty3_mand]\
-	               ,[qty3_balcode]\
-	               ,[qty3_dp]\
-	               ,[qty4_used]\
-	               ,[qty4_title]\
-	               ,[qty4_mand]\
-	               ,[qty4_balcode]\
-	               ,[qty4_dp]\
-	               ,[adddate]\
-	               ,[moddate]\
-	               ,[deldate]\
-	               ,[usrname]\
-	               ,[accountsummary]\
-	               ,[crlimdate]\
-	               ,[crlimcurr]\
-	               ,[elmstat]\
-	               ,[sic]\
-	               ,[crmanager]\
-	               ,[crrating]\
-	               ,[crratingdate]\
-	               ,[crref]\
-	               ,[cragency]\
-	               ,[dateaccopened]\
-	               ,[paymentindex]\
-	               ,[taxadjustment]\
-	               ,[matchtopo]\
-	               ,[extval]\
-	               ,[arcpaid]\
-	               ,[arcrecon]\
-	               ,[ten99code]\
-	               ,[subslevel]\
-	               ,[subselm]\
-	               ,[temporaryelm]\
-	               ,[maxtemporaryid]\
-	               ,[allowtaxnum]\
-	               ,[allowlangcode]\
-	               ,[allowctycode]\
-	               ,[forceterms]\
-	               ,[forcetaxnum]\
-	               ,[forceaddress]\
-	               ,[force1None99]\
-	               ,[startyear]\
-	               ,[startperiod]\
-	               ,[endyear]\
-	               ,[endperiod]\
-	               ,[statmemo]\
-	               ,[balancingacc]\
-	               ,[catcode]\
-	               ,[assetelement]\
-	               ,[extcode]\
-	               ,[extconfig]\
-	               ,[procorders]\
-	               ,[procreq]\
-	               ,[repcode1]\
-	               ,[repcode2]\
-	               ,[repcode3]\
-	               ,[punchoutcode]\
-	               ,[punchouturl]\
-	               ,[punchoutdomain]\
-	               ,[punchoutuser]\
-	               ,[punchoutpasswd]\
-	               ,[punchoutidcode]\
-	               ,[punchoutenc]\
-	               ,[punchoutmktplace]\
-	               ,[custsuppaccext]\
-	               ,[autoreceipt]\
-	               ,[procstatus]\
-	               ,[tolerancecode]\
-	               ,[matchingoffset]\
-	               ,[proctranslimit]\
-	               ,[proctranslimit_dp]\
-	               ,[proccalloffs]\
-	               ,[procgrns]\
-	               ,[procreturns]\
-	               ,[procemailsal]\
-	               ,[procemailsub]\
-	               ,[euvatcode]\
-               	   ,[longname]\
-                 ) values (\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?\
-                 )",
-	                row['cmpcode']
-
-				   ,cmpcode_cs_waarde ###
-	               ,row['code']
-	               ,code_cs_waarde ###
-	               ,elmlevel_waarde
-	               ,elmlevel_cs_waarde ###
-	               ,row['indirectcode']
-	               ,tstamp_waarde
-	               ,row['name']
-	               ,row['sname']
-	               ,row['cur']
-	               ,row['tax']
-	               ,accounttype_waarde
-	               ,row['statuser']
-	               ,statpay_waarde
-	               ,statrec_waarde
-	               ,descr_waarde
-	               ,matchable_waarde
-	               ,statpayint_waarde ###
-	               ,summary_waarde
-	               ,split_waarde
-	               ,row['settle']
-	               ,paper_waarde
-	               ,elec_waarde
-	               ,subanal_waarde
-	               ,taxrepesl_waarde
-	               ,taxrepintra_waarde
-	               ,crliminforce_waarde
-	               ,crlim_waarde
-	               ,crlim_dp_waarde
-	               ,taxmethod_waarde
-	               ,row['terms']
-	               ,keepturn_waarde
-	               ,ten99_waarde
-	               ,custsuppacc_waarde
-	               ,discenable_waarde
-	               ,forcedisperse_waarde
-	               ,enablepay_waarde
-	               ,row['paymode']
-	               ,priority_waarde
-	               ,row['medcode']
-	               ,tag_waarde
-	               ,qty1_used_waarde
-	               ,row['qty1_title']
-	               ,qty1_mand_waarde
-	               ,row['qty1_balcode']
-	               ,qty1_dp_waarde
-	               ,qty2_used_waarde
-	               ,row['qty2_title']
-	               ,qty2_mand_waarde
-	               ,row['qty2_balcode']
-	               ,qty2_dp_waarde
-	               ,qty3_used_waarde
-	               ,row['qty3_title']
-	               ,qty3_mand_waarde
-	               ,row['qty3_balcode']
-	               ,qty3_dp_waarde
-	               ,qty4_used_waarde
-	               ,row['qty4_title']
-	               ,qty4_mand_waarde
-	               ,row['qty4_balcode']
-	               ,qty4_dp_waarde
-	               ,row['adddate']
-	               ,row['moddate']
-	               ,row['deldate']
-	               ,row['usrname']
-	               ,row['accountsummary']
-	               ,row['crlimdate']
-	               ,crlimcurr_waarde
-	               ,row['elmstat']
-	               ,row['sic']
-	               ,row['crmanager']
-	               ,row['crrating']
-	               ,row['crratingdate']
-	               ,row['crref']
-	               ,row['cragency']
-	               ,row['dateaccopened']
-	               ,row['paymentindex']
-	               ,taxadjustment_waarde
-	               ,matchtopo_waarde
-	               ,row['extval']
-	               ,arcpaid_waarde
-	               ,arcrecon_waarde
-	               ,row['ten99code']
-	               ,subslevel_waarde
-	               ,row['subselm']
-	               ,temporaryelm_waarde
-	               ,maxtemporaryid ###
-	               ,allowtaxnum_waarde
-	               ,allowlangcode_waarde
-	               ,allowctycode_waarde
-	               ,forceterms_waarde
-	               ,forcetaxnum_waarde
-	               ,forceaddress_waarde
-	               ,force1None99_waarde
-	               ,startyear_waarde
-	               ,startperiod_waarde
-	               ,endyear_waarde
-	               ,endperiod_waarde
-	               ,row['statmemo']
-	               ,row['balancingacc']
-	               ,row['catcode']
-	               ,assetelement_waarde
-	               ,row['extcode']
-	               ,extconfig_waarde
-	               ,row['procorders']
-	               ,row['procreq']
-	               ,row['repcode1']
-	               ,row['repcode2']
-	               ,row['repcode3']
-
-                   ,row['punchoutcode']
-	               ,row['punchouturl']
-	               ,row['punchoutdomain']
-	               ,row['punchoutuser']
-	               ,row['punchoutpasswd']
-	               ,row['punchoutidcode']
-	               ,punchoutenc_waarde
-	               ,punchoutmktplace_waarde
-	               ,custsuppaccext_waarde
-	               ,autoreceipt_waarde
-	               ,procstatus_waarde
-	               ,tolerancecode_waarde
-	               ,matchingoffset_waarde
-	               ,proctranslimit_waarde
-	               ,proctranslimit_dp_waarde
-	               ,row['proccalloffs']
-	               ,row['procgrns']
-	               ,row['procreturns']
-	               ,row['procemailsal']
-	               ,row['procemailsub']
-	               ,row['euvatcode']
-	               ,row['longname'])
-'''
-
-
-# hieronder bewaren   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# bevat de volledige set kolommen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'''
-  cursor.execute("INSERT INTO [codafin12].[oas_element](\
-	                [cmpcode]\
-	               ,[cmpcode_cs]\
-	               ,[code]\
-	               ,[code_cs]\
-	               ,[elmlevel]\
-	               ,[elmlevel_cs]\
-	               ,[indirectcode]\
-	               ,[tstamp]\
-	               ,[name]\
-	               ,[sname]\
-	               ,[cur]\
-	               ,[tax]\
-	               ,[accounttype]\
-	               ,[statuser]\
-	               ,[statpay]\
-	               ,[statrec]\
-	               ,[descr]\
-	               ,[matchable]\
-	               ,[statpayint]\
-	               ,[summary]\
-	               ,[split]\
-	               ,[settle]\
-	               ,[paper]\
-	               ,[elec]\
-	               ,[subanal]\
-	               ,[taxrepesl]\
-	               ,[taxrepintra]\
-	               ,[crliminforce]\
-	               ,[crlim]\
-	               ,[crlim_dp]\
-	               ,[taxmethod]\
-	               ,[terms]\
-	               ,[keepturn]\
-	               ,[ten99]\
-	               ,[custsuppacc]\
-	               ,[discenable]\
-	               ,[forcedisperse]\
-	               ,[enablepay]\
-	               ,[paymode]\
-	               ,[priority]\
-	               ,[medcode]\
-	               ,[tag]\
-	               ,[qty1_used]\
-	               ,[qty1_title]\
-	               ,[qty1_mand]\
-	               ,[qty1_balcode]\
-	               ,[qty1_dp]\
-	               ,[qty2_used]\
-	               ,[qty2_title]\
-	               ,[qty2_mand]\
-	               ,[qty2_balcode]\
-	               ,[qty2_dp]\
-	               ,[qty3_used]\
-	               ,[qty3_title]\
-	               ,[qty3_mand]\
-	               ,[qty3_balcode]\
-	               ,[qty3_dp]\
-	               ,[qty4_used]\
-	               ,[qty4_title]\
-	               ,[qty4_mand]\
-	               ,[qty4_balcode]\
-	               ,[qty4_dp]\
-	               ,[adddate]\
-	               ,[moddate]\
-	               ,[deldate]\
-	               ,[usrname]\
-	               ,[accountsummary]\
-	               ,[crlimdate]\
-	               ,[crlimcurr]\
-	               ,[elmstat]\
-	               ,[sic]\
-	               ,[crmanager]\
-	               ,[crrating]\
-	               ,[crratingdate]\
-	               ,[crref]\
-	               ,[cragency]\
-	               ,[dateaccopened]\
-	               ,[paymentindex]\
-	               ,[taxadjustment]\
-	               ,[matchtopo]\
-	               ,[extval]\
-	               ,[arcpaid]\
-	               ,[arcrecon]\
-	               ,[ten99code]\
-	               ,[subslevel]\
-	               ,[subselm]\
-	               ,[temporaryelm]\
-	               ,[maxtemporaryid]\
-	               ,[allowtaxnum]\
-	               ,[allowlangcode]\
-	               ,[allowctycode]\
-	               ,[forceterms]\
-	               ,[forcetaxnum]\
-	               ,[forceaddress]\
-	               ,[force1None99]\
-	               ,[startyear]\
-	               ,[startperiod]\
-	               ,[endyear]\
-	               ,[endperiod]\
-	               ,[statmemo]\
-	               ,[balancingacc]\
-	               ,[catcode]\
-	               ,[assetelement]\
-	               ,[extcode]\
-	               ,[extconfig]\
-	               ,[procorders]\
-	               ,[procreq]\
-	               ,[repcode1]\
-	               ,[repcode2]\
-	               ,[repcode3]\
-	               ,[punchoutcode]\
-	               ,[punchouturl]\
-	               ,[punchoutdomain]\
-	               ,[punchoutuser]\
-	               ,[punchoutpasswd]\
-	               ,[punchoutidcode]\
-	               ,[punchoutenc]\
-	               ,[punchoutmktplace]\
-	               ,[custsuppaccext]\
-	               ,[autoreceipt]\
-	               ,[procstatus]\
-	               ,[tolerancecode]\
-	               ,[matchingoffset]\
-	               ,[proctranslimit]\
-	               ,[proctranslimit_dp]\
-	               ,[proccalloffs]\
-	               ,[procgrns]\
-	               ,[procreturns]\
-	               ,[procemailsal]\
-	               ,[procemailsub]\
-	               ,[euvatcode]\
-               	,[longname]\
-                 ) values (\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?,?,?,?,?,?,?,?,?\
-                    ?,?\
-                 )",
-	                row['cmpcode']
-	               ,row['cmpcode_cs']
-	               ,row['code']
-	               ,row['code_cs']
-	               ,row['elmlevel']
-	               ,row['elmlevel_cs']
-	               ,row['indirectcode']
-	               ,row['tstamp']
-	               ,row['name']
-	               ,row['sname']
-	               ,row['cur']
-	               ,row['tax']
-	               ,row['accounttype']
-	               ,row['statuser']
-	               ,row['statpay']
-	               ,row['statrec']
-	               ,row['descr']
-	               ,row['matchable']
-	               ,row['statpayint']
-	               ,row['summary']
-	               ,row['split']
-	               ,row['settle']
-	               ,row['paper']
-	               ,row['elec']
-	               ,row['subanal']
-	               ,row['taxrepesl']
-	               ,row['taxrepintra']
-	               ,row['crliminforce']
-	               ,row['crlim']
-	               ,row['crlim_dp']
-	               ,row['taxmethod']
-	               ,row['terms']
-	               ,row['keepturn']
-	               ,row['ten99']
-	               ,row['custsuppacc']
-	               ,row['discenable']
-	               ,row['forcedisperse']
-	               ,row['enablepay']
-	               ,row['paymode']
-	               ,row['priority']
-	               ,row['medcode']
-	               ,row['tag']
-	               ,row['qty1_used']
-	               ,row['qty1_title']
-	               ,row['qty1_mand']
-	               ,row['qty1_balcode']
-	               ,row['qty1_dp']
-	               ,row['qty2_used']
-	               ,row['qty2_title']
-	               ,row['qty2_mand']
-	               ,row['qty2_balcode']
-	               ,row['qty2_dp']
-	               ,row['qty3_used']
-	               ,row['qty3_title']
-	               ,row['qty3_mand']
-	               ,row['qty3_balcode']
-	               ,row['qty3_dp']
-	               ,row['qty4_used']
-	               ,row['qty4_title']
-	               ,row['qty4_mand']
-	               ,row['qty4_balcode']
-	               ,row['qty4_dp']
-	               ,row['adddate']
-	               ,row['moddate']
-	               ,row['deldate']
-	               ,row['usrname']
-	               ,row['accountsummary']
-	               ,row['crlimdate']
-	               ,row['crlimcurr']
-	               ,row['elmstat']
-	               ,row['sic']
-	               ,row['crmanager']
-	               ,row['crrating']
-	               ,row['crratingdate']
-	               ,row['crref']
-	               ,row['cragency']
-	               ,row['dateaccopened']
-	               ,row['paymentindex']
-	               ,row['taxadjustment']
-	               ,row['matchtopo']
-	               ,row['extval']
-	               ,row['arcpaid']
-	               ,row['arcrecon']
-	               ,row['ten99code']
-	               ,row['subslevel']
-	               ,row['subselm']
-	               ,row['temporaryelm']
-	               ,row['maxtemporaryid']
-	               ,row['allowtaxnum']
-	               ,row['allowlangcode']
-	               ,row['allowctycode']
-	               ,row['forceterms']
-	               ,row['forcetaxnum']
-	               ,row['forceaddress']
-	               ,row['force1None99']
-	               ,row['startyear']
-	               ,row['startperiod']
-	               ,row['endyear']
-	               ,row['endperiod']
-	               ,row['statmemo']
-	               ,row['balancingacc']
-	               ,row['catcode']
-	               ,row['assetelement']
-	               ,row['extcode']
-	               ,row['extconfig']
-	               ,row['procorders']
-	               ,row['procreq']
-	               ,row['repcode1']
-	               ,row['repcode2']
-	               ,row['repcode3']
-                  ,row['punchoutcode']
-	               ,row['punchouturl']
-	               ,row['punchoutdomain']
-	               ,row['punchoutuser']
-	               ,row['punchoutpasswd']
-	               ,row['punchoutidcode']
-	               ,row['punchoutenc']
-	               ,row['punchoutmktplace']
-	               ,row['custsuppaccext']
-	               ,row['autoreceipt']
-	               ,row['procstatus']
-	               ,row['tolerancecode']
-	               ,row['matchingoffset']
-	               ,row['proctranslimit']
-	               ,row['proctranslimit_dp']
-	               ,row['proccalloffs']
-	               ,row['procgrns']
-	               ,row['procreturns']
-	               ,row['procemailsal']
-	               ,row['procemailsub']
-	               ,row['euvatcode']
-	               ,row['longname'])
-'''                  
+                 
 sql_conn.commit() 
 cursor.close() 
 sql_conn.close() 
-
 
 print("Einde verwerking")
