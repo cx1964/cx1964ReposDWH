@@ -200,9 +200,23 @@ for index, row in data.iterrows():
                     ,[l4userref3]\
                     ,[l4order]\
                     ,[l4manager]\
+                    ,[l5name]\
+                    ,[l5hdrtxt]\
+                    ,[l5hdrhide]\
+                    ,[l5ftrtxt]\
+                    ,[l5ftrhide]\
+                    ,[l5reverse]\
+                    ,[l5subtotalsign]\
+                    ,[l5userref1]\
+                    ,[l5userref2]\
+                    ,[l5userref3]\
+                    ,[l5order]\
+                    ,[l5manager]\
                     ,[leafmanager]\
                  ) values (\
 				           ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
                    ?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
@@ -222,7 +236,6 @@ for index, row in data.iterrows():
                  ,row['l2userref2']
                  ,row['l2userref3']
                  ,l2order_waarde
-
                  ,row['l3name']
                  ,row['l3hdrtxt']
                  ,l3hdrhide_waarde
@@ -235,7 +248,6 @@ for index, row in data.iterrows():
                  ,row['l3userref3']
                  ,l3order_waarde
                  ,row['l3manager']
-
                  ,row['l4name']
                  ,row['l4hdrtxt']
                  ,l4hdrhide_waarde
@@ -248,6 +260,19 @@ for index, row in data.iterrows():
                  ,row['l4userref3']
                  ,l4order_waarde
                  ,row['l4manager']
+
+                 ,row['l5name']
+                 ,row['l5hdrtxt']
+                 ,l5hdrhide_waarde
+                 ,row['l5ftrtxt']
+                 ,l5ftrhide_waarde
+                 ,l5reverse_waarde
+                 ,l5subtotalsign_waarde
+                 ,row['l5userref1']
+                 ,row['l5userref2']
+                 ,row['l5userref3']
+                 ,l5order_waarde
+                 ,row['l5manager']
 
                  ,row['leafmanager'] # Laatste kolom
                  )
