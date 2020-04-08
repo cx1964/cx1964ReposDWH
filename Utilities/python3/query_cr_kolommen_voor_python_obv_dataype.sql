@@ -4,7 +4,7 @@ go
 -- create python kolommen voor insert statement
 
 select
-        ',['+column_name+']' as kol
+        ',['+column_name+']\' as kol
        ,case 
 	      when (lower(data_type) = 'varchar' or lower(data_type) = 'char' )
 	      then
@@ -16,6 +16,6 @@ select
 from [INFORMATION_SCHEMA].[COLUMNS]
 where 1=1
   and [TABLE_NAME] = 'oas_himlist'
-  and COLUMN_NAME like 'l3%'
+  and COLUMN_NAME like 'l4%'
 order by ORDINAL_POSITION asc 
 go
