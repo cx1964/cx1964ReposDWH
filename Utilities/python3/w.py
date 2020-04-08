@@ -1,4 +1,7 @@
-# Filenaam: weg.py
+# Filenaam: w.py
+
+# dit werkt
+
 # Functie:  werkend python3 script om data via odbc in SQL server database te importeren.
 #           Dit voorbeeld laat expliciet zien met numerieke veld op de database omgegaan
 #           moet worden in combinatie met NULL values voor verschillende SQL server datatypen
