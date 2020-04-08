@@ -169,13 +169,13 @@ for index, row in data.iterrows():
                     ,[l1hdrtxt]\
                     ,[l1hdrhide]\
                     ,[l1ftrtxt]\
-					,[l1ftrhide]\
-					,[l1reverse]\
-					,[l1subtotalsign]\
-					,[l1userref1]\
-					,[l2userref2]\
-					,[l2userref3]\
-					,[l2order]\
+					          ,[l1ftrhide]\
+					          ,[l1reverse]\
+					          ,[l1subtotalsign]\
+				          	,[l1userref1]\
+					          ,[l2userref2]\
+					          ,[l2userref3]\
+					          ,[l2order]\
                     ,[leafmanager]\
                  ) values (\
 				   ?,?,?,?,?,?,?,?,?,?,\
