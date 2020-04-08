@@ -176,9 +176,23 @@ for index, row in data.iterrows():
 					          ,[l2userref2]\
 					          ,[l2userref3]\
 					          ,[l2order]\
+                    ,[l3name]\
+                    ,[l3hdrtxt]\
+                    ,[l3hdrhide]\
+                    ,[l3ftrtxt]\
+                    ,[l3ftrhide]\
+                    ,[l3reverse]\
+                    ,[l3subtotalsign]\
+                    ,[l3userref1]\
+                    ,[l3userref2]\
+                    ,[l3userref3]\
+                    ,[l3order]\
+                    ,[l3manager]\
                     ,[leafmanager]\
                  ) values (\
-				   ?,?,?,?,?,?,?,?,?,?,\
+				           ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,\
                    ?,?,?,?\
                  )",
                   row['code']
@@ -194,6 +208,19 @@ for index, row in data.iterrows():
                  ,row['l2userref2']
                  ,row['l2userref3']
                  ,l2order_waarde
+
+                 ,row['l3name']
+                 ,row['l3hdrtxt']
+                 ,l3hdrhide_waarde
+                 ,row['l3ftrtxt']
+                 ,l3ftrhide_waarde
+                 ,l3reverse_waarde
+                 ,l3subtotalsign_waarde
+                 ,row['l3userref1']
+                 ,row['l3userref2']
+                 ,row['l3userref3']
+                 ,l3order_waarde
+                 ,row['l3manager']
 
                  ,row['leafmanager'] # Laatste kolom
                  )
