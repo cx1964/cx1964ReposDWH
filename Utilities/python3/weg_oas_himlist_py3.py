@@ -174,8 +174,30 @@ for index, row in data.iterrows():
 					          ,[l1subtotalsign]\
 					          ,[l1userref1]\
                     ,[leafmanager]\
+										,[l2userref2]\
+										,[l2userref3]\
+										,[l2order]\
+										,[l3name]\
+										,[l3hdrtxt]\
+										,[l3hdrhide]\
+										,[l3ftrtxt]\
+										,[l3ftrhide]\
+										,[l3reverse]\
+										,[l3subtotalsign]\
+										,[l3userref1]\
+										,[l3userref2]\
+										,[l3userref3]\
+										,[l3order]\
+										,[l4name]\
+										,[l4hdrtxt]\
+										,[l4hdrhide]\
+										,[l4ftrtxt]\
+										,[l4ftrhide]\
+										,[l4reverse]\
                  ) values (\
 					         ?,?,?,?,?,?,?,?,?,?,\
+					         ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?,?,?,?,?,?,?,\
                    ?\
                  )",
                   row['code']
@@ -188,6 +210,27 @@ for index, row in data.iterrows():
                  ,l1reverse_waarde
                  ,l1subtotalsign_waarde
                  ,row['l1userref1']
+
+                 ,row['l2userref2']
+                 ,row['l2userref3']
+                 ,l2order_waarde
+                 ,row['l3name']
+                 ,row['l3hdrtxt']
+                 ,l3hdrhide_waarde
+                 ,row['l3ftrtxt']
+                 ,l3ftrhide_waarde
+                 ,l3reverse_waarde
+                 ,l3subtotalsign_waarde
+                 ,row['l3userref1']
+                 ,row['l3userref2']
+                 ,row['l3userref3']
+                 ,l3order_waarde
+                 ,row['l4name']
+                 ,row['l4hdrtxt']
+                 ,l4hdrhide_waarde
+                 ,row['l4ftrtxt']
+                 ,l4ftrhide_waarde
+                 ,l4reverse_waarde
 
                  ,row['leafmanager'] # Laatste kolom
                  )
