@@ -173,9 +173,18 @@ for index, row in data.iterrows():
 					          ,[l1reverse]\
 					          ,[l1subtotalsign]\
 				          	,[l1userref1]\
-					          ,[l2userref2]\
-					          ,[l2userref3]\
-					          ,[l2order]\
+                    ,[l2name]\
+                    ,[l2hdrtxt]\
+                    ,[l2hdrhide]\
+                    ,[l2ftrtxt]\
+                    ,[l2ftrhide]\
+                    ,[l2reverse]\
+                    ,[l2subtotalsign]\
+                    ,[l2userref1]\
+                    ,[l2userref2]\
+                    ,[l2userref3]\
+                    ,[l2order]\
+                    ,[l2manager]\
                     ,[l3name]\
                     ,[l3hdrtxt]\
                     ,[l3hdrhide]\
@@ -332,6 +341,7 @@ for index, row in data.iterrows():
                    ?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
                    ?,\
+                   ?,?,?,?,?,?,?,?,?,\
                    ?,?,?,?\
                  )",
                   row['code']
@@ -344,9 +354,20 @@ for index, row in data.iterrows():
                  ,l1reverse_waarde
                  ,l1subtotalsign_waarde
                  ,row['l1userref1']
+
+                 ,row['l2name']
+                 ,row['l2hdrtxt']
+                 ,l2hdrhide_waarde
+                 ,row['l2ftrtxt']
+                 ,l2ftrhide_waarde
+                 ,l2reverse_waarde
+                 ,l2subtotalsign_waarde
+                 ,row['l2userref1']
                  ,row['l2userref2']
                  ,row['l2userref3']
                  ,l2order_waarde
+                 ,row['l2manager']
+
                  ,row['l3name']
                  ,row['l3hdrtxt']
                  ,l3hdrhide_waarde
