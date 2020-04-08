@@ -1,4 +1,4 @@
-# Filenaam: weg_oas_himlist_py3.py
+# Filenaam: weg.py
 # Functie:  werkend python3 script om data via odbc in SQL server database te importeren.
 #           Dit voorbeeld laat expliciet zien met numerieke veld op de database omgegaan
 #           moet worden in combinatie met NULL values voor verschillende SQL server datatypen
@@ -169,80 +169,17 @@ for index, row in data.iterrows():
                     ,[l1hdrtxt]\
                     ,[l1hdrhide]\
                     ,[l1ftrtxt]\
-					          ,[l1ftrhide]\
-					          ,[l1reverse]\
-					          ,[l1subtotalsign]\
-					          ,[l1userref1]\
-										,[l2userref2]\
-										,[l2userref3]\
-										,[l2order]\
-										,[l3name]\
-										,[l3hdrtxt]\
-										,[l3hdrhide]\
-										,[l3ftrtxt]\
-										,[l3ftrhide]\
-										,[l3reverse]\
-										,[l3subtotalsign]\
-										,[l3userref1]\
-										,[l3userref2]\
-										,[l3userref3]\
-										,[l3order]\
-										,[l4name]\
-										,[l4hdrtxt]\
-										,[l4hdrhide]\
-										,[l4ftrtxt]\
-										,[l4ftrhide]\
-										,[l4reverse]\
-                    ,[l4subtotalsign]\
-										,[l4userref1]\
-										,[l4userref2]\
-										,[l4userref3]\
-										,[l4order]\
-										,[l5name]\
-										,[l5hdrtxt]\
-										,[l5hdrhide]\
-										,[l5ftrtxt]\
-										,[l5ftrhide]\
-										,[l5reverse]\
-										,[l5subtotalsign]\
-										,[l5userref1]\
-										,[l5userref2]\
-										,[l5userref3]\
-										,[l5order]\
-										,[l6name]\
-										,[l6hdrtxt]\
-										,[l6hdrhide]\
-										,[l6ftrtxt]\
-										,[l6ftrhide]\
-										,[l6reverse]\
-										,[l6subtotalsign]\
-										,[l6userref1]\
-										,[l6userref2]\
-										,[l6userref3]\
-										,[l6order]\
-										,[l7name]\
-										,[l7hdrtxt]\
-										,[l7hdrhide]\
-										,[l7ftrtxt]\
-										,[l7ftrhide]\
-										,[l7reverse]\
-										,[l7subtotalsign]\
-										,[l7userref1]\
-										,[l7userref2]\
-										,[l7userref3]\
-										,[l7order]\
-										,[l8name]\
-										,[l8hdrtxt]\
+					,[l1ftrhide]\
+					,[l1reverse]\
+					,[l1subtotalsign]\
+					,[l1userref1]\
+					,[l2userref2]\
+					,[l2userref3]\
+					,[l2order]\
                     ,[leafmanager]\
                  ) values (\
-					         ?,?,?,?,?,?,?,?,?,?,\
-					         ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?,?,?,?,?,?,?,?,?,\
-					         ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?\
+				   ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?\
                  )",
                   row['code']
                  ,lstseqno_waarde
@@ -257,64 +194,6 @@ for index, row in data.iterrows():
                  ,row['l2userref2']
                  ,row['l2userref3']
                  ,l2order_waarde
-                 ,row['l3name']
-                 ,row['l3hdrtxt']
-                 ,l3hdrhide_waarde
-                 ,row['l3ftrtxt']
-                 ,l3ftrhide_waarde
-                 ,l3reverse_waarde
-                 ,l3subtotalsign_waarde
-                 ,row['l3userref1']
-                 ,row['l3userref2']
-                 ,row['l3userref3']
-                 ,l3order_waarde
-                 ,row['l4name']
-                 ,row['l4hdrtxt']
-                 ,l4hdrhide_waarde
-                 ,row['l4ftrtxt']
-                 ,l4ftrhide_waarde
-                 ,l4reverse_waarde
-
-                 ,l4subtotalsign_waarde
-                 ,row['l4userref1']
-                 ,row['l4userref2']
-                 ,row['l4userref3']
-                 ,l4order_waarde
-                 ,row['l5name']
-                 ,row['l5hdrtxt']
-                 ,l5hdrhide_waarde
-                 ,row['l5ftrtxt']
-                 ,l5ftrhide_waarde
-                 ,l5reverse_waarde
-                 ,l5subtotalsign_waarde
-                 ,row['l5userref1']
-                 ,row['l5userref2']
-                 ,row['l5userref3']
-                 ,l5order_waarde
-                 ,row['l6name']
-                 ,row['l6hdrtxt']
-                 ,l6hdrhide_waarde
-                 ,row['l6ftrtxt']
-                 ,l6ftrhide_waarde
-                 ,l6reverse_waarde
-                 ,l6subtotalsign_waarde
-                 ,row['l6userref1']
-                 ,row['l6userref2']
-                 ,row['l6userref3']
-                 ,l6order_waarde
-                 ,row['l7name']
-                 ,row['l7hdrtxt']
-                 ,l7hdrhide_waarde
-                 ,row['l7ftrtxt']
-                 ,l7ftrhide_waarde
-                 ,l7reverse_waarde
-                 ,l7subtotalsign_waarde
-                 ,row['l7userref1']
-                 ,row['l7userref2']
-                 ,row['l7userref3']
-                 ,l7order_waarde
-                 ,row['l8name']
-                 ,row['l8hdrtxt']
 
                  ,row['leafmanager'] # Laatste kolom
                  )
