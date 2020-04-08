@@ -16,6 +16,6 @@ select
 from [INFORMATION_SCHEMA].[COLUMNS]
 where 1=1
   and [TABLE_NAME] = 'oas_himlist'
-  and COLUMN_NAME like 'l10%'
+  and COLUMN_NAME like 'l11%'
 order by ORDINAL_POSITION asc 
 go
