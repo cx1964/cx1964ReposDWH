@@ -248,9 +248,23 @@ for index, row in data.iterrows():
                     ,[l8userref3]\
                     ,[l8order]\
                     ,[l8manager]\
+                    ,[l9name]\
+                    ,[l9hdrtxt]\
+                    ,[l9hdrhide]\
+                    ,[l9ftrtxt]\
+                    ,[l9ftrhide]\
+                    ,[l9reverse]\
+                    ,[l9subtotalsign]\
+                    ,[l9userref1]\
+                    ,[l9userref2]\
+                    ,[l9userref3]\
+                    ,[l9order]\
+                    ,[l9manager]\
                     ,[leafmanager]\
                  ) values (\
 				           ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
                    ?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
@@ -338,7 +352,6 @@ for index, row in data.iterrows():
                  ,row['l7userref3']
                  ,l7order_waarde
                  ,row['l7manager']
-
                  ,row['l8name']
                  ,row['l8hdrtxt']
                  ,l8hdrhide_waarde
@@ -351,6 +364,19 @@ for index, row in data.iterrows():
                  ,row['l8userref3']
                  ,l8order_waarde
                  ,row['l8manager']
+
+                 ,row['l9name']
+                 ,row['l9hdrtxt']
+                 ,l9hdrhide_waarde
+                 ,row['l9ftrtxt']
+                 ,l9ftrhide_waarde
+                 ,l9reverse_waarde
+                 ,l9subtotalsign_waarde
+                 ,row['l9userref1']
+                 ,row['l9userref2']
+                 ,row['l9userref3']
+                 ,l9order_waarde
+                 ,row['l9manager']
 
                  ,row['leafmanager'] # Laatste kolom
                  )
