@@ -30,7 +30,6 @@ import math
 import pyodbc
 import pandas as pd
 
-# Werkt 
 # Voor verwerken van datum velden in CSV
 # zie https://kite.com/python/answers/how-to-import-dates-in-a-csv-file-as-datetimes-in-a-pandas-dataframe-in-python
 
@@ -165,6 +164,12 @@ for index, row in data.iterrows():
   cursor.execute("INSERT INTO [codafin12].[oas_himlist](\
                      [code]\
                     ,[lstseqno]\
+                    ,[grptype]\
+                    ,[cmpcode]\
+                    ,[grpcode]\
+                    ,[elmcode]\
+                    ,[elmlevel]\
+                    ,[useelmname]\
                     ,[l1name]\
                     ,[l1hdrtxt]\
                     ,[l1hdrhide]\
@@ -337,10 +342,17 @@ for index, row in data.iterrows():
                    ?,?,?,?,?,?,?,?,?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
                    ?,?,?,?,?,?,?,?,?,?,\
-                   ?,?,?,?,?,?,?,?\
+                   ?,?,?,?,?,?,?,?,?,?,\
+                   ?,?,?,?\
                  )",
                   row['code']
                  ,lstseqno_waarde
+                 ,grptype_waarde
+                 ,row['cmpcode']
+                 ,row['grpcode']
+                 ,row['elmcode']
+                 ,elmlevel_waarde
+                 ,useelmname_waarde
                  ,row['l1name']	       
                  ,row['l1hdrtxt']	   
                  ,l1hdrhide_waarde	   
