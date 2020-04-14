@@ -24,26 +24,41 @@ ALTER TABLE [codafin12].[oas_element]
    );
 
 
--- ToDo afmaken:
--- 1. verplicht not null constraints resterende tabellen
--- 2. pk definities resterende tabellen
+-- verplicht maken van de pk columns
+ALTER TABLE [codafin12].[oas_grplist]
+  ALTER COLUMN [cmpcode] varchar(12) NOT NULL;
 
--- [codafin12].[oas_grplist]
-[dbo].[oas_grplist]
-(
+ALTER TABLE [codafin12].[oas_grplist]
+  ALTER COLUMN [code] varchar(72) NOT NULL;  
+
+ALTER TABLE [codafin12].[oas_grplist]
+  ALTER COLUMN [elmlevel] smallint NOT NULL;  
+
+ALTER TABLE [codafin12].[oas_grplist]
+  ALTER COLUMN [lstseqno] smallint NOT NULL;  
+
+-- Toevoegen pk definitie
+ALTER TABLE [codafin12].[oas_grplist]
+   ADD CONSTRAINT PK_oas_grplist
+   PRIMARY KEY CLUSTERED (
 	 [cmpcode]
 	,[code]
 	,[elmlevel]
 	,[lstseqno]
-)
+   );
 
 
+-- verplicht maken van de pk columns
+ALTER TABLE [codafin12].[oas_himlist]
+  ALTER COLUMN [code] varchar(12) NOT NULL;  
 
--- [codafin12].[oas_himlist]
-[dbo].[oas_himlist]
-(
-	[code]
+ALTER TABLE [codafin12].[oas_himlist]
+  ALTER COLUMN [lstseqno] int NOT NULL;  
+
+-- Toevoegen pk definitie
+ALTER TABLE [codafin12].[oas_himlist]
+   ADD CONSTRAINT PK_oas_himlist
+   PRIMARY KEY CLUSTERED (
+	 [code]
 	,[lstseqno]
-)
-
-
+   );
