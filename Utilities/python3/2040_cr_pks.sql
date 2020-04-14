@@ -37,6 +37,9 @@ ALTER TABLE [codafin12].[oas_grplist]
 ALTER TABLE [codafin12].[oas_grplist]
   ALTER COLUMN [lstseqno] smallint NOT NULL;  
 
+--ALTER TABLE [codafin12].[oas_grplist]
+--  drop CONSTRAINT PK_oas_grplist;
+
 -- Toevoegen pk definitie
 ALTER TABLE [codafin12].[oas_grplist]
    ADD CONSTRAINT PK_oas_grplist
@@ -46,6 +49,22 @@ ALTER TABLE [codafin12].[oas_grplist]
 	,[elmlevel]
 	,[lstseqno]
    );
+
+select
+     [cmpcode]
+	,[code]
+	,[elmlevel]
+from [codafin12].[oas_grplist]
+group by
+ 	 [cmpcode]
+	,[code]
+	,[elmlevel]
+	,[lstseqno]
+having count(*) > 1
+
+select count(*)
+from [codafin12].[oas_grplist]
+
 
 
 -- verplicht maken van de pk columns
