@@ -23,7 +23,6 @@ ALTER TABLE [codafin12].[oas_element]
 	,[elmlevel]
    );
 
-
 -- verplicht maken van de pk columns
 ALTER TABLE [codafin12].[oas_grplist]
   ALTER COLUMN [cmpcode] varchar(12) NOT NULL;
@@ -50,29 +49,30 @@ ALTER TABLE [codafin12].[oas_grplist]
 	,[lstseqno]
    );
 
-select
-     [cmpcode]
-	,[code]
-	,[elmlevel]
-from [codafin12].[oas_grplist]
-group by
- 	 [cmpcode]
-	,[code]
-	,[elmlevel]
-	,[lstseqno]
-having count(*) > 1
-
-select count(*)
-from [codafin12].[oas_grplist]
-
+--select
+--   [cmpcode]
+--	,[code]
+--	,[elmlevel]
+--from [codafin12].[oas_grplist]
+--group by
+-- 	 [cmpcode]
+--	,[code]
+--	,[elmlevel]
+--	,[lstseqno]
+--having count(*) > 1
 
 
 -- verplicht maken van de pk columns
 ALTER TABLE [codafin12].[oas_himlist]
-  ALTER COLUMN [code] varchar(12) NOT NULL;  
+  -- ALTER COLUMN [code] varchar(12) NOT NULL; 
+  ALTER COLUMN [code] varchar(72) NOT NULL;  
 
 ALTER TABLE [codafin12].[oas_himlist]
-  ALTER COLUMN [lstseqno] int NOT NULL;  
+  -- ALTER COLUMN [lstseqno] int NOT NULL;  
+  ALTER COLUMN [lstseqno] smallint NOT NULL;  
+
+ALTER TABLE [codafin12].[oas_himlist]
+   drop CONSTRAINT PK_oas_himlist;
 
 -- Toevoegen pk definitie
 ALTER TABLE [codafin12].[oas_himlist]
