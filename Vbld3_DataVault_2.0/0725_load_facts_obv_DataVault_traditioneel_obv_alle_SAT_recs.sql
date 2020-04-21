@@ -1,11 +1,5 @@
 -- file: 0725_load_facts_obv_DataVault_traditioneel_obv_alle_SAT_recs.sql
 
--- ToDo: Dit script is nog niet geschikt voor incremneteel laden van de facts
---       Dit script moet aangevuld worden bij IEDERE join op een SAT met een EXIST operator
---       erzorgt voor dat alleen gewijzigde SATs worden geladen inde FACT tabel
---       Een derglijke constructie mbt EXIST voor de join met de SAT moet ook in de DIM gedaan worden
---       zodat DIMs ook incrementeel geladen kunnen worden.
-
 -- vullen Facts obv tranditionele manier (zonder bridge table)
 
 -- Methode1 obv Hashkey zonder Look-up naar HUB en DIM
@@ -17,14 +11,15 @@ go
 
 -- FKs uitzetten is al gedaan (bij laden van de speciale DIM records)
 
-truncate table [dbo].[FACT_gepensioneerde_per_OE_Compleet]
-
--- Methode 1
 -- Tbv onafhankelijk laden, 
--- Dwz parallel DIMs en FACts laden in DataMart
--- Parallel laden is alleen mogelijk las in de DIMs hashkeys als surrogate keys worden gebruikt,
+-- Dwz parallel DIMs en FACTs laden in DataMart
+-- Parallel laden is alleen mogelijk als in de DIMs hashkeys als surrogate keys worden gebruikt,
 -- waarbij de surrogate keys de hashkeys van de HUBs zijn uit de DataVault en
--- de foreign keys in de FACTs verwijzen naar deze Hhash keys van de DIMs
+-- de foreign keys in de FACTs verwijzen naar deze Hash keys van de DIMs
+-- Omdat de hashkeys niet uniek zijn voor de PK van de DIM, wordt de PK aangevuld met de 
+-- meta_load_date en meta_create_time van de SAT. De SAT wordt namelijk zowel gebruikt
+-- om de DIM als de FACT te laden, hierdoor kan de FK in de FACT naast de hashkey ook
+-- de meta_load_date en meta_create_time uit de SAT gebruiken.
 
 insert into [dbo].[FACT_gepensioneerde_per_OE_Compleet]
 -- Hoogste niveau select tbv om meta hub gegevens te joinen aan resultaat
@@ -74,7 +69,6 @@ from (
 	-- Tbv Medewerker properties in FACT is SAT medewerker nodig
     inner join [TestIntegrationDB3].[dbo].[S_Medewerker3_vrtrw] sm
           on sm.H_Medewerker3Hashkey = l.H_Medewerker3Hashkey
-    -- **** hier ergens moet MOGELIJK nog een EXIST conditie commen om te zorgen dat alleen gewijzigde SATs worden geladen ****
     -- Tbv FK velden voor de fact van FACT naar DIM_organisatieeenheid is join
 	  -- met SAT organisatie eenheid nodig
     inner join [TestIntegrationDB3].[dbo].[S_Organisatie_Eenheid3] so
@@ -89,11 +83,17 @@ from (
             ,data.meta_load_date
             ,data.meta_create_time
 ) resultaat
--- niet meer nodig: Look-ups naar HUB en DIM
--- niet meer nodig: inner join  [TestIntegrationDB].[dbo].[H_Organisatie_Eenheid] rh
--- niet meer nodig:       on rh.h_Organisatie_EenheidHashkey = resultaat.h_Organisatie_EenheidHashkey
--- niet meer nodig: inner join [TestPresentationDB].[dbo].[Dim_Organisatie_Eenheid] do
--- niet meer nodig:       on do.code = resultaat.code 
+except -- Except tbv incrementeel laden.
+      --  voeg alleen records toe aan de fact die nog niet in de fact voorkomen 
+select
+          -- Dit zijn  de records die al in de fact voorkomen
+          H_Organisatie3HashKey
+         ,meta_load_date
+         ,meta_create_time
+         ,aantal_gepensioneerden
+         ,meta_record_source 
+from [TestPresentationDB3].[dbo].FACT_gepensioneerde_per_OE_Compleet
+
 
 
 -- voeg FK weer toe na laden
