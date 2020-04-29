@@ -33,10 +33,10 @@ CREATE TABLE [dbo].[Pit_Medewerker](
 	,[pit_load_time] [time] NOT NULL				-- PK kolom
 	 -- uit SAT nvrtrw
     ,[nvrtrw_load_date] [date] NOT NULL
-	,[nvrtrw__create_time] [time] NOT NULL
+	,[nvrtrw_create_time] [time] NOT NULL
 	 -- uit SAT vrtrw
     ,[vrtrw_load_date] [date] NOT NULL
-	,[vrtrw__create_time] [time] NOT NULL
+	,[vrtrw_create_time] [time] NOT NULL
     CONSTRAINT [PK_pit_medewerker] PRIMARY KEY nonclustered 
     (
 	  [H_Medewerker3Hashkey] ASC

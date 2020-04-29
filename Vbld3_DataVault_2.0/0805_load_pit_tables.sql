@@ -18,19 +18,29 @@ go
 
 -- #########################################
 -- ToDo
+-- Test 1
+-- Tbv testen moet het aantal unieke hashkeys (= afleiding van business keys) overeenkomen
+-- met het aantal unieke business keys in de onderliggende busines tabel Medewerker in de bron
 
--- tbv testen de tabel moet evenveel records bevaten als de onderliggende buisnes tabel Medewerker in de bron
-
--- testen. Dit gaat nog fout
--- Deze query levert nog te veel records op.
--- De query new_keys (select met except mbt keys) levert wel even veel records op in vergelijk met de bron tabel
--- Het joinen met de SATs gaat verkeerd. Of niet ivm de history
-
--- bepaal
--- Of onderstaande query goed is, na het laden van de DIM obv de PIt tabel.
--- Als dit alle records bevat zoals de DIM obv de join van SATs en HUB
+-- Test 2
+-- Onderstaande query mbt de pit-tabel is goed, als na het laden van de Pit tabel,
+-- de pit tabel evenveel records bevat als de dim table op mederwerkers die gevuld wordt
+-- obv de join van SATs en HUB van medewerker
 -- #############################################
 
+
+-- probleem definitie PK pit table is niet uniek
+
+insert into [TestIntegrationDB3].dbo.Pit_Medewerker
+(
+       H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
+      ,pit_load_date        -- onderdeel van PK van PIT_table  
+	  ,pit_load_time        -- onderdeel van PK van PIT_table
+      ,nvrtrw_load_date
+	  ,nvrtrw_create_time
+	  ,vrtrw_load_date
+	  ,vrtrw_create_time
+) 
 select
        new_keys.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
       ,new_keys.pit_load_date        -- onderdeel van PK van PIT_table  
@@ -59,3 +69,6 @@ left join [TestIntegrationDB3].[dbo].[S_Medewerker3_nvrtrw] s_m_nvrtrw
 left join [TestIntegrationDB3].[dbo].[S_Medewerker3_vrtrw] s_m_vrtrw
      on s_m_vrtrw.[H_Medewerker3Hashkey] = new_keys.[H_Medewerker3Hashkey];
 go
+
+-- 20200429 obv local database bevat query 6 rows
+
