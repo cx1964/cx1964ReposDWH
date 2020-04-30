@@ -37,11 +37,17 @@ select
 	   ,hm.nr
 
         -- uit Sat S_Medewerker3_nvrtrw
+	   ,s_m_nvrtrw.meta_load_date    as meta_load_date_nvrtrw -- extra toegevoegd
+	   ,s_m_nvrtrw.meta_create_time  as meta_create_time_nvrtrw -- extra toegevoegd
+
        ,s_m_nvrtrw.[hoogste_opleiding]
        ,s_m_nvrtrw.[bril_dragend]
        ,s_m_nvrtrw.[schoenmaat]
 
         -- uit Sat S_Medewerker3_vrtrw
+	   ,s_m_vrtrw.meta_load_date    as meta_load_date_vrtrw  -- extra toegevoegd
+	   ,s_m_vrtrw.meta_create_time  as meta_create_time_vrtrw -- extra toegevoegd
+		
        ,s_m_vrtrw.[voorletters]
        ,s_m_vrtrw.[voorvoegsel]
        ,s_m_vrtrw.[achternaam]
