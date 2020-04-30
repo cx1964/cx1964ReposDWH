@@ -5,6 +5,9 @@ use TestIntegrationDB3;
 go
 
 
+-- ToDo
+-- Oplossen probleem dat Dim records niet uniek zijn
+
 insert into [TestPresentationDB3].[dbo].[Dim_Medewerker_Pit](
   [H_Medewerker3Hashkey]
  ,[meta_load_date]
@@ -58,4 +61,4 @@ inner join dbo.S_Medewerker3_vrtrw s_m_vrtrw
       on     s_m_vrtrw.H_Medewerker3Hashkey = pm.H_Medewerker3Hashkey
 	     and s_m_vrtrw.meta_load_date       = pm.vrtrw_load_date
 		 and s_m_vrtrw.meta_create_time     = pm.vrtrw_create_time
--- order by 1,2
+order by 1,2,3
