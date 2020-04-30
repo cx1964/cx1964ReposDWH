@@ -40,19 +40,16 @@ go
 -- Probleem2: Wat wordt de PK van de Pit tabel, waardoor het wel unieke waarden heeft
 
 
---insert into [TestIntegrationDB3].dbo.Pit_Medewerker
---(
---       H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
---      ,pit_load_date        -- onderdeel van PK van PIT_table  
---	  ,pit_load_time        -- onderdeel van PK van PIT_table
---      ,nvrtrw_load_date
---	  ,nvrtrw_create_time
---	  ,vrtrw_load_date
---	  ,vrtrw_create_time
---) 
-
-select *
-from (
+insert into [TestIntegrationDB3].dbo.Pit_Medewerker
+(
+       H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
+      ,pit_load_date        -- onderdeel van PK van PIT_table  
+	  ,pit_load_time        -- onderdeel van PK van PIT_table
+      ,nvrtrw_load_date
+	  ,nvrtrw_create_time
+	  ,vrtrw_load_date
+	  ,vrtrw_create_time
+) 
 select 
        new_keys.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
       ,new_keys.pit_load_date        -- onderdeel van PK van PIT_table  
@@ -61,12 +58,12 @@ select
 	  ,s_m_nvrtrw.meta_create_time as nvrtrw_create_time
 	  -- debug
 	  ------------------------------------------- er onstaat een de 2 inner joins een cartesich product !!!!!!!!!!!!!!!!!!
-	  ,s_m_nvrtrw.schoenmaat
+	  --,s_m_nvrtrw.schoenmaat
 
 	  ,s_m_vrtrw.meta_load_date   as vrtrw_load_date
 	  ,s_m_vrtrw.meta_create_time as vrtrw_create_time
 	  -- debug
-	  ,s_m_vrtrw.aow_datum
+	  --,s_m_vrtrw.aow_datum
 
 from (
   select hm.[H_Medewerker3Hashkey]     as H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
@@ -82,38 +79,30 @@ from (
 	    ,pm.pit_load_time -- onderdeel van PK van PIT_table
   from [TestIntegrationDB3].[dbo].[Pit_Medewerker] pm
 ) new_keys
+-- Maak een SAT tabel bij een betreffende HUB een join van die SAT aan die HUB
 left join [TestIntegrationDB3].[dbo].[S_Medewerker3_nvrtrw] s_m_nvrtrw
      on s_m_nvrtrw.[H_Medewerker3Hashkey] = new_keys.[H_Medewerker3Hashkey]
-	    --and 1=2
 -- Maak een SAT tabel bij een betreffende HUB een join van die SAT aan die HUB
 left join [TestIntegrationDB3].[dbo].[S_Medewerker3_vrtrw] s_m_vrtrw
      on s_m_vrtrw.[H_Medewerker3Hashkey] = new_keys.[H_Medewerker3Hashkey]
-	    --and 1=2
-) resultaat
-order by 
-         2,3
-        ,1
-		,4,5
-		,6,7
-
 go
 
 -- 20200429 obv local database bevat query 6 rows
 
-select *
-	   ,convert(datetime2, convert(varchar(10), meta_load_date, 105) + ' ' +convert(varchar(18), meta_create_time)) as extra_date
-from dbo.S_Medewerker3_vrtrw
-where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
-order by extra_date desc
-go
+--select *
+--	   ,convert(datetime2, convert(varchar(10), meta_load_date, 105) + ' ' +convert(varchar(18), meta_create_time)) as extra_date
+--from dbo.S_Medewerker3_vrtrw
+--where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--order by extra_date desc
+--go
 
-select *
-from dbo.S_Medewerker3_vrtrw
-where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
-order by meta_load_date desc, meta_create_time 
-go
+--select *
+--from dbo.S_Medewerker3_vrtrw
+--where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--order by meta_load_date desc, meta_create_time 
+--go
 
-select *
-from dbo.S_Medewerker3_nvrtrw
-where dbo.S_Medewerker3_nvrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
-go
+--select *
+--from dbo.S_Medewerker3_nvrtrw
+--where dbo.S_Medewerker3_nvrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--go

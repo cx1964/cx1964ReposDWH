@@ -41,7 +41,14 @@ CREATE TABLE [dbo].[Pit_Medewerker](
     (
 	  [H_Medewerker3Hashkey] ASC
 	 ,[pit_load_date] ASC
-	 ,[pit_load_time]
+	 ,[pit_load_time] ASC
+	 -- nodig om uniek te maken
+	 -- uit SAT nvrtrw
+     ,[nvrtrw_load_date]
+	 ,[nvrtrw_create_time]
+	 -- uit SAT vrtrw
+     ,[vrtrw_load_date]
+	 ,[vrtrw_create_time]
     ) ON [PRIMARY]
 ) ON [PRIMARY]
 END
