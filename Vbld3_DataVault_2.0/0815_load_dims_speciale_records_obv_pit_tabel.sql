@@ -25,8 +25,8 @@ ALTER TABLE [dbo].[FACT_gepensioneerde_per_OE_Compleet]
 DROP CONSTRAINT [FK_FACT_gepensioneerde_per_OE_Compleet_Dim_Organisatie_Eenheid_Compleet];
 GO
 
-truncate table Dim_Medewerker_Compleet;
---truncate table Dim_Organisatie_Eenheid_?;
+truncate table Dim_Medewerker_Pit;
+--truncate table Dim_Organisatie_Eenheid_Pit;
 go
 
 

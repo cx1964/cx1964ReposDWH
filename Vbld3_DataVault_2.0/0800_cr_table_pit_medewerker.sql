@@ -37,6 +37,8 @@ CREATE TABLE [dbo].[Pit_Medewerker](
 	 -- uit SAT vrtrw
     ,[vrtrw_load_date] [date] NOT NULL
 	,[vrtrw_create_time] [time] NOT NULL
+
+	,meta_record_source [varchar](255) NOT NULL
     CONSTRAINT [PK_pit_medewerker] PRIMARY KEY nonclustered 
     (
 	  [H_Medewerker3Hashkey] ASC

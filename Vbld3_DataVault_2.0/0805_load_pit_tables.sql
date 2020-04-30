@@ -49,15 +49,16 @@ insert into [TestIntegrationDB3].dbo.Pit_Medewerker
 	  ,nvrtrw_create_time
 	  ,vrtrw_load_date
 	  ,vrtrw_create_time
+	  ,meta_record_source
 ) 
 select 
-       new_keys.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
-      ,new_keys.pit_load_date        -- onderdeel van PK van PIT_table  
-	  ,new_keys.pit_load_time             -- onderdeel van PK van PIT_table
-      ,s_m_nvrtrw.meta_load_date   as nvrtrw_load_date
-	  ,s_m_nvrtrw.meta_create_time as nvrtrw_create_time
+        new_keys.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
+       ,new_keys.pit_load_date        -- onderdeel van PK van PIT_table  
+	   ,new_keys.pit_load_time        -- onderdeel van PK van PIT_table
+       ,s_m_nvrtrw.meta_load_date   as nvrtrw_load_date
+	   ,s_m_nvrtrw.meta_create_time as nvrtrw_create_time
 	  -- debug
-	  ------------------------------------------- er onstaat een de 2 inner joins een cartesich product !!!!!!!!!!!!!!!!!!
+	  -- er onstaat een de 2 inner joins een cartesich product !!!!!!!!!!!!!!!!!!
 	  --,s_m_nvrtrw.schoenmaat
 
 	  ,s_m_vrtrw.meta_load_date   as vrtrw_load_date
@@ -65,10 +66,12 @@ select
 	  -- debug
 	  --,s_m_vrtrw.aow_datum
 
+	  ,new_keys.meta_record_source
 from (
   select hm.[H_Medewerker3Hashkey]     as H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
         ,convert(date, getdate() )     as pit_load_date -- onderdeel van PK van PIT_table  
 	    ,convert(time, getdate() )     as pit_load_time -- onderdeel van PK van PIT_table
+		,hm.meta_record_source         as meta_record_source
   from [TestIntegrationDB3].[dbo].[H_Medewerker3] hm
   except -- Except tbv incrementeel laden.
       --  voeg alleen records toe aan de pit die nog niet in de pit voorkomen 
@@ -77,6 +80,7 @@ from (
          pm.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
         ,pm.pit_load_date -- onderdeel van PK van PIT_table  
 	    ,pm.pit_load_time -- onderdeel van PK van PIT_table
+		,pm.meta_record_source
   from [TestIntegrationDB3].[dbo].[Pit_Medewerker] pm
 ) new_keys
 -- Maak een SAT tabel bij een betreffende HUB een join van die SAT aan die HUB
@@ -92,17 +96,17 @@ go
 --select *
 --	   ,convert(datetime2, convert(varchar(10), meta_load_date, 105) + ' ' +convert(varchar(18), meta_create_time)) as extra_date
 --from dbo.S_Medewerker3_vrtrw
---where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ï¿½6ï¿½6ï¿½GÜ‚ï¿½ï¿½;]J/ï¿½+ï¿½ï¿½lï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½'
 --order by extra_date desc
 --go
 
 --select *
 --from dbo.S_Medewerker3_vrtrw
---where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--where dbo.S_Medewerker3_vrtrw.H_Medewerker3Hashkey = 'ï¿½6ï¿½6ï¿½GÜ‚ï¿½ï¿½;]J/ï¿½+ï¿½ï¿½lï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½'
 --order by meta_load_date desc, meta_create_time 
 --go
 
 --select *
 --from dbo.S_Medewerker3_nvrtrw
---where dbo.S_Medewerker3_nvrtrw.H_Medewerker3Hashkey = 'ø6ô6íGÜ‚äü;]J/û+´ßl¥ÄÄ¸ŸÁŽä'
+--where dbo.S_Medewerker3_nvrtrw.H_Medewerker3Hashkey = 'ï¿½6ï¿½6ï¿½GÜ‚ï¿½ï¿½;]J/ï¿½+ï¿½ï¿½lï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½'
 --go
