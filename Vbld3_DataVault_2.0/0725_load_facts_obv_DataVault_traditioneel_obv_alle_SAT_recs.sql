@@ -6,6 +6,8 @@
 -- en waarbij de FACTs en de DIMs parallel geladen kan worden
 -- en dat de DIMs geladen wordt obv alle SAT records.
 
+-- LETOP: Deze methode werkt alleen als de HUB slechts 1 SAT heeft.
+
 use [TestPresentationDB3]
 go
 
@@ -20,6 +22,10 @@ go
 -- meta_load_date en meta_create_time van de SAT. De SAT wordt namelijk zowel gebruikt
 -- om de DIM als de FACT te laden, hierdoor kan de FK in de FACT naast de hashkey ook
 -- de meta_load_date en meta_create_time uit de SAT gebruiken.
+
+-- LETOP: Deze constructie werkt alleen als een HUB slechts 1 SAT heeft!!!
+--        Zijn er meerdere SATs bij een HUB, dan is de aanvulling van meta_load_date en meta_create_time niet toereikend,
+--        want obv meta_load_date en meta_create_time weet je niet welke SAT je nodig hebt om de FKs in de FACT te bepalen.
 
 insert into [dbo].[FACT_gepensioneerde_per_OE_Compleet]
 -- Hoogste niveau select tbv om meta hub gegevens te joinen aan resultaat
