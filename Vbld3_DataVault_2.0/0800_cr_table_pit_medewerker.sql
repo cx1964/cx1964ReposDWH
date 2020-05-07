@@ -1,4 +1,4 @@
--- File: 0800_cr_table_pit_medewerker.sql
+-- File:  0800_cr_table_pit_medewerker.sql
 -- Functie: create pit table voor medewerker  
 
 use [TestIntegrationDB3];
@@ -31,6 +31,9 @@ CREATE TABLE [dbo].[Pit_Medewerker](
 	 [H_Medewerker3Hashkey] [varchar](32) NOT NULL  -- PK kolom
     ,[pit_load_date] [date] NOT NULL				-- PK kolom
 	,[pit_load_time] [time] NOT NULL				-- PK kolom
+	,nvrtrw_change_Hashkey [varchar](32) NOT NULL   -- PK kolom 
+	,vrtrw_change_Hashkey [varchar](32) NOT NULL    -- PK kolom
+
 	 -- uit SAT nvrtrw
     ,[nvrtrw_load_date] [date] NOT NULL
 	,[nvrtrw_create_time] [time] NOT NULL
@@ -45,12 +48,15 @@ CREATE TABLE [dbo].[Pit_Medewerker](
 	 ,[pit_load_date] ASC
 	 ,[pit_load_time] ASC
 	 -- nodig om uniek te maken
-	 -- uit SAT nvrtrw
-     ,[nvrtrw_load_date]
-	 ,[nvrtrw_create_time]
-	 -- uit SAT vrtrw
-     ,[vrtrw_load_date]
-	 ,[vrtrw_create_time]
+	 ,nvrtrw_change_Hashkey
+	 ,vrtrw_change_Hashkey
+
+	 ---- uit SAT nvrtrw
+  --   ,[nvrtrw_load_date]
+	 --,[nvrtrw_create_time]
+	 ---- uit SAT vrtrw
+  --   ,[vrtrw_load_date]
+	 --,[vrtrw_create_time]
     ) ON [PRIMARY]
 ) ON [PRIMARY]
 END
