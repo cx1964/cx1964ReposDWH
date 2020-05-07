@@ -1,5 +1,9 @@
--- File: 0800_load_pit_tables.sql
+-- File: 0805_load_pit_tables.change_hash_key.v2.sql
 -- Functie: load pit-tables
+
+-- Letop tijdelijke versie ivm change_hash_key
+-- Dit script kan vervallen als, het werkt en aanpassingen zijn aangebracht in 0805_load_pit_tables.change_hash_key.sql
+
 
 use [TestIntegrationDB3];
 go
@@ -45,6 +49,8 @@ insert into [TestIntegrationDB3].dbo.Pit_Medewerker
        H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
       ,pit_load_date        -- onderdeel van PK van PIT_table  
 	  ,pit_load_time        -- onderdeel van PK van PIT_table
+	  ,nvrtrw_change_hashkey
+	  ,vrtrw_change_hashkey
       ,nvrtrw_load_date
 	  ,nvrtrw_create_time
 	  ,vrtrw_load_date
@@ -55,14 +61,17 @@ select
         new_keys.H_Medewerker3Hashkey -- onderdeel van PK van PIT_table
        ,new_keys.pit_load_date        -- onderdeel van PK van PIT_table  
 	   ,new_keys.pit_load_time        -- onderdeel van PK van PIT_table
-       ,s_m_nvrtrw.meta_load_date   as nvrtrw_load_date
-	   ,s_m_nvrtrw.meta_create_time as nvrtrw_create_time
+	   ,s_m_nvrtrw.meta_change_hashkey as nvrtrw_meta_change_hashkey
+ 	   ,s_m_vrtrw.meta_change_hashkey as vrtrw_meta_change_hashkey
+
+       ,s_m_nvrtrw.meta_load_date      as nvrtrw_load_date
+	   ,s_m_nvrtrw.meta_create_time    as nvrtrw_create_time
 	  -- debug
 	  -- er onstaat een de 2 inner joins een cartesich product !!!!!!!!!!!!!!!!!!
 	  --,s_m_nvrtrw.schoenmaat
 
-	  ,s_m_vrtrw.meta_load_date   as vrtrw_load_date
-	  ,s_m_vrtrw.meta_create_time as vrtrw_create_time
+	  ,s_m_vrtrw.meta_load_date      as vrtrw_load_date
+	  ,s_m_vrtrw.meta_create_time    as vrtrw_create_time
 	  -- debug
 	  --,s_m_vrtrw.aow_datum
 
