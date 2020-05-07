@@ -7,22 +7,25 @@ go
 -- ToDo
 -- Oplossen probleem dat Dim records niet uniek zijn
 
--- Probleem 6-5-2020
--- Gaat iets mis met aan joinen sat vrtw aan pit tabel ?????????????????????????????
-
 insert into [TestPresentationDB3].[dbo].[Dim_Medewerker_Pit](
   [H_Medewerker3Hashkey]
  ,[meta_load_date]
  ,[meta_create_time]
+ ,[nvrtrw_change_hashkey] -- extra toegevoegd
+ ,[vrtrw_change_hashkey] -- extra toegevoegd
 
  ,[nr]
 
    -- uit Sat S_Medewerker3_nvrtrw
+ ,[meta_load_date_nvrtrw]
+ ,[meta_create_time_nvrtrw]
  ,[hoogste_opleiding]
  ,[bril_dragend]
  ,[schoenmaat]
 
   -- uit Sat S_Medewerker3_vrtrw
+ ,[meta_load_date_vrtrw]
+ ,[meta_create_time_vrtrw]
  ,[voorletters]
  ,[voorvoegsel]
  ,[achternaam]
@@ -35,11 +38,12 @@ select
 	    hm.[H_Medewerker3Hashkey]
 	   ,hm.[meta_load_date]
 	   ,hm.[meta_create_time]
+	   ,s_m_nvrtrw.meta_change_hashkey as nvrtrw_change_hashkey -- extra toegevoegd
+	   ,s_m_vrtrw.meta_change_hashkey as vrtrw_change_hashkey -- extra toegevoegd
 
 	   ,hm.nr
 
         -- uit Sat S_Medewerker3_nvrtrw
-       ,s_m_nvrtrw.meta_change_hashkey as nvrtrw_change_hashkey -- extra toegevoegd
 	   ,s_m_nvrtrw.meta_load_date      as meta_load_date_nvrtrw -- extra toegevoegd
 	   ,s_m_nvrtrw.meta_create_time    as meta_create_time_nvrtrw -- extra toegevoegd
 
@@ -48,7 +52,6 @@ select
        ,s_m_nvrtrw.[schoenmaat]
 
         -- uit Sat S_Medewerker3_vrtrw
-       ,s_m_vrtrw.meta_change_hashkey as vrtrw_change_hashkey -- extra toegevoegd
 	   ,s_m_vrtrw.meta_load_date       as meta_load_date_vrtrw  -- extra toegevoegd
 	   ,s_m_vrtrw.meta_create_time     as meta_create_time_vrtrw -- extra toegevoegd
 		
