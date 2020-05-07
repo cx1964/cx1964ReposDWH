@@ -59,8 +59,10 @@ go
 insert into [Dim_Medewerker_Compleet]
 (
          H_Medewerker3Hashkey
-        ,meta_load_date
-        ,meta_create_time
+        ,meta_load_date_nvrtrw
+        ,meta_create_time_nvrtrw
+		,meta_load_date_vrtrw
+        ,meta_create_time_vrtrw
 
          -- Business key
         ,h.nr
@@ -84,21 +86,18 @@ select
          h.H_Medewerker3Hashkey
         ,s_m_nvrtrw.meta_load_date   --- loaddate en createTime uit slechts 1 sat terwijl 2 SATs worden geladen !!!!!!!!!!!!!!!!!! waarom nvrtw ???
         ,s_m_nvrtrw.meta_create_time ---
+		,s_m_vrtrw.meta_load_date   --- nodig om uniek te maken
+        ,s_m_vrtrw.meta_create_time --- nodig om uniek te maken
 
          -- Business key
         ,h.nr
 
         -- uit Sat S_Medewerker3_nvrtrw
-	   --,s_m_nvrtrw.meta_load_date      as meta_load_date_nvrtrw -- extra toegevoegd
-	   --,s_m_nvrtrw.meta_create_time    as meta_create_time_nvrtrw -- extra toegevoegd
        ,s_m_nvrtrw.[hoogste_opleiding]
        ,s_m_nvrtrw.[bril_dragend]
        ,s_m_nvrtrw.[schoenmaat]
 
-
 	    -- uit Sat S_Medewerker3_vrtrw
-	   --,s_m_vrtrw.meta_load_date       as meta_load_date_vrtrw  -- extra toegevoegd
-	   --,s_m_vrtrw.meta_create_time     as meta_create_time_vrtrw -- extra toegevoegd
        ,s_m_vrtrw.[voorletters]
        ,s_m_vrtrw.[voorvoegsel]
        ,s_m_vrtrw.[achternaam]
