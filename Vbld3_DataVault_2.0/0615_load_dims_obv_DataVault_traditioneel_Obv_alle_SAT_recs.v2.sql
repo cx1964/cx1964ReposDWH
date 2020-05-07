@@ -50,29 +50,41 @@ go
 
 -- *** eerste select query ****
 
-----insert into Dim_Medewerker
---insert into [Dim_Medewerker_Compleet]
---(
---      --hashkey tbv surrogate key
---       [H_Medewerker3Hashkey]
---      ,[meta_load_date]
---      ,[meta_create_time]  
---      -- Business key 
---      ,[nr]
---       -- Properties
---      ,[voorletters]
---      ,[voorvoegsel]
---      ,[achternaam]
---      ,[geboortedatum]
---      ,[aow_datum]
---       -- Meta data
---      ,[meta_record_source]
---)
+-- truncate table [Dim_Medewerker_Compleet]
+
+-- ToDo
+-- Probleem publicate op PK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--insert into Dim_Medewerker
+insert into [Dim_Medewerker_Compleet]
+(
+         H_Medewerker3Hashkey
+        ,meta_load_date
+        ,meta_create_time
+
+         -- Business key
+        ,h.nr
+
+        -- uit Sat S_Medewerker3_nvrtrw
+       ,hoogste_opleiding
+       ,bril_dragend
+       ,schoenmaat
+	    
+	    -- uit Sat S_Medewerker3_vrtrw
+       ,voorletters
+       ,voorvoegsel
+       ,achternaam
+       ,geboortedatum
+       ,aow_datum
+        -- Meta data
+       ,meta_record_source
+)
 select 
          --hashkey + loaddatum + laadtijd tbv surrogate key
          h.H_Medewerker3Hashkey
-        ,s_m_nvrtrw.meta_load_date
-        ,s_m_nvrtrw.meta_create_time
+        ,s_m_nvrtrw.meta_load_date   --- loaddate en createTime uit slechts 1 sat terwijl 2 SATs worden geladen !!!!!!!!!!!!!!!!!! waarom nvrtw ???
+        ,s_m_nvrtrw.meta_create_time ---
+
          -- Business key
         ,h.nr
 
@@ -104,7 +116,4 @@ left join [TestIntegrationDB3].[dbo].[S_Medewerker3_nvrtrw] s_m_nvrtrw
 	  
 left join [TestIntegrationDB3].dbo.S_Medewerker3_vrtrw s_m_vrtrw
       on s_m_vrtrw.H_Medewerker3Hashkey = h.H_Medewerker3Hashkey
-order by 1,2,3
-
-
 go
