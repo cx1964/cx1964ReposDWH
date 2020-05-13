@@ -1,19 +1,37 @@
 -- File: pit_query_tmp.sql
-
-use [TestIntegrationDB3];
-go
-
--- aanleiding: https://danischnider.wordpress.com/2015/11/12/loading-dimensions-from-a-data-vault-model/
+-- Aanleiding: https://danischnider.wordpress.com/2015/11/12/loading-dimensions-from-a-data-vault-model/
 
 -- Doc:
 -- t-sql over: https://docs.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql?view=sql-server-ver15
 -- t-sql parition by: 
 
--- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
+-- Verklaring:
+-- Een PIT table wordt gebruikt om DIM tabel te laden voor situaties waarbij een HUB meer dan 1 SAT heeft.
+-- Doodat de PIT tabel een een soort index functie vervult, is het mogelijk een DIM te creeren obv een
+-- view door gebruik te maken van een PI tabel.
+-- Bij het gebruik van PIT tables maak je tijdreeksen obv de loaddate en time die afkomstig zijn uit alle
+-- SAT tabellen die horen bij een bepaald HUB. Deze tijdreeks onstaat door mbv een union alle 
+-- loaddate en time bijelkaar te voegen. Vervolgens ontstaat de pit table door
+-- de deze tijdreeks weer aan de betreffende SATs te joinen, waardoor de tijdreeks wordt aangevuld 
+-- met de Hashkey uit de SATs.
+
+
+use [TestIntegrationDB3];
+go
+
+
 
 -- combineren van brondata die gesplitst in DataVault in meerdere SATs 
 select 'combineren van brondata die gesplitst in DataVault in meerdere SATs' as functie;
 go
+
+
+
+
+--
+
+-- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
+
 
 WITH load_timestamps AS (
       SELECT [H_Medewerker3Hashkey], meta_load_date, meta_create_time FROM [dbo].[S_Medewerker3_nvrtrw]
