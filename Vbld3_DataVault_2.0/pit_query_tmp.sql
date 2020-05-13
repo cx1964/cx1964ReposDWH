@@ -15,24 +15,18 @@
 -- de deze tijdreeks weer aan de betreffende SATs te joinen, waardoor de tijdreeks wordt aangevuld 
 -- met de Hashkey uit de SATs.
 
-
 use [TestIntegrationDB3];
 go
-
-
 
 -- combineren van brondata die gesplitst in DataVault in meerdere SATs 
 select 'combineren van brondata die gesplitst in DataVault in meerdere SATs' as functie;
 go
 
-
-
-
+-- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
 --
 
--- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
-
-
+-- Maak een tabel met een tijdreeks obv meta_load_date, meta_create_time uit 
+-- de SAT tabellen voor HUB medewerker
 WITH load_timestamps AS (
       SELECT [H_Medewerker3Hashkey], meta_load_date, meta_create_time FROM [dbo].[S_Medewerker3_nvrtrw]
       UNION
