@@ -1,5 +1,9 @@
--- File: 0806_load_pit_medewerker3.sql
+-- File: pit_query_tmp.sql
 -- Aanleiding: https://danischnider.wordpress.com/2015/11/12/loading-dimensions-from-a-data-vault-model/
+
+-- Doc:
+-- t-sql over: https://docs.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql?view=sql-server-ver15
+-- t-sql parition by: 
 
 -- Verklaring:
 -- Een PIT table wordt gebruikt om DIM tabel te laden voor situaties waarbij een HUB meer dan 1 SAT heeft.
@@ -52,6 +56,16 @@ SELECT
 		,coalesce(vrtrw.meta_load_date   , '99991231') as [vrtrw_load_date]
 		,coalesce(vrtrw.meta_create_time, '00:00:00') as [vrtrw_create_time]
 		,'system'                  as [meta_record_source]
+   --     ,(convert( datetime2
+   --                   ,convert(varchar(10), nvrtrw.meta_load_date) + ' ' +convert(varchar(18), nvrtrw.meta_create_time)
+			--         ) 
+
+		 --) timestamp_nvrtrw
+   --     ,(convert( datetime2
+   --                   ,convert(varchar(10), vrtrw.meta_load_date) + ' ' +convert(varchar(18), vrtrw.meta_create_time)
+			--         ) 
+
+		 --) timestamp_vrtrw
 FROM load_timestamps LD
 LEFT JOIN[dbo].[S_Medewerker3_nvrtrw] nvrtrw
      ON (      nvrtrw.H_Medewerker3Hashkey = LD.H_Medewerker3Hashkey
@@ -66,15 +80,3 @@ LEFT JOIN [dbo].[S_Medewerker3_vrtrw] vrtrw
 order by 2,1;
 go
 
-
-		-- Tbv datum en tijd in 1 kolom stoppen van datatyep datetime2
-			   --     ,(convert( datetime2
-			   --                   ,convert(varchar(10), nvrtrw.meta_load_date) + ' ' +convert(varchar(18), nvrtrw.meta_create_time)
-						--         ) 
-
-					 --) timestamp_nvrtrw
-			   --     ,(convert( datetime2
-			   --                   ,convert(varchar(10), vrtrw.meta_load_date) + ' ' +convert(varchar(18), vrtrw.meta_create_time)
-						--         ) 
-
-					 --) timestamp_vrtrw
