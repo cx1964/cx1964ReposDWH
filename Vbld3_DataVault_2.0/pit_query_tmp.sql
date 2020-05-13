@@ -22,16 +22,23 @@ go
 select 'combineren van brondata die gesplitst in DataVault in meerdere SATs' as functie;
 go
 
--- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
---
 
 -- Maak een tabel met een tijdreeks obv meta_load_date, meta_create_time uit 
 -- de SAT tabellen voor HUB medewerker
+-- Voor het werken met PIT tabellen, is het eigenlijk handiger om de meta_load_date, meta_create_time
+-- in 1 kolom te hebben van het datatype datetime2.
+-- Dit voorkomt extra type casting in queries
 WITH load_timestamps AS (
       SELECT [H_Medewerker3Hashkey], meta_load_date, meta_create_time FROM [dbo].[S_Medewerker3_nvrtrw]
       UNION
       SELECT [H_Medewerker3Hashkey], meta_load_date, meta_create_time FROM [dbo].[S_Medewerker3_vrtrw]
 	  )
+
+-- onderstaande query geeft een overzicht van de mutaties in de tijd
+select *
+from load_timestamps
+order by 2,3,1
+
 ----select *
 ----from load_date
 --INSERT INTO dbo.Dim_Medewerker_Pit
@@ -41,6 +48,10 @@ WITH load_timestamps AS (
 --    ,[meta_load_date]
 
 --)
+
+-- *** Uitzoeken LEAD en MAX functie mbt parition voor PIT query *****
+--
+
 SELECT
          LD.[H_Medewerker3Hashkey]
         ,LEAD(convert( datetime2

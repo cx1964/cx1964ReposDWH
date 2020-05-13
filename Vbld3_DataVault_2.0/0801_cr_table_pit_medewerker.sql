@@ -1,4 +1,4 @@
--- File:  0800_cr_table_pit_medewerker.sql
+-- File:  0801_cr_table_pit_medewerker.sql
 -- Functie: create pit table voor medewerker  
 
 use [TestIntegrationDB3];
