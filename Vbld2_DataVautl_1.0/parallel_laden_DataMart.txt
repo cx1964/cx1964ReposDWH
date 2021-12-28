@@ -1,0 +1,27 @@
+file: parallel_laden_DataMart.txt
+
+Alleen als men Hashkeys gebruikt, kan men de FACT en DIM tabellen parallel
+laden. Zonder Hashkeys als surrogate keys voor de DIMs moet men eerste de
+DIMs laden en om de keys te kunnen bepalen in de FACTs lookups doen op de
+DIMs. Dit veroorzaakt volgordelijk laden.
+
+Wil men in de de FACTs en DIMs parallel laden, moet men de hashkeys uit de
+DataVault laag van de HUBs hergebruiken in de DataMart.
+
+Echter tbv het laden van de DIMs zijn de hashkeys uit de HUBs niet uniek
+om als PK voor de DIMs te worden gebruikt.
+Dit kan men oplossen door:
+1. de DIMs te vullen obv de meest actuele SAT (dat de hashkeys niet een unieke keys
+   voor de DIMs komt doordat een HUB record meerdere SAT records kan hebben)
+2. als men toch alle SAT records wil laden in de DIM, dan moet er 
+   of een andere PK gebruikt worden of de PK obv van de hashkey  moet
+   aangevuld worden. Als aanvulling zijn de loaddatum en loadtijd van de SAT een
+   goede kandidaten. In de praktijk blijkt dat het toevoegen van de
+   loaddatum en loadtijd van de SAT aan de PK van de DIM naast de hashkey niet
+   voldoende is om de PK van de DIM unike te maken.
+   Pas als men de PK van de DIM definieert obv hashkey van de hub, aangevuld meest
+   de load datum en tijd en loadend datum en tijd van de SAT, de PK wel uniek is als
+   alle SAT records worden geladen.
+   Echter als men een nieuwe PK gaat gebruiken voor de DIMs dient ook de FKs in de 
+   FACTs hierop aangepast moeten worden.
+   

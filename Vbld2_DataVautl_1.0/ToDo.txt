@@ -1,0 +1,15 @@
+ToDo.txt
+
+11. Maken en laden Bridge tables
+12. Maken en laden PIT tabellen
+13. Laden DIMs obv PIT tables
+14. Laden FACT obv Bridge table   
+
+15. Nadenken Delete detection implementeren, voor situatie als records uit de bron zijn verwijderd
+16. Nadenken of men alleen SATs kan vullen obv inserts.  
+
+17 nadenken mbt probleem niet verplichte FK 
+   en facts met fk naar NULL dimensie
+   Of is dit een modeleringsprobleem van de STER.
+   Nog niet beaantwoord, hoe omgaan met met FACTs zonder betreffende DIM. 
+   Niet verplichte FKs in de bron kan men waarcshijnlijk ook oplossen door LEFT JOINs te gebruiken samen met LINKs
