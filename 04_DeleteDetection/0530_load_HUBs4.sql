@@ -15,7 +15,7 @@ select
         ,staging.[meta_record_source]
         ,staging.[meta_load_date]
         ,staging.[meta_create_time]
-        ,'TRUE' as [meta_IsDeletedInSource]
+        ,'FALSE' as [meta_IsDeletedInSource]
 from [TestStagingDB4].[dbo].[Organisatie_Eenheid4] staging
 inner join (
              -- haal het eerste records uit staging
@@ -43,7 +43,7 @@ select
         ,staging.[meta_record_source]
         ,staging.[meta_load_date]
         ,staging.[meta_create_time]
-        ,'TRUE' as [meta_IsDeletedInSource]
+        ,'FALSE' as [meta_IsDeletedInSource]
 from [TestStagingDB4].[dbo].[Medewerker4] staging
 inner join (
              -- haal het eerste records uit staging
