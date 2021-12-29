@@ -15,7 +15,7 @@ use TestSourceDB4
 go
 
 /* Maak de Applicatie database user eigenaar van de database */
-exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerSource3'
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerSource4'
 go
 -- *** Einde Change owner TestSourceDB DB ***
 
@@ -26,7 +26,7 @@ use TestStagingDB4
 go
 
 /* Maak de Applicatie database user eigenaar van de database */
-exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerStaging3'
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerStaging4'
 go
 -- *** Einde Change owner TestIntegrationDB DB ***
 
@@ -37,7 +37,7 @@ use TestIntegrationDB4
 go
 
 /* Maak de Applicatie database user eigenaar van de database */
-exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerIntegration3'
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerIntegration4'
 go
 -- *** Einde Change owner TestIntegrationDB DB ***
 
@@ -47,6 +47,6 @@ use TestPresentationDB4
 go
 
 /* Maak de Applicatie database user eigenaar van de database */
-exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerPresentation3'
+exec dbo.sp_changedbowner @loginame =  'myTestDBOwnerPresentation4'
 go
 -- *** Einde Change owner TestIntegrationDB DB ***
