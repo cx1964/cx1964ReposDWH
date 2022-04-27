@@ -4,15 +4,14 @@
   "Version": "2.0",
   "Labels": {
 
-   
     "1E5EBE25-8B4E-4D5C-9630-ACC180604D5F": {
-      "DisplayName": "mijnInformationLabel",
-      "Description": "Dummy Business data dat is speciaal bewerkt en goedgekeurd voor prototyping",
+      "_comment": "Eigen toegevoegde label, id aangemaakt obv een GUID die aangemaakt wotrdt met het script generate_guid_t_sql.sql",
+      "DisplayName": "mijn_Eigen_Label",
+      "Description": "mijn eigen label",
       "Rank": "None",
       "Order": 100,
       "Enabled": true
     },
-
 
 
     "1866ca45-1973-4c28-9d12-04d407f147ad": {
@@ -60,26 +59,24 @@
   },
   "InformationTypes": {
 
-    
-
-
-    "b40ad280-0f6a-6ca8-11ba-2f1a08651fce": {
-      "DisplayName": "Prototyping",
-      "Description": "kolommen voor prototyping",
+    "563d5c24-d98a-4fa2-9d9f-b948f50ba79e": {
+      "_comment": "Eigen toegevoegde InformatieType, id aangemaakt obv een GUID die aangemaakt wotrdt met het script generate_guid_t_sql.sql. Letop zet Custom: true",
+      "DisplayName": "mijn_Informatie_Type",
+      "Description": "mijn_Informatie_Type toegevoegd om extra informatie_Typen uit te testen",
       "Order": 100,
-      "RecommendedLabelId": "1866ca45-1973-4c28-9d12-04d407f147ac",
+      "RecommendedLabelId": "1E5EBE25-8B4E-4D5C-9630-ACC180604D5F",
       "Enabled": true,
-      "Custom": false,
+      "Custom": true,
       "Keywords": [
         {
-          "Pattern": "%naam%",
-          "Custom": false,
-          "CanBeNumeric": false,
+          "Pattern": "%nr%",
+          "Custom": true,
+          "CanBeNumeric": true,
           "Excluded": null
         },
         {
-          "Pattern": "%datum%",
-          "Custom": false,
+          "Pattern": "voor%",
+          "Custom": true,
           "CanBeNumeric": false,
           "Excluded": null
         }
@@ -87,44 +84,6 @@
     },
 
 
-
-
-
-
-    "b40ad280-0f6a-6ca8-11ba-2f1a08651fcf": {
-      "DisplayName": "Networking",
-      "Description": "Data related to the network domain. Example: IP, port, etc.",
-      "Order": 100,
-      "RecommendedLabelId": "331f0b13-76b5-2f1b-a77b-def5a73c73c2",
-      "Enabled": true,
-      "Custom": false,
-      "Keywords": [
-        {
-          "Pattern": "ip",
-          "Custom": false,
-          "CanBeNumeric": false,
-          "Excluded": null
-        },
-        {
-          "Pattern": "%[^h]ip%address%",
-          "Custom": false,
-          "CanBeNumeric": false,
-          "Excluded": null
-        },
-        {
-          "Pattern": "ip%address%",
-          "Custom": false,
-          "CanBeNumeric": false,
-          "Excluded": null
-        },
-        {
-          "Pattern": "%mac%address%",
-          "Custom": false,
-          "CanBeNumeric": false,
-          "Excluded": null
-        }
-      ]
-    },
     "5c503e21-22c6-81fa-620b-f369b8ec38d1": {
       "DisplayName": "Contact Info",
       "Description": "Contact data of a person. Example: address, phone, etc.",
