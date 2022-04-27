@@ -1,4 +1,4 @@
--- file: generate_guid_t_sql
+-- file: generate_guid_t_sql.sql
 -- Functie: genereer GUIDs (unieke ids)
 --          tbv label_ids in Information_Protection_Policy_handmatige_aanpassing_obv_export_default_smss_18.11.1.json
 -- Doc: https://docs.microsoft.com/en-us/sql/t-sql/data-types/uniqueidentifier-transact-sql?view=sql-server-ver15
@@ -11,3 +11,4 @@
 DECLARE @myid uniqueidentifier = NEWID();  
 -- SELECT CONVERT(CHAR(255), @myid) AS 'char';
 SELECT CONVERT(CHAR(37), @myid) AS 'char';
+select NEWID() as guid;
